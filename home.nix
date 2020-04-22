@@ -84,6 +84,7 @@ in {
       # gui apps
       briss
       latest.firefox-nightly-bin
+      google-chrome
       pinentry_qt5              # support for gpg passphrase entry
       spotify
       # skype
