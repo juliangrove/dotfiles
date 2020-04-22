@@ -1,0 +1,236 @@
+(require 'package)
+(add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/"))
+(add-to-list 'package-archives '("org" . "https://orgmode.org/elpa/") t)
+(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
+(add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/") t)
+(let* ((no-ssl (and (memq system-type '(windows-nt ms-dos))
+                    (not (gnutls-available-p))))
+       (proto (if no-ssl "http" "https")))
+  (add-to-list 'package-archives
+               (cons "melpa" (concat proto "://melpa.org/packages/")) t))
+(package-initialize)
+
+;; (require 'xclip)
+;; (xclip-mode 1)
+
+(menu-bar-mode -1)
+(tool-bar-mode -1)
+(toggle-scroll-bar -1)
+
+(cua-mode 1)
+
+(setq split-width-threshold 1)
+
+;; (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
+
+;; (require 'auto-package-update)
+
+(setenv "PATH" "/usr/share/texmf/tex/latex/:$PATH" t)
+
+;; (load-theme 'ample t t)
+;; (load-theme 'ample-flat t t)
+;; (load-theme 'ample-light t t)
+;; (enable-theme 'ample)
+
+;; (load-theme 'cyberpunk t)
+
+;; (load-theme 'seti t)
+
+(load-theme 'gruvbox t)
+
+(require 'airline-themes)
+(load-theme 'airline-gruvbox-dark t)
+
+(setq column-number-mode t)
+
+(require 'evil)
+(evil-mode 1)
+
+(global-linum-mode t)
+
+;; mu4e
+;; (require 'mu4e)
+(with-eval-after-load 'mu4e (require 'mu4e-conversation))
+(global-mu4e-conversation-mode)
+
+(setq mail-user-agent 'mu4e-user-agent)
+
+(setq mu4e-maildir "~/.mail")
+
+(setq mu4e-drafts-folder "/gmail/[Gmail].Drafts")
+(setq mu4e-sent-folder "/gmail/[Gmail].Sent Mail")
+(setq mu4e-trash-folder "/gmail/[Gmail].Trash")
+
+(setq mu4e-sent-messages-behavior 'delete)
+(setq mu4e-get-mail-command "mbsync")
+
+(setq
+  user-mail-address "julian.grove@gmail.com"
+  user-full-name "Julian Grove"
+  mu4e-compose-signature
+  (concat "Julian Grove\n"
+	  "julian.grove@gmail.com\n"
+	  "juliangrove.github.io\n"
+	  "sent via mu4e"))
+
+;; (require 'smtpmail-multi)
+(require 'smtpmail)
+
+(setq message-send-mail-function 'smtpmail-send-it
+      starttls-use-gnutls t
+      smtpmail-starttls-credentials '(("smtp.gmail.com" 587 nil nil))
+      smtpmail-auth-credentials
+      '(("smtp.gmail.com" 587 "julian.grove@gmail.com" nil))
+      smtpmail-default-smtp-server "smtp.gmail.com"
+      smtpmail-smtp-server "smtp.gmail.com"
+      smtpmail-smtp-service 587)
+
+(setq message-kill-buffer-on-exit t)
+;; (require 'shr)
+
+(setq mu4e-view-show-images t
+      mu4e-view-image-max-width 800)
+
+(defun no-auto-fill ()
+  "Turn off auto-fill-mode."
+  (auto-fill-mode -1))
+
+(add-hook 'mu4e-compose-mode-hook #'no-auto-fill)
+
+(setq mu4e-user-mail-address-list '("julian.grove@gmail.com" "juliangrove@gmail.com" "juliang@uchicago.edu"))
+(setq mu4e-compose-dont-reply-to-self t)
+
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(column-number-mode t)
+ '(nil nil t)
+ '(package-selected-packages
+   (quote
+    (airline-themes racket-mode org-plus-contrib elpy nix-mode nix-env-install xclip tuareg proof-general org-gcal org-agenda-property org mu4e-conversation idris-mode haskell-mode gruvbox-theme evil coq-commenter calfw-org calfw-ical calfw-gcal calfw auto-package-update auctex))))
+
+(setq-default TeX-PDF-mode t)
+(setq-default TeX-master t)
+(setq latex-run-command "pdflatex")
+(setq TeX-command-extra-options "-shell-escape")
+(setq TeX-view-program-selection '((output-pdf "PDF Viewer"))) (setq
+TeX-view-program-list '(("PDF Viewer"
+"/Applications/Skim.app/Contents/SharedSupport/displayline -b -g %n %o
+%b")))
+(setq shift-select-mode t)
+(setq TeX-parse-self t) ; Enable parse on load.
+(setq TeX-auto-save t) ; Enable parse on save.
+(setq-default TeX-PDF-mode t)
+(setq-default TeX-master t)
+(setq latex-run-command "pdflatex")
+(setq TeX-command-extra-options "-shell-escape")
+(setq TeX-view-program-selection '((output-pdf "PDF Viewer")))
+;; Zathura
+(setq TeX-view-program-list '(("Zathura" "zathura %u")))
+
+(add-hook 'LaTeX-mode-hook '(lambda ()
+                  (add-to-list 'TeX-expand-list
+                       '("%u" pdf-make-url))))
+(defun pdf-make-url () (concat
+               "file://\""
+               (expand-file-name (funcall file (TeX-output-extension) t)
+                         (file-name-directory (TeX-master-file)))
+               "\"#src:"
+               (TeX-current-line)
+	       "\""
+               (expand-file-name (TeX-master-directory))
+               "./"
+               (TeX-current-file-name-master-relative)
+	       "\""))
+(setq TeX-view-program-selection '((output-pdf "Zathura")))
+;;
+(setq shift-select-mode t)
+(setq TeX-parse-self t) ; Enable parse on load.
+(setq TeX-auto-save t) ; Enable parse on save.
+(setq-default TeX-PDF-mode t)
+(setq-default TeX-master t)
+(setq latex-run-command "pdflatex")
+(setq TeX-command-extra-options "-shell-escape")
+(setq shift-select-mode t)
+(setq TeX-parse-self t) ; Enable parse on load.
+(setq TeX-auto-save t) ; Enable parse on save.
+
+;; (autoload 'ghc-init "ghc" nil t)
+;; (autoload 'ghc-debug "ghc" nil t)
+;; (add-hook 'haskell-mode-hook (lambda () (ghc-init)))
+(add-hook 'haskell-mode-hook 'interactive-haskell-mode)
+;; (add-hook 'haskell-mode-hook 'inferior-haskell-mode)
+
+;; (defun my-haskell-comment-setup ()
+;;   "Configure multi-line comments for haskell."
+;;   ;; You may want to use `setq-local' instead.
+;;   (setq comment-start       "-- "
+;;         comment-end         "-- "
+;;         comment-multi-line  t
+;;         comment-padding     nil
+;;         comment-style       'extra-line
+;;         comment-continue    "-- "
+;;         comment-empty-lines t))
+
+;; (add-hook 'haskell-mode-hook #'my-haskell-comment-setup)
+
+;; (load "~/.emacs.d/lisp/PG/generic/proof-site")
+;; Open .v files with Proof General's Coq mode
+(add-hook 'coq-mode-hook 'coq-commenter-mode)
+
+(setq auto-mode-alist (append '(("\\.pl\\'" . prolog-mode))
+     auto-mode-alist))
+(setq prolog-system 'swi)
+(autoload 'run-prolog "pl" "Run an inferior prolog process" t)
+(autoload 'prolog-mode "prolog" "SWI-Prolog mode" t)
+
+(defvar caml-annot-dir nil)
+
+;; elpy
+(elpy-enable)
+
+;; org
+(global-set-key (kbd "C-c l") 'org-store-link)
+(global-set-key (kbd "C-c a") 'org-agenda)
+(global-set-key (kbd "C-c c") 'org-capture)
+
+;; org-gcal
+(setq org-agenda-files (list "~/Documents/org/gcal/gcal.org"))
+
+(require 'org-gcal)
+(setq org-gcal-client-id "972385860203-c1a6cfcnttnrtoqrluibrds34tcdhbk1.apps.googleusercontent.com"
+org-gcal-client-secret "oP4Gj3VCHZb3XWHXZ06QqYUG"
+org-gcal-file-alist '(("juliangrove@gmail.com" .  "~/Documents/org/gcal/gcal.org")))
+
+(defun my-org-gcal-fetch (&optional arg)
+  (interactive "P")
+  (let ((browse-url-browser-function #'browse-url-firefox))
+        (org-gcal-fetch)))
+
+(add-hook 'org-agenda-mode-hook (lambda () (org-gcal-sync)))
+(add-hook 'org-capture-after-finalize-hook (lambda () (org-gcal-sync)))
+
+(setq org-capture-templates
+'(("a" "Appointment" entry (file  "~/Documents/org/gcal/gcal.org")
+"* %?\n\n%^T\n\n:PROPERTIES:\n\n:END:\n\n")))
+
+;; org-agenda
+(setq org-agenda-files (list "~/Documents/org/gcal/gcal.org"))
+
+;; calfw
+(require 'calfw)
+(require 'calfw-org)
+;; (require 'calfw-ical)
+(require 'calfw-gcal)
+
+(defun schedule ()
+(interactive)
+(cfw:open-org-calendar))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(default ((t (:family "Monospace" :slant normal :weight normal :height 120 :width normal)))))
