@@ -124,7 +124,7 @@
         haskellPackages.xmonad-extras
         haskellPackages.xmonad
       ];
-      config = /home/juliangrove/.config/nixpkgs/programs/xmonad/xmonad.hs;   
+      config = programs/xmonad/xmonad.hs;   
     };
 
     # auto-login
