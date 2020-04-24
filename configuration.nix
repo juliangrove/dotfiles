@@ -88,7 +88,10 @@
   # services.openssh.enable = true;
 
   # avahi for DNS discovery
-  services.avahi.enable = true;
+  services.avahi = {
+    enable = true;
+    nssmdns = true;             # local hostname resolution for apps
+  };
   
   # Enable  CUPS to print documents.
   services.printing.enable = true;

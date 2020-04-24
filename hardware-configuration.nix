@@ -20,11 +20,11 @@
         }
       ];
       availableKernelModules = [ "xhci_pci" "nvme" ];
-      kernelModules = [ "dm-snapshot" ];
+      kernelModules = [ "i915" ];
     };
-    kernelParams = [ "intel_pstate=no_hwp" ];
-    kernelModules = [ "i915" ];
-    extraModulePackages = [];
+    # kernelParams = [ "intel_pstate=no_hwp" ];
+    kernelModules = [ "acpi_call" ];
+    extraModulePackages = with config.boot.kernelPackages; [ acpi_call ];
   };
 
   fileSystems."/" =
