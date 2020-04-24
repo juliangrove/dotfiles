@@ -51,6 +51,14 @@ in {
     let nixos = import <nixos> {};
         unstable = import <nixos-unstable> {};
         ewp = (pkgs.emacsPackagesGen pkgs.emacs).emacsWithPackages;
+        python-packages = py-pkgs: with py-pkgs; [
+          pandas
+          scikitlearn
+        ];
+        python-stuff = pkgs.python38.withPackages python-packages;
+        R-stuff = pkgs.rWrapper.override {
+          packages = with pkgs.rPackages; [ ggplot2 ];
+        };
     in with pkgs; [
       # cli tools
       nixos.dict
@@ -60,6 +68,7 @@ in {
       gnupg
       htop
       i3lock-fancy-rapid
+      lshw
       mu
       neofetch
       nix-prefetch-git
@@ -68,6 +77,7 @@ in {
       scrot
       lm_sensors
       wget
+      xorg.xdpyinfo
 
       # editors
       (ewp (import ./emacs.nix { inherit pkgs; }))
@@ -77,8 +87,9 @@ in {
       coq
       idris
       ocaml
-      python
+      python-stuff              # python + packages
       racket
+      R-stuff                   # R + packages
       stack                     # haskell
       swiProlog                 # prolog
 

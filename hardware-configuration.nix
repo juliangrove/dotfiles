@@ -23,7 +23,7 @@
       kernelModules = [ "dm-snapshot" ];
     };
     kernelParams = [ "intel_pstate=no_hwp" ];
-    kernelModules = [ "kvm-intel" ];
+    kernelModules = [ "i915" ];
     extraModulePackages = [];
   };
 
@@ -44,6 +44,19 @@
     [
       { device = "/dev/disk/by-uuid/c952b234-9395-4e76-ae34-5e8768995d63"; }
     ];
+
+  hardware = {
+    opengl.extraPackages = with pkgs; [
+      vaapiIntel
+      vaapiVdpau
+      libvdpau-va-gl
+    ];
+    enableAllFirmware = true;
+    cpu.intel.updateMicrocode =
+      lib.mkDefault config.hardware.enableRedistributableFirmware;
+  };
+
+  services.throttled.enable = lib.mkDefault true;
 
   nix.maxJobs = lib.mkDefault 8;
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";

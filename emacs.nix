@@ -16,8 +16,8 @@
   haskell-mode
   idris-mode
   mu4e-conversation             # subsumes mu4e
-  nix-mode
   nix-haskell-mode
+  nix-mode
   org
   org-agenda-property
   org-gcal

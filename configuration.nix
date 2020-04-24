@@ -5,11 +5,12 @@
 { config, pkgs, ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      <home-manager/nixos>
-    ];
+ imports =
+   [
+     # Include the results of the hardware scan.
+     ./hardware-configuration.nix
+     <home-manager/nixos>
+   ];
 
   # Use the systemd-boot EFI boot loader.
   boot = {
@@ -18,7 +19,7 @@
       efi.canTouchEfiVariables = true;
     };
   };
-
+  
   networking = {
     hostName = "nixthinkpad"; # Define your hostname.
     # wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -158,11 +159,6 @@
   powerManagement = {
     enable = true;
     powertop.enable = true;
-  };
-
-  hardware = {
-    enableAllFirmware = true;
-    cpu.intel.updateMicrocode = true;
   };
 
   # bluetooth
