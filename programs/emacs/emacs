@@ -106,10 +106,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(column-number-mode t)
- '(nil nil t)
- '(package-selected-packages
-   (quote
-    (airline-themes racket-mode org-plus-contrib elpy nix-mode nix-env-install xclip tuareg proof-general org-gcal org-agenda-property org mu4e-conversation idris-mode haskell-mode gruvbox-theme evil coq-commenter calfw-org calfw-ical calfw-gcal calfw auto-package-update auctex))))
+ '(nil nil t))
 
 (setq-default TeX-PDF-mode t)
 (setq-default TeX-master t)
@@ -157,23 +154,14 @@ TeX-view-program-list '(("PDF Viewer"
 (setq TeX-parse-self t) ; Enable parse on load.
 (setq TeX-auto-save t) ; Enable parse on save.
 
+(require 'haskell-mode)
+(require 'nix-haskell-mode)
+;; (add-hook 'haskell-mode-hook 'nix-haskell-mode)
 ;; (autoload 'ghc-init "ghc" nil t)
 ;; (autoload 'ghc-debug "ghc" nil t)
 ;; (add-hook 'haskell-mode-hook (lambda () (ghc-init)))
 (add-hook 'haskell-mode-hook 'interactive-haskell-mode)
 ;; (add-hook 'haskell-mode-hook 'inferior-haskell-mode)
-
-;; (defun my-haskell-comment-setup ()
-;;   "Configure multi-line comments for haskell."
-;;   ;; You may want to use `setq-local' instead.
-;;   (setq comment-start       "-- "
-;;         comment-end         "-- "
-;;         comment-multi-line  t
-;;         comment-padding     nil
-;;         comment-style       'extra-line
-;;         comment-continue    "-- "
-;;         comment-empty-lines t))
-
 ;; (add-hook 'haskell-mode-hook #'my-haskell-comment-setup)
 
 ;; (load "~/.emacs.d/lisp/PG/generic/proof-site")

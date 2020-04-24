@@ -61,6 +61,7 @@ mystartup = do
 mykeys c = mkKeymap c $
   [ ("M-S-e", spawn "emacs")
   , ("M-S-f", spawn "firefox")
+  , ("M-S-g", spawn "google-chrome-stable")
   , ("M-S-l", spawn $ "i3lock-fancy-rapid 40 10 -n"
                    ++ " --insidecolor=1d202180"
                    ++ " --ringcolor=b8bb2680"
