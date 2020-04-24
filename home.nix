@@ -50,6 +50,7 @@ in {
   home.packages =
     let nixos = import <nixos> {};
         unstable = import <nixos-unstable> {};
+        ewp = (pkgs.emacsPackagesGen pkgs.emacs).emacsWithPackages;
     in with pkgs; [
       # cli tools
       nixos.dict
@@ -69,7 +70,7 @@ in {
       wget
 
       # editors
-      (import ./emacs.nix { inherit pkgs; })
+      (ewp (import ./emacs.nix { inherit pkgs; }))
       vim   
       
       # languages
@@ -90,6 +91,7 @@ in {
       # skype
       unstable.haskellPackages.xmobar
       zotero
+      # zoom-us
     ];
 
   programs.bash = {

@@ -24,7 +24,7 @@
     };
     kernelParams = [ "intel_pstate=no_hwp" ];
     kernelModules = [ "kvm-intel" ];
-    extraModulePackages = [ ];
+    extraModulePackages = [];
   };
 
   fileSystems."/" =
