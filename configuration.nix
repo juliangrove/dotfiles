@@ -18,11 +18,11 @@
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
     };
+    kernelPackages = (import <nixos-unstable> {}).linuxPackages_latest;
   };
   
   networking = {
     hostName = "nixthinkpad"; # Define your hostname.
-    # wireless.enable = true;  # Enables wireless support via wpa_supplicant.
     networkmanager.enable = true;
 
     # The global useDHCP flag is deprecated, therefore explicitly set to false here.

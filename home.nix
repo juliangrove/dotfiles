@@ -20,7 +20,6 @@ in {
     };
     ".emacs" = {
       source = programs/emacs/emacs;
-      onChange = ''sed -i "s|itsasecret|$(gpg -q --for-your-eyes-only --no-tty -d .org-gcal-client-secret.gpg)|g" .emacs'';
     };
     ".mbsyncrc" = {
       source = programs/isync/mbsyncrc;
@@ -71,6 +70,7 @@ in {
       gnupg
       htop
       i3lock-fancy-rapid
+      isync
       killall
       lshw
       mu

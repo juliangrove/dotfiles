@@ -165,10 +165,14 @@ TeX-view-program-list '(("PDF Viewer"
 ;; org-gcal
 (setq org-agenda-files (list "~/Documents/org/gcal/gcal.org"))
 
+(require 'json)
+(defun get-gcal-config-value (key)
+  (cdr (assoc key (json-read-file "~/.emacs.d/gcal-secret.json"))))
+
 (require 'org-gcal)
-(setq org-gcal-client-id "972385860203-c1a6cfcnttnrtoqrluibrds34tcdhbk1.apps.googleusercontent.com"
-org-gcal-client-secret "itsasecret"
-org-gcal-file-alist '(("juliangrove@gmail.com" .  "~/Documents/org/gcal/gcal.org")))
+(setq org-gcal-client-id (get-gcal-config-value 'client_id)
+      org-gcal-client-secret (get-gcal-config-value 'client_secret)
+      org-gcal-file-alist '(("juliangrove@gmail.com" .  "~/Documents/org/gcal/gcal.org")))
 
 (defun my-org-gcal-fetch (&optional arg)
   (interactive "P")
