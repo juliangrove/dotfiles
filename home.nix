@@ -20,6 +20,10 @@ in {
     };
     ".emacs" = {
       source = programs/emacs/emacs;
+      onChange = ''sed -i "s|itsasecret|$(gpg -q --for-your-eyes-only --no-tty -d .org-gcal-client-secret.gpg)|g" .emacs'';
+    };
+    ".mbsyncrc" = {
+      source = programs/isync/mbsyncrc;
     };
     ".offlineimaprc" = {
       source = programs/offlineimap/offlineimaprc;
@@ -50,7 +54,6 @@ in {
   home.packages =
     let nixos = import <nixos> {};
         unstable = import <nixos-unstable> {};
-        ewp = (pkgs.emacsPackagesGen pkgs.emacs).emacsWithPackages;
         python-packages = py-pkgs: with py-pkgs; [
           pandas
           scikitlearn
@@ -68,6 +71,7 @@ in {
       gnupg
       htop
       i3lock-fancy-rapid
+      killall
       lshw
       mu
       neofetch
@@ -80,7 +84,6 @@ in {
       xorg.xdpyinfo
 
       # editors
-      (ewp (import ./emacs.nix { inherit pkgs; }))
       vim   
       
       # languages
@@ -99,34 +102,51 @@ in {
       google-chrome
       pinentry_qt5              # support for gpg passphrase entry
       spotify
-      # skype
+      skype
       unstable.haskellPackages.xmobar
+      zoom-us
       zotero
-      # zoom-us
     ];
 
-  programs.bash = {
-    enable = true;
-    historyIgnore = [ "ls" "cd" "exit" ];
-    profileExtra = (builtins.readFile ./programs/bash/bash_profile);
-    bashrcExtra = (builtins.readFile ./programs/bash/bashrc);
+  programs = {
+    alacritty.enable = true; # terminal emulator
+    
+    bash = {
+      enable = true;
+      historyIgnore = [ "ls" "cd" "exit" ];
+      profileExtra = (builtins.readFile ./programs/bash/bash_profile);
+      bashrcExtra = (builtins.readFile ./programs/bash/bashrc);
+    };
+
+    emacs = {
+      enable = true;
+      package = pkgs.emacs;
+      extraPackages = import ./emacs.nix { inherit pkgs; };
+    };
+    
+    zathura.enable = true;  # zathura
   };
-
-  programs.alacritty.enable = true; # terminal emulator  
-
-  programs.zathura.enable = true; # zathura
-
+  
   # cursors
   xsession.pointerCursor = {
     package = pkgs.vanilla-dmz;
     name = "Vanilla-DMZ";
   };
 
-  # picom
-  services.picom = {
-    enable = true;
-    vSync = true;               # to prevent tearing
-    shadow = true;
-    shadowExclude = [ "name = 'xmobar'" ];
+  # systemd user services
+  services = {
+    emacs.enable = true;
+    
+    picom = {
+      enable = true;
+      vSync = true;             # to prevent tearing
+      shadow = true;
+      shadowExclude = [ "name = 'xmobar'" ];
+    };
+    
+    # offlineimap = {
+    #   enable = true;
+    #   # frequency = "*:0/1";
+    # };
   };
 }

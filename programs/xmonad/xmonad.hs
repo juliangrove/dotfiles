@@ -57,9 +57,8 @@ mystartup = do
   spawn $ "nitrogen --restore"
        ++ " && gpg -q --for-your-eyes-only --no-tty -d ~/.gmailpass.gpg"
        ++ " && gpg -q --for-your-eyes-only --no-tty -d ~/.exchangepass.gpg"
-       ++ " && offlineimap"
 mykeys c = mkKeymap c $
-  [ ("M-S-e", spawn "emacs")
+  [ ("M-S-e", spawn "emacsclient -c")
   , ("M-S-f", spawn "firefox")
   , ("M-S-g", spawn "google-chrome-stable")
   , ("M-S-l", spawn $ "i3lock-fancy-rapid 40 10 -n"

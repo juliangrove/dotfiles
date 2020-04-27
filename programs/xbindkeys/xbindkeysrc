@@ -76,7 +76,11 @@
 # Mute volume
 "pactl set-sink-mute @DEFAULT_SINK@ toggle"
    XF86AudioMute
-   
+
+# Mute mic
+"pactl set-source-mute 1 toggle"
+   XF86AudioMicMute
+
 # Increase brightness
 "light -A 6.25"
    XF86MonBrightnessUp

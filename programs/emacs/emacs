@@ -10,31 +10,20 @@
                (cons "melpa" (concat proto "://melpa.org/packages/")) t))
 (package-initialize)
 
-;; (require 'xclip)
-;; (xclip-mode 1)
+(require 'xclip)
+(xclip-mode 1)
 
 (menu-bar-mode -1)
 (tool-bar-mode -1)
-(toggle-scroll-bar -1)
+(defun my/disable-scroll-bars (frame)
+  (modify-frame-parameters frame
+                           '((vertical-scroll-bars . nil)
+                             (horizontal-scroll-bars . nil))))
+(add-hook 'after-make-frame-functions 'my/disable-scroll-bars)
 
 (cua-mode 1)
 
 (setq split-width-threshold 1)
-
-;; (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
-
-;; (require 'auto-package-update)
-
-(setenv "PATH" "/usr/share/texmf/tex/latex/:$PATH" t)
-
-;; (load-theme 'ample t t)
-;; (load-theme 'ample-flat t t)
-;; (load-theme 'ample-light t t)
-;; (enable-theme 'ample)
-
-;; (load-theme 'cyberpunk t)
-
-;; (load-theme 'seti t)
 
 (load-theme 'gruvbox t)
 
@@ -49,11 +38,11 @@
 (global-linum-mode t)
 
 ;; mu4e
-;; (require 'mu4e)
-(with-eval-after-load 'mu4e (require 'mu4e-conversation))
-(global-mu4e-conversation-mode)
+(require 'mu4e)
 
 (setq mail-user-agent 'mu4e-user-agent)
+
+(global-set-key (kbd "C-M-v") 'mu4e-conversation-toggle-view)
 
 (setq mu4e-maildir "~/.mail")
 
@@ -62,7 +51,7 @@
 (setq mu4e-trash-folder "/gmail/[Gmail].Trash")
 
 (setq mu4e-sent-messages-behavior 'delete)
-(setq mu4e-get-mail-command "mbsync")
+(setq mu4e-get-mail-command "offlineimap")
 
 (setq
   user-mail-address "julian.grove@gmail.com"
@@ -73,7 +62,6 @@
 	  "juliangrove.github.io\n"
 	  "sent via mu4e"))
 
-;; (require 'smtpmail-multi)
 (require 'smtpmail)
 
 (setq message-send-mail-function 'smtpmail-send-it
@@ -86,7 +74,6 @@
       smtpmail-smtp-service 587)
 
 (setq message-kill-buffer-on-exit t)
-;; (require 'shr)
 
 (setq mu4e-view-show-images t
       mu4e-view-image-max-width 800)
@@ -99,14 +86,6 @@
 
 (setq mu4e-user-mail-address-list '("julian.grove@gmail.com" "juliangrove@gmail.com" "juliang@uchicago.edu"))
 (setq mu4e-compose-dont-reply-to-self t)
-
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(column-number-mode t)
- '(nil nil t))
 
 (setq-default TeX-PDF-mode t)
 (setq-default TeX-master t)
@@ -164,7 +143,6 @@ TeX-view-program-list '(("PDF Viewer"
 ;; (add-hook 'haskell-mode-hook 'inferior-haskell-mode)
 ;; (add-hook 'haskell-mode-hook #'my-haskell-comment-setup)
 
-;; (load "~/.emacs.d/lisp/PG/generic/proof-site")
 ;; Open .v files with Proof General's Coq mode
 (add-hook 'coq-mode-hook 'coq-commenter-mode)
 
@@ -189,7 +167,7 @@ TeX-view-program-list '(("PDF Viewer"
 
 (require 'org-gcal)
 (setq org-gcal-client-id "972385860203-c1a6cfcnttnrtoqrluibrds34tcdhbk1.apps.googleusercontent.com"
-org-gcal-client-secret "oP4Gj3VCHZb3XWHXZ06QqYUG"
+org-gcal-client-secret "itsasecret"
 org-gcal-file-alist '(("juliangrove@gmail.com" .  "~/Documents/org/gcal/gcal.org")))
 
 (defun my-org-gcal-fetch (&optional arg)
@@ -216,9 +194,6 @@ org-gcal-file-alist '(("juliangrove@gmail.com" .  "~/Documents/org/gcal/gcal.org
 (defun schedule ()
 (interactive)
 (cfw:open-org-calendar))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(default ((t (:family "Monospace" :slant normal :weight normal :height 120 :width normal)))))
+
+(set-default-font "Monospace-12")
+(setq default-frame-alist '((font . "Monospace-12")))

@@ -67,14 +67,10 @@
   environment.systemPackages =
     let unstable = import <nixos-unstable> {};
     in with pkgs; [
-      # personal config
-      unstable.home-manager
-      
-      # keybindings
-      xbindkeys
-
-      # wallpaper
-      nitrogen
+      unstable.home-manager     # personal config
+      lxqt.pavucontrol-qt       # pulseaudio control
+      nitrogen                  # wallpaper
+      xbindkeys                 # keybindings
     ];
   
   # Some programs need SUID wrappers, can be configured further or are
@@ -101,6 +97,7 @@
   hardware.pulseaudio = {
     enable = true;
     package = pkgs.pulseaudioFull;
+    support32Bit = true;
   };
   
   # xserver config
