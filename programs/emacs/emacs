@@ -91,15 +91,9 @@
 (setq-default TeX-master t)
 (setq latex-run-command "pdflatex")
 (setq TeX-command-extra-options "-shell-escape")
-(setq TeX-view-program-selection '((output-pdf "PDF Viewer"))) (setq
-TeX-view-program-list '(("PDF Viewer"
-"/Applications/Skim.app/Contents/SharedSupport/displayline -b -g %n %o
-%b")))
 (setq shift-select-mode t)
-(setq TeX-parse-self t) ; Enable parse on load.
-(setq TeX-auto-save t) ; Enable parse on save.
-(setq-default TeX-PDF-mode t)
-(setq-default TeX-master t)
+(setq TeX-parse-self t)			; Enable parse on load.
+(setq TeX-auto-save t)			; Enable parse on save.
 (setq latex-run-command "pdflatex")
 (setq TeX-command-extra-options "-shell-escape")
 (setq TeX-view-program-selection '((output-pdf "PDF Viewer")))
@@ -121,17 +115,6 @@ TeX-view-program-list '(("PDF Viewer"
                (TeX-current-file-name-master-relative)
 	       "\""))
 (setq TeX-view-program-selection '((output-pdf "Zathura")))
-;;
-(setq shift-select-mode t)
-(setq TeX-parse-self t) ; Enable parse on load.
-(setq TeX-auto-save t) ; Enable parse on save.
-(setq-default TeX-PDF-mode t)
-(setq-default TeX-master t)
-(setq latex-run-command "pdflatex")
-(setq TeX-command-extra-options "-shell-escape")
-(setq shift-select-mode t)
-(setq TeX-parse-self t) ; Enable parse on load.
-(setq TeX-auto-save t) ; Enable parse on save.
 
 (require 'haskell-mode)
 (require 'nix-haskell-mode)
@@ -143,7 +126,7 @@ TeX-view-program-list '(("PDF Viewer"
 ;; (add-hook 'haskell-mode-hook 'inferior-haskell-mode)
 ;; (add-hook 'haskell-mode-hook #'my-haskell-comment-setup)
 
-;; Open .v files with Proof General's Coq mode
+;; open .v files with Proof General's Coq mode
 (add-hook 'coq-mode-hook 'coq-commenter-mode)
 
 (setq auto-mode-alist (append '(("\\.pl\\'" . prolog-mode))
@@ -192,7 +175,6 @@ TeX-view-program-list '(("PDF Viewer"
 ;; calfw
 (require 'calfw)
 (require 'calfw-org)
-;; (require 'calfw-ical)
 (require 'calfw-gcal)
 
 (defun schedule ()
