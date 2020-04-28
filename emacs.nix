@@ -5,13 +5,14 @@
   auctex                        # latex
   auto-package-update
   calfw
-  calfw-ical
   calfw-gcal
+  calfw-ical
   calfw-org
   caml
   coq-commenter
   elpy                          # python
   evil                          # used to use vim
+  flycheck
   gruvbox-theme
   haskell-mode
   idris-mode
@@ -24,6 +25,7 @@
   org-plus-contrib
   proof-general                 # coq
   racket-mode
+  use-package
   tuareg                        # ocaml
   xclip
 ]))

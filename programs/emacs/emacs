@@ -46,12 +46,12 @@
 
 (setq mu4e-maildir "~/.mail")
 
-(setq mu4e-drafts-folder "/gmail/[Gmail].Drafts")
-(setq mu4e-sent-folder "/gmail/[Gmail].Sent Mail")
-(setq mu4e-trash-folder "/gmail/[Gmail].Trash")
+(setq mu4e-drafts-folder "/gmail/drafts")
+(setq mu4e-sent-folder "/gmail/sent")
+(setq mu4e-trash-folder "/gmail/trash")
 
 (setq mu4e-sent-messages-behavior 'delete)
-(setq mu4e-get-mail-command "offlineimap")
+(setq mu4e-get-mail-command "mbsync -a")
 
 (setq
   user-mail-address "julian.grove@gmail.com"
@@ -116,15 +116,12 @@
 	       "\""))
 (setq TeX-view-program-selection '((output-pdf "Zathura")))
 
+;; (require 'flycheck)
+
 (require 'haskell-mode)
-(require 'nix-haskell-mode)
+;; (require 'nix-haskell-mode)
 ;; (add-hook 'haskell-mode-hook 'nix-haskell-mode)
-;; (autoload 'ghc-init "ghc" nil t)
-;; (autoload 'ghc-debug "ghc" nil t)
-;; (add-hook 'haskell-mode-hook (lambda () (ghc-init)))
 (add-hook 'haskell-mode-hook 'interactive-haskell-mode)
-;; (add-hook 'haskell-mode-hook 'inferior-haskell-mode)
-;; (add-hook 'haskell-mode-hook #'my-haskell-comment-setup)
 
 ;; open .v files with Proof General's Coq mode
 (add-hook 'coq-mode-hook 'coq-commenter-mode)
@@ -155,7 +152,7 @@
 (require 'org-gcal)
 (setq org-gcal-client-id (get-gcal-config-value 'client_id)
       org-gcal-client-secret (get-gcal-config-value 'client_secret)
-      org-gcal-file-alist '(("juliangrove@gmail.com" .  "~/Documents/org/gcal/gcal.org")))
+      org-gcal-file-alist '(("juliangrove@gmail.com" . "~/Documents/org/gcal/gcal.org")))
 
 (defun my-org-gcal-fetch (&optional arg)
   (interactive "P")

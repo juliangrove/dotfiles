@@ -24,12 +24,6 @@ in {
     ".mbsyncrc" = {
       source = programs/isync/mbsyncrc;
     };
-    ".offlineimaprc" = {
-      source = programs/offlineimap/offlineimaprc;
-    };
-    ".offlineimap.py" = {
-      source = programs/offlineimap/offlineimap.py;
-    };
     ".xbindkeysrc" = {
       source = programs/xbindkeys/xbindkeysrc;
     };
@@ -76,7 +70,7 @@ in {
       mu
       neofetch
       nix-prefetch-git
-      offlineimap
+      pandoc
       pciutils
       scrot
       lm_sensors
@@ -113,7 +107,7 @@ in {
     
     bash = {
       enable = true;
-      historyIgnore = [ "ls" "cd" "exit" ];
+      historyIgnore = [ "ls" "cd" "exit" "pwd" ];
       profileExtra = (builtins.readFile ./programs/bash/bash_profile);
       bashrcExtra = (builtins.readFile ./programs/bash/bashrc);
     };
@@ -135,7 +129,7 @@ in {
 
   # systemd user services
   services = {
-    emacs.enable = true;
+     emacs.enable = true;
     
     picom = {
       enable = true;
@@ -144,9 +138,10 @@ in {
       shadowExclude = [ "name = 'xmobar'" ];
     };
     
-    # offlineimap = {
-    #   enable = true;
-    #   # frequency = "*:0/1";
-    # };
+    mbsync = {
+      enable = true;
+      frequency = "*:0/1";
+      postExec = ''${pkgs.mu}/bin/mu index --maildir=/home/juliangrove/.mail'';
+    };
   };
 }

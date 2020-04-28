@@ -1,10 +1,9 @@
 IMAPAccount gmail
 Host imap.gmail.com
 User julian.grove@gmail.com
-PassCmd "gpg -q --for-your-eyes-only --no-tty -d ~/.gmailpass.gpg"
+PassCmd "/home/juliangrove/.nix-profile/bin/gpg -q --for-your-eyes-only --no-tty -d /home/juliangrove/.gmailpass.gpg"
 SSLType IMAPS
 CertificateFile /etc/ssl/certs/ca-certificates.crt
-PipelineDepth 2
 
 IMAPStore gmail-remote
 Account gmail
@@ -21,37 +20,45 @@ Create Slave
 Remove Slave
 SyncState *
 
+Channel gmail-drafts
+Master :gmail-remote:"[Gmail]/Drafts"
+Slave :gmail-local:drafts
+Create Slave
+Remove Slave
+SyncState *
+
 Channel gmail-sent
-Master :gmail-remote:"[Google Mail]/Sent Mail"
+Master :gmail-remote:"[Gmail]/Sent Mail"
 Slave :gmail-local:sent
 Create Slave
 Remove Slave
 SyncState *
 
 Channel gmail-trash
-Master :gmail-remote:"[Google Mail]/Bin"
+Master :gmail-remote:"[Gmail]/Trash"
 Slave :gmail-local:trash
 Create Slave
 Remove Slave
 SyncState *
 
 Channel gmail-all
-Master :gmail-remote:"[Google Mail]/All Mail"
+Master :gmail-remote:"[Gmail]/All Mail"
 Slave :gmail-local:all
 Create Slave
 Remove Slave
 SyncState *
 
 Group gmail
-Channel personal-inbox
-Channel personal-sent
-Channel personal-trash
-Channel personal-all
+Channel gmail-inbox
+Channel gmail-drafts
+Channel gmail-sent
+Channel gmail-trash
+Channel gmail-all
 
 IMAPAccount exchange
 Host outlook.office365.com
 User juliang@uchicago.edu
-PassCmd "gpg -q --for-your-eyes-only --no-tty -d ~/.exchangepass.gpg"
+PassCmd "/home/juliangrove/.nix-profile/bin/gpg -q --for-your-eyes-only --no-tty -d /home/juliangrove/.exchangepass.gpg"
 SSLType IMAPS
 CertificateFile /etc/ssl/certs/ca-certificates.crt
 
