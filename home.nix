@@ -141,7 +141,7 @@ in {
     mbsync = {
       enable = true;
       frequency = "*:0/1";
-      postExec = ''${pkgs.mu}/bin/mu index --maildir=/home/juliangrove/.mail'';
+      postExec = ''${pkgs.mu}/bin/mu index --maildir=~/.mail'';
     };
   };
 }
