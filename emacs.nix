@@ -2,6 +2,8 @@
 
 (epkgs: (with epkgs; [
   airline-themes
+  all-the-icons
+  all-the-icons-dired
   auctex                        # latex
   auto-package-update
   calfw
@@ -10,7 +12,9 @@
   calfw-org
   caml
   coq-commenter
-  dired-toggle
+  dired-hide-dotfiles
+  dired-sidebar
+  dired-subtree
   elpy                          # python
   evil                          # used to use vim
   flycheck
@@ -24,6 +28,7 @@
   org-agenda-property
   org-gcal
   org-plus-contrib
+  pdf-tools
   proof-general                 # coq
   racket-mode
   use-package

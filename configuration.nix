@@ -141,7 +141,8 @@
   # fonts
   fonts = {
     fontconfig.dpi = 145;
-    fonts = with pkgs; [                  
+    fonts = with pkgs; [
+      emacs-all-the-icons-fonts
       font-awesome_4
       lohit-fonts.kannada
     ];

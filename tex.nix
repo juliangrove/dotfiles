@@ -19,9 +19,9 @@
         sectsty
         stackengine
         stmaryrd
+        tikz-qtree
         tipa
         titling
-        tikz-qtree
         ulem
         xcolor;
       minionpro.pkgs = [ (pkgs.callPackage ./programs/minionpro {}) ];

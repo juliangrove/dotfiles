@@ -36,6 +36,7 @@
 (evil-mode 1)
 
 (global-linum-mode t)
+(add-hook 'pdf-view-mode-hook (lambda() (linum-mode -1)))
 
 ;; mu4e
 (require 'mu4e)
@@ -181,21 +182,29 @@
 (set-default-font "Monospace-12")
 (setq default-frame-alist '((font . "Monospace-12")))
 
-(use-package dired-toggle
-  :defer t
-  :bind (("<f3>" . #'dired-toggle)
-         :map dired-mode-map
-         ("q" . #'dired-toggle-quit)
-         ([remap dired-find-file] . #'dired-toggle-find-file)
-         ([remap dired-up-directory] . #'dired-toggle-up-directory)
-         ("C-c C-u" . #'dired-toggle-up-directory))
-  :config
-  (setq dired-toggle-window-size 32)
-  (setq dired-toggle-window-side 'left)
+;; dired
+(require 'all-the-icons)
+(use-package dired-sidebar
+  :bind (("M-d" . dired-sidebar-toggle-sidebar)))
 
-  ;; Optional, enable =visual-line-mode= for our narrow dired buffer:
-  (add-hook 'dired-toggle-mode-hook
-            (lambda () (interactive)
-              (visual-line-mode 1)
-              (setq-local visual-line-fringe-indicators '(nil right-curly-arrow))
-              (setq-local word-wrap nil))))
+(define-key dired-mode-map "." #'dired-hide-dotfiles-mode)
+
+(use-package dired-subtree
+  :config
+  (bind-keys :map dired-mode-map
+             ("SPC" . dired-icons-subtree-toggle)))
+
+(defun dired-icons-subtree-toggle ()
+  (interactive)
+  (dired-subtree-toggle)
+  (revert-buffer))
+
+(add-hook 'dired-mode-hook
+      (lambda ()
+        (dired-hide-details-mode)
+        (dired-hide-dotfiles-mode)))
+(add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
+
+;; pdf viewer
+(pdf-loader-install)
+(add-hook 'TeX-after-compilation-finished-functions #'TeX-revert-document-buffer)
