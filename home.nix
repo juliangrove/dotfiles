@@ -5,11 +5,6 @@ let mozilla-overlay = fetchTarball {
     };
     i3lock-fancy-rapid = pkgs.callPackage ./programs/i3lock-fancy-rapid {};
 in {
-  imports =
-    [
-      ./tex.nix                 # latex
-    ];
-
   # dotfiles
   home.file = {
     ".config/alacritty/alacritty.yml" = {
@@ -55,12 +50,12 @@ in {
         R-stuff = pkgs.rWrapper.override {
           packages = with pkgs.rPackages; [ ggplot2 ];
         };
+        tex = (pkgs.callPackage ./tex.nix {}).tex;
     in with pkgs; [
       # cli tools
       nixos.dict
       feh
       gcc
-      git
       gnupg
       htop
       i3lock-fancy-rapid
@@ -72,7 +67,10 @@ in {
       nix-prefetch-git
       pandoc
       pciutils
+      pdftk
+      prettyping
       scrot
+      unzip
       lm_sensors
       wget
       xorg.xdpyinfo
@@ -90,6 +88,9 @@ in {
       stack                     # haskell
       swiProlog                 # prolog
 
+      # latex
+      tex
+      
       # gui apps
       briss
       latest.firefox-nightly-bin
@@ -107,15 +108,23 @@ in {
     
     bash = {
       enable = true;
-      historyIgnore = [ "ls" "cd" "exit" "pwd" ];
-      profileExtra = (builtins.readFile ./programs/bash/bash_profile);
-      bashrcExtra = (builtins.readFile ./programs/bash/bashrc);
+      historyIgnore = [ "ls" "cd" "exit" "pwd" ]; 
+      bashrcExtra = ''
+        PS1=$'\[\033[32m\e[2m\]\u03bb\[\033[00m\] '
+        neofetch
+'';
     };
 
     emacs = {
       enable = true;
       package = pkgs.emacs;
       extraPackages = import ./emacs.nix { inherit pkgs; };
+    };
+
+    git = {
+      enable = true;
+      userEmail = "julian.grove@gmail.com";
+      userName = "juliangrove";
     };
     
     zathura.enable = true;  # zathura

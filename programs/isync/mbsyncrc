@@ -10,7 +10,7 @@ Account gmail
 
 MaildirStore gmail-local
 Path ~/.mail/gmail/
-Inbox ~/.mail/gmail/Inbox
+Inbox ~/.mail/gmail/inbox
 
 Channel gmail-inbox
 Master :gmail-remote:
@@ -67,7 +67,7 @@ Account exchange
 
 MaildirStore exchange-local
 Path ~/.mail/exchange/
-Inbox ~/.mail/exchange/Inbox
+Inbox ~/.mail/exchange/inbox
 
 Channel exchange-inbox
 Master :exchange-remote:

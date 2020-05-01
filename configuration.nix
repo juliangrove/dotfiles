@@ -68,8 +68,8 @@
     let unstable = import <nixos-unstable> {};
     in with pkgs; [
       unstable.home-manager     # personal config
-      lxqt.pavucontrol-qt       # pulseaudio control
       nitrogen                  # wallpaper
+      lxqt.pavucontrol-qt       # pulseaudio control
       xbindkeys                 # keybindings
     ];
   

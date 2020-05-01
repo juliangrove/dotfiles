@@ -1,21 +1,30 @@
-{ config, pkgs, ... }:
+{ pkgs, lib, texlive, ... }:
 
 {
-  home.packages = with pkgs; [
-    (lib.overrideDerivation (texlive.combine {
+  tex = (lib.overrideDerivation (texlive.combine {
       inherit (texlive)
-        scheme-medium
-        titling
-        enumitem
-        libertine
-        tikz-qtree
-        sectsty
-        expex
-        stackengine
         appendix
-        mnsymbol
-        relsize;
-      minionpro.pkgs = [ (callPackage ./programs/minionpro {}) ];
+        bussproofs
+        enumitem
+        etoolbox
+        expex
+        kpfonts
+        libertine
+        mathtools
+        mnsymbol       
+        multirow
+        pgf
+        relsize
+        scheme-basic
+        sectsty
+        stackengine
+        stmaryrd
+        tipa
+        titling
+        tikz-qtree
+        ulem
+        xcolor;
+      minionpro.pkgs = [ (pkgs.callPackage ./programs/minionpro {}) ];
     }) (oldAttrs: {
      postBuild = ''
        # Save the udpmap.cfg because texlive.combine removes it.
@@ -37,6 +46,5 @@
        # Regenerate .map files.
        perl `type -P updmap.pl` --sys
      '';
-    }))
-  ];
+    }));
 }

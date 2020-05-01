@@ -10,6 +10,7 @@
   calfw-org
   caml
   coq-commenter
+  dired-toggle
   elpy                          # python
   evil                          # used to use vim
   flycheck
