@@ -1,10 +1,11 @@
 { config, pkgs, ... }:
-
-let mozilla-overlay = fetchTarball {
-      url = https://github.com/mozilla/nixpkgs-mozilla/archive/master.tar.gz;
-    };
-    i3lock-fancy-rapid = pkgs.callPackage ./programs/i3lock-fancy-rapid {};
-in {
+let
+  mozilla-overlay = fetchTarball {
+    url = https://github.com/mozilla/nixpkgs-mozilla/archive/master.tar.gz;
+  };
+  i3lock-fancy-rapid = pkgs.callPackage ./programs/i3lock-fancy-rapid {};
+in
+{
   # dotfiles
   home.file = {
     ".config/alacritty/alacritty.yml" = {
@@ -38,19 +39,21 @@ in {
       (import "${mozilla-overlay}")
     ];
   };
-    
+
   home.packages =
-    let nixos = import <nixos> {};
-        unstable = import <nixos-unstable> {};
-        python-packages = py-pkgs: with py-pkgs; [
-          pandas
-          scikitlearn
-        ];
-        python-stuff = pkgs.python38.withPackages python-packages;
-        R-stuff = pkgs.rWrapper.override {
-          packages = with pkgs.rPackages; [ ggplot2 ];
-        };
-        tex = (pkgs.callPackage ./tex.nix {}).tex;
+    let
+      nixos = import <nixos> {};
+      unstable = import <nixos-unstable> {};
+      python-packages = py-pkgs: with py-pkgs; [
+        numpy
+        pandas
+        scikitlearn
+      ];
+      python-stuff = pkgs.python38.withPackages python-packages;
+      R-stuff = pkgs.rWrapper.override {
+        packages = with pkgs.rPackages; [ ggplot2 ];
+      };
+      tex = (pkgs.callPackage ./tex.nix {}).tex;
     in with pkgs; [
       # cli tools
       nixos.dict
@@ -64,6 +67,7 @@ in {
       lshw
       mu
       neofetch
+      nixpkgs-fmt
       nix-prefetch-git
       pandoc
       pciutils
@@ -76,28 +80,29 @@ in {
       xorg.xdpyinfo
 
       # editors
-      vim   
-      
+      vim
+
       # languages
       coq
       idris
       ocaml
-      python-stuff              # python + packages
+      python-stuff # python + packages
       racket
-      R-stuff                   # R + packages
-      stack                     # haskell
-      swiProlog                 # prolog
+      R-stuff # R + packages
+      stack # haskell
+      swiProlog # prolog
 
       # latex
       tex
-      
+
       # gui apps
       briss
+      clementineUnfree
       latest.firefox-nightly-bin
       google-chrome
-      pinentry_qt5              # support for gpg passphrase entry
-      spotify
+      pinentry_qt5 # support for gpg passphrase entry
       skype
+      spotify
       unstable.haskellPackages.xmobar
       zoom-us
       zotero
@@ -105,14 +110,14 @@ in {
 
   programs = {
     alacritty.enable = true; # terminal emulator
-    
+
     bash = {
       enable = true;
-      historyIgnore = [ "ls" "cd" "exit" "pwd" ]; 
+      historyIgnore = [ "ls" "cd" "exit" "pwd" ];
       bashrcExtra = ''
         PS1=$'\[\033[32m\e[2m\]\u03bb\[\033[00m\] '
         neofetch
-'';
+      '';
     };
 
     emacs = {
@@ -126,10 +131,10 @@ in {
       userEmail = "julian.grove@gmail.com";
       userName = "juliangrove";
     };
-    
-    zathura.enable = true;  # zathura
+
+    zathura.enable = true; # zathura
   };
-  
+
   # cursors
   xsession.pointerCursor = {
     package = pkgs.vanilla-dmz;
@@ -138,15 +143,15 @@ in {
 
   # systemd user services
   services = {
-     emacs.enable = true;
-    
+    emacs.enable = true;
+
     picom = {
       enable = true;
-      vSync = true;             # to prevent tearing
+      vSync = true; # to prevent tearing
       shadow = true;
       shadowExclude = [ "name = 'xmobar'" ];
     };
-    
+
     mbsync = {
       enable = true;
       frequency = "*:0/1";

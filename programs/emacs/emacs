@@ -179,8 +179,8 @@
 (interactive)
 (cfw:open-org-calendar))
 
-(set-default-font "Monospace-12")
-(setq default-frame-alist '((font . "Monospace-12")))
+(set-default-font "DejaVu Sans Mono-12")
+(setq default-frame-alist '((font . "DejaVu Sans Mono-12")))
 
 ;; dired
 (require 'all-the-icons)
@@ -204,6 +204,12 @@
         (dired-hide-details-mode)
         (dired-hide-dotfiles-mode)))
 (add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
+
+;; nixos
+(require 'nix-mode)
+(add-to-list 'auto-mode-alist '("\\.nix\\'" . nix-mode))
+(add-hook 'nix-mode-hook 'nixpkgs-fmt-on-save-mode)
+(define-key nix-mode-map (kbd "C-c C-f") 'nixpkgs-fmt)
 
 ;; pdf viewer
 (pdf-loader-install)

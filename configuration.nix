@@ -5,12 +5,12 @@
 { config, pkgs, ... }:
 
 {
- imports =
-   [
-     # Include the results of the hardware scan.
-     ./hardware-configuration.nix
-     <home-manager/nixos>
-   ];
+  imports =
+    [
+      # Include the results of the hardware scan.
+      ./hardware-configuration.nix
+      <home-manager/nixos>
+    ];
 
   # Use the systemd-boot EFI boot loader.
   boot = {
@@ -20,7 +20,7 @@
     };
     kernelPackages = (import <nixos-unstable> {}).linuxPackages_latest;
   };
-  
+
   networking = {
     hostName = "nixthinkpad"; # Define your hostname.
     networkmanager.enable = true;
@@ -33,11 +33,11 @@
       enp0s31f6.useDHCP = true;
       wlp0s20f3.useDHCP = true;
     };
-    
+
     # Configure network proxy if necessary
     # proxy.default = "http://user:password@proxy:port/";
     # proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-    
+
     # Open ports in the firewall.
     # firewall.allowedTCPPorts = [ ... ];
     # firewall.allowedUDPPorts = [ ... ];
@@ -61,18 +61,19 @@
 
   # backlight
   programs.light.enable = true;
-  
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages =
-    let unstable = import <nixos-unstable> {};
+    let
+      unstable = import <nixos-unstable> {};
     in with pkgs; [
-      unstable.home-manager     # personal config
-      nitrogen                  # wallpaper
-      lxqt.pavucontrol-qt       # pulseaudio control
-      xbindkeys                 # keybindings
+      unstable.home-manager # personal config
+      nitrogen # wallpaper
+      lxqt.pavucontrol-qt # pulseaudio control
+      xbindkeys # keybindings
     ];
-  
+
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
@@ -86,9 +87,9 @@
   # avahi for DNS discovery
   services.avahi = {
     enable = true;
-    nssmdns = true;             # local hostname resolution for apps
+    nssmdns = true; # local hostname resolution for apps
   };
-  
+
   # Enable  CUPS to print documents.
   services.printing.enable = true;
 
@@ -99,14 +100,14 @@
     package = pkgs.pulseaudioFull;
     support32Bit = true;
   };
-  
+
   # xserver config
   services.xserver = {
     # x11
     enable = true;
     xkbOptions = "eurosign:e";
     dpi = 145;
-    
+
     # touchpad support
     libinput = {
       enable = true;
@@ -125,7 +126,7 @@
         haskellPackages.xmonad-extras
         haskellPackages.xmonad
       ];
-      config = programs/xmonad/xmonad.hs;   
+      config = programs/xmonad/xmonad.hs;
     };
 
     # auto-login
@@ -147,7 +148,7 @@
       lohit-fonts.kannada
     ];
   };
-  
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.juliangrove = {
     description = "Julian Grove";
@@ -170,7 +171,7 @@
   };
 
   services.blueman.enable = true;
-  
+
   # This value determines the NixOS release with which your system is to be
   # compatible, in order to avoid breaking some software such as database
   # servers. You should change this only after NixOS release notes say you
