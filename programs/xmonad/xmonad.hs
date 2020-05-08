@@ -19,11 +19,12 @@ main = do -- dbus <- D.connectSession
 -- Command to launch the bar.
 mybar = "xmobar"
 -- Custom PP, configure it as you like. It determines what is being written to the bar
-mypp = xmobarPP { ppCurrent = const "<fc=#fe8019>\x25cf</fc>"
-                , ppHidden = const "<fc=#3c3836>\x25cf</fc>" -- "<fc=#fe8019>\x25cb</fc>"
-                , ppTitle = const ""
-                , ppOrder = return . head
-                , ppWsSep = "   " }
+mypp = def { ppCurrent = const "<fc=#fe8019>\x25cf</fc>"
+           , ppHidden = const "<fc=#3c3836>\x25cf</fc>" -- "<fc=#fe8019>\x25cb</fc>"
+           , ppHiddenNoWindows = const "<fc=#3c3836>\x25cf</fc>"
+           , ppTitle = const ""
+           , ppOrder = return . head
+           , ppWsSep = "   " }
 -- Key binding to toggle the gap for the bar.
 togglestrutskey XConfig {XMonad.modMask = modMask} = (modMask, xK_b)
 

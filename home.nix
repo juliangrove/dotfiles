@@ -45,13 +45,16 @@ in
       nixos = import <nixos> {};
       unstable = import <nixos-unstable> {};
       python-packages = py-pkgs: with py-pkgs; [
+        matplotlib
         numpy
         pandas
         scikitlearn
       ];
       python-stuff = pkgs.python38.withPackages python-packages;
       R-stuff = pkgs.rWrapper.override {
-        packages = with pkgs.rPackages; [ ggplot2 ];
+        packages = with pkgs.rPackages; [
+          ggplot2
+        ];
       };
       tex = (pkgs.callPackage ./tex.nix {}).tex;
     in with pkgs; [

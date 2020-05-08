@@ -49,9 +49,9 @@ stdenv.mkDerivation rec {
     cp l3packages/l3packages/xparse.pdf $out/doc/latex/xparse
     mkdir -p $out/tex/latex/xparse
     cp l3packages/l3packages/xparse.sty $out/tex/latex/xparse
-    mkdir -p $out/doc/latex/langsci-avm
+    mkdir $out/doc/latex/langsci-avm
     cp langsci-avm/langsci-avm/langsci-avm.pdf $out/doc/latex/langsci-avm
-    mkdir -p $out/tex/latex/langsci-avm
+    mkdir $out/tex/latex/langsci-avm
     cp langsci-avm/langsci-avm/langsci-avm.sty $out/tex/latex/langsci-avm
   '';
 
