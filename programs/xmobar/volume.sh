@@ -13,6 +13,6 @@ else if (( $volume >= 75 ))
      fi
 fi
 
-printf " <fn=2>"
+printf " <fn=2><fc=#ebdbb2>"
 printf $volume
-printf "%%</fn>"
+printf "%%</fc></fn>"

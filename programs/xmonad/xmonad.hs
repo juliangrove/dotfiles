@@ -55,8 +55,7 @@ mylayout = tiled ||| Mirror tiled ||| Full
     -- Percent of screen to increment by when resizing panes
     delta   = 3/100
 mystartup = do
-  spawn $ "nitrogen --restore"
-       ++ " && gpg -q --for-your-eyes-only --no-tty -d ~/.gmailpass.gpg"
+  spawn $ "gpg -q --for-your-eyes-only --no-tty -d ~/.gmailpass.gpg"
        ++ " && gpg -q --for-your-eyes-only --no-tty -d ~/.exchangepass.gpg"
 mykeys c = mkKeymap c $
   [ ("M-S-e", spawn "emacsclient -c --eval \'(dired \"~/Documents\")\'")

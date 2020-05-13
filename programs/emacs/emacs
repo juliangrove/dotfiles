@@ -137,6 +137,10 @@
 
 ;; elpy
 (elpy-enable)
+;; enable flycheck for elpy
+(when (require 'flycheck nil t)
+  (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
+  (add-hook 'elpy-mode-hook 'flycheck-mode))
 
 ;; org
 (global-set-key (kbd "C-c l") 'org-store-link)

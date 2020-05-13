@@ -1,7 +1,3 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
-
 { config, pkgs, ... }:
 
 {
@@ -84,14 +80,80 @@
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
 
-  # avahi for DNS discovery
-  services.avahi = {
-    enable = true;
-    nssmdns = true; # local hostname resolution for apps
-  };
+  # systemd services
+  services = {
+    # avahi for DNS discovery
+    avahi = {
+      enable = true;
+      nssmdns = true; # local hostname resolution for apps
+    };
 
-  # Enable  CUPS to print documents.
-  services.printing.enable = true;
+    # Enable  CUPS to print documents.
+    printing.enable = true;
+
+    # xserver config
+    xserver = {
+      # x11
+      enable = true;
+      xkbOptions = "eurosign:e";
+      dpi = 145;
+
+      # touchpad support
+      libinput = {
+        enable = true;
+        naturalScrolling = true;
+        tapping = false;
+      };
+
+      # wm
+      windowManager.default = "xmonad";
+      desktopManager.default = "none";
+      windowManager.xmonad = {
+        enable = true;
+        enableContribAndExtras = true;
+        extraPackages = haskellPackages: [
+          haskellPackages.xmonad-contrib
+          haskellPackages.xmonad-extras
+          haskellPackages.xmonad
+        ];
+        config = programs/xmonad/xmonad.hs;
+      };
+
+      # auto-login
+      displayManager = {
+        lightdm.autoLogin = {
+          enable = true;
+          user = "juliangrove";
+        };
+        sessionCommands = ''
+          nitrogen --restore
+          xbindkeys &
+          systemctl --user restart emacs # keep having to do this for some reason
+        '';
+      };
+
+      # screen-locker
+      xautolock = {
+        enable = true;
+        locker = ''${pkgs.writeShellScript "lock-screen-i3lock-fancy-rapid" ''
+          ~/.nix-profile/bin/i3lock-fancy-rapid 40 10 -n \
+          --insidecolor=1d202180 \
+          --ringcolor=b8bb2680 \
+          --keyhlcolor=fabd2f80 \
+          --bshlcolor=cc241dff \
+          --linecolor=282828ff \
+          --insidevercolor=83a5984d \
+          --ringvercolor=45858880 \
+          --insidewrongcolor=cc241d80 \
+          --ringwrongcolor=fb493480
+        ''}'';
+        time = 3;
+        extraOptions = [ "-corners" "00-0" ];
+      };
+    };
+
+    blueman.enable = true;
+  };
 
   # Enable sound.
   sound.enable = true;
@@ -99,44 +161,6 @@
     enable = true;
     package = pkgs.pulseaudioFull;
     support32Bit = true;
-  };
-
-  # xserver config
-  services.xserver = {
-    # x11
-    enable = true;
-    xkbOptions = "eurosign:e";
-    dpi = 145;
-
-    # touchpad support
-    libinput = {
-      enable = true;
-      naturalScrolling = true;
-      tapping = false;
-    };
-
-    # wm
-    windowManager.default = "xmonad";
-    desktopManager.default = "none";
-    windowManager.xmonad = {
-      enable = true;
-      enableContribAndExtras = true;
-      extraPackages = haskellPackages: [
-        haskellPackages.xmonad-contrib
-        haskellPackages.xmonad-extras
-        haskellPackages.xmonad
-      ];
-      config = programs/xmonad/xmonad.hs;
-    };
-
-    # auto-login
-    displayManager = {
-      lightdm.autoLogin = {
-        enable = true;
-        user = "juliangrove";
-      };
-      sessionCommands = "xbindkeys";
-    };
   };
 
   # fonts
@@ -170,11 +194,9 @@
     package = pkgs.bluezFull;
   };
 
-  services.blueman.enable = true;
-
   # This value determines the NixOS release with which your system is to be
   # compatible, in order to avoid breaking some software such as database
   # servers. You should change this only after NixOS release notes say you
   # should.
-  system.stateVersion = "19.09"; # Did you read the comment?
+  system.stateVersion = " 19.09 "; # Did you read the comment?
 }

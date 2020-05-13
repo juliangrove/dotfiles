@@ -73,7 +73,7 @@ Config {
         --                      ] 10
 
         -- battery monitor
-        [ Run Battery        [ "-t", "<acstatus> <fn=2><left>%</fn>"
+        [ Run Battery        [ "-t", "<acstatus> <fn=2><fc=#ebdbb2><left>%</fc></fn>"
 	                     , "-H", "85"
 	                     , "-L", "20"
 			     , "--"
@@ -87,17 +87,17 @@ Config {
 			     , "--lows" , "<fc=#fb4934></fc>" ] 5
         -- time and date indicator 
         --   (%F = y-m-d date, %a = day of week, %T = h:m:s time)
-        , Run Date           "%F (%a) %I:%M" "date" 10
+        , Run Date           "<fc=#ebdbb2>%F (%a) %I:%M</fc>" "date" 10
 
         -- keyboard layout indicator
         -- , Run Kbd            [ ("us"         , "<fc=#8B0000> us</fc>") ]
 	, Run StdinReader
 	, Run Wireless "wlp0s20f3" [ "-t", "<fc=#d65d0e></fc> <fc=#689d6a><essid></fc>" ] 5
-	, Run Brightness [ "-t", "<fc=#fabd2f>\xf03e</fc> <fn=2><percent>%</fn>"
+	, Run Brightness [ "-t", "<fc=#fabd2f>\xf03e</fc> <fn=2><fc=#ebdbb2><percent>%</fc></fn>"
 	                 , "--"
 	                 , "-D", "/sys/class/backlight/intel_backlight" ] 2
 	-- volume status
-	-- , Run Volume "default" "Master" [ "-t", "<status> <fn=2><volume>%</fn>"
+	-- , Run Volume "default" "Master" [ "-t", "<status> <fn=2><fc=#ebdbb2><volume>%</fc></fn>"
         --                                 , "--"
         --                                 , "-O", ""
 	-- 				, "-C", "#b8bb26"

@@ -116,7 +116,8 @@ in
 
     bash = {
       enable = true;
-      historyIgnore = [ "ls" "cd" "exit" "pwd" ];
+      historyControl = [ "ignoredups" ];
+      historyIgnore = [ "ls*" "cd*" "exit" "pwd" ];
       bashrcExtra = ''
         PS1=$'\[\033[32m\e[2m\]\u03bb\[\033[00m\] '
         neofetch

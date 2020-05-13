@@ -14,14 +14,14 @@ stdenv.mkDerivation rec {
 
   patchPhase = ''
     sed -i "s|i3lock-color|${i3lock-color}/bin/i3lock-color|g" i3lock-fancy-rapid.c
-'';
-    
+  '';
+
   buildInputs = [ xorg.libX11 ];
-  
+
   installPhase = ''
     mkdir -p $out/bin
     cp i3lock-fancy-rapid $out/bin/
-'';
+  '';
 
   meta = {
     description = "A fork of i3lock-fancy-rapid that uses i3lock-color instead of i3lock.";

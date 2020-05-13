@@ -1,9 +1,9 @@
 { stdenv, fetchurl, fetchzip, texlive, libarchive }:
-let
-  version = "2.015";
-in
+
 stdenv.mkDerivation rec {
   name = "minionpro-${version}";
+
+  version = "2.015";
 
   src = fetchzip {
     name = "scripts";

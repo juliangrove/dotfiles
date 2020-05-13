@@ -1,9 +1,9 @@
 { stdenv, fetchzip, texlive }:
-let
-  version = "0.1.0";
-in
+
 stdenv.mkDerivation rec {
   name = "langsci-avm-${version}";
+
+  version = "0.1.0";
 
   srcs = [
     (
