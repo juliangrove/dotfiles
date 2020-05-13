@@ -3,7 +3,6 @@ let
   mozilla-overlay = fetchTarball {
     url = https://github.com/mozilla/nixpkgs-mozilla/archive/master.tar.gz;
   };
-  i3lock-fancy-rapid = pkgs.callPackage ./programs/i3lock-fancy-rapid {};
 in
 {
   # dotfiles
@@ -42,6 +41,7 @@ in
 
   home.packages =
     let
+      i3lock-fancy-rapid = pkgs.callPackage ./programs/i3lock-fancy-rapid {};
       nixos = import <nixos> {};
       unstable = import <nixos-unstable> {};
       python-packages = py-pkgs: with py-pkgs; [
