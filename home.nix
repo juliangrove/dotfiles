@@ -76,7 +76,7 @@ in
       pciutils
       pdftk
       prettyping
-      scrot
+      escrotum
       unzip
       lm_sensors
       wget

@@ -71,7 +71,7 @@ mykeys c = mkKeymap c $
                    ++ " --ringvercolor=45858880"
                    ++ " --insidewrongcolor=cc241d80"
                    ++ " --ringwrongcolor=fb493480")
-  , ("M-S-i", spawn "scrot")
+  , ("M-S-i", spawn "escrotum -s")
   , ("M-S-s", spawn "spotify") ]
 
 -- -\- Override the PP values as you would otherwise, adding colors etc depending
