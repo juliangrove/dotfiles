@@ -21,8 +21,9 @@ stdenv.mkDerivation rec {
     cp i3lock-fancy-rapid $out/bin/
   '';
 
-  meta = {
+  meta = with stdenv.lib; {
     description = "A fork of i3lock-fancy-rapid that uses i3lock-color instead of i3lock.";
-    homepage = "https://github.com/juliangrove/i3lock-fancy-rapid";
+    homepage = https://github.com/juliangrove/i3lock-fancy-rapid;
+    license = licenses.bsd3;
   };
 }

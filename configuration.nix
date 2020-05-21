@@ -121,9 +121,12 @@
 
       # auto-login
       displayManager = {
-        lightdm.autoLogin = {
+        lightdm = {
           enable = true;
-          user = "juliangrove";
+          autoLogin = {
+            enable = true;
+            user = "juliangrove";
+          };
         };
         sessionCommands = ''
           nitrogen --restore

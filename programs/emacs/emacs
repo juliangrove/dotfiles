@@ -117,14 +117,18 @@
 	       "\""))
 (setq TeX-view-program-selection '((output-pdf "Zathura")))
 
-;; (require 'flycheck)
-
+;; haskell
 (require 'haskell-mode)
 ;; (require 'nix-haskell-mode)
 ;; (add-hook 'haskell-mode-hook 'nix-haskell-mode)
 (add-hook 'haskell-mode-hook 'interactive-haskell-mode)
 
-;; open .v files with Proof General's Coq mode
+;; ocaml
+(autoload 'merlin-mode "merlin" "Merlin mode" t)
+(add-hook 'tuareg-mode-hook 'merlin-mode)
+(add-hook 'caml-mode-hook 'merlin-mode)
+
+;; coq
 (add-hook 'coq-mode-hook 'coq-commenter-mode)
 
 (setq auto-mode-alist (append '(("\\.pl\\'" . prolog-mode))
@@ -133,9 +137,7 @@
 (autoload 'run-prolog "pl" "Run an inferior prolog process" t)
 (autoload 'prolog-mode "prolog" "SWI-Prolog mode" t)
 
-(defvar caml-annot-dir nil)
-
-;; elpy
+;; python
 (elpy-enable)
 ;; enable flycheck for elpy
 (when (require 'flycheck nil t)

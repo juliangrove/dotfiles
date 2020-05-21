@@ -89,6 +89,9 @@ in
       coq
       idris
       ocaml
+      ocamlPackages.findlib
+      ocamlPackages.ocamlbuild
+      ocamlPackages.merlin
       python-stuff # python + packages
       racket
       R-stuff # R + packages
