@@ -28,8 +28,9 @@
             ulem
             xcolor
             ;
-          langsci-avm.pkgs = [ (pkgs.callPackage ./programs/langsci-avm {}) ];
-          minionpro.pkgs = [ (pkgs.callPackage ./programs/minionpro {}) ];
+          langsci-avm.pkgs = [ (pkgs.callPackage ./latex/langsci-avm {}) ];
+          libib.pkgs = [ (pkgs.callPackage ./latex/libib {}) ];
+          minionpro.pkgs = [ (pkgs.callPackage ./latex/minionpro {}) ];
         }
       )
       (

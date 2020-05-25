@@ -88,6 +88,7 @@
 (setq mu4e-user-mail-address-list '("julian.grove@gmail.com" "juliangrove@gmail.com" "juliang@uchicago.edu"))
 (setq mu4e-compose-dont-reply-to-self t)
 
+;; latex
 (setq-default TeX-PDF-mode t)
 (setq-default TeX-master t)
 (setq latex-run-command "pdflatex")
@@ -98,7 +99,8 @@
 (setq latex-run-command "pdflatex")
 (setq TeX-command-extra-options "-shell-escape")
 (setq TeX-view-program-selection '((output-pdf "PDF Viewer")))
-;; Zathura
+
+;; Zathura as latex pdf viewer
 (setq TeX-view-program-list '(("Zathura" "zathura %u")))
 
 (add-hook 'LaTeX-mode-hook '(lambda ()
@@ -131,6 +133,7 @@
 ;; coq
 (add-hook 'coq-mode-hook 'coq-commenter-mode)
 
+;; prolog
 (setq auto-mode-alist (append '(("\\.pl\\'" . prolog-mode))
      auto-mode-alist))
 (setq prolog-system 'swi)
