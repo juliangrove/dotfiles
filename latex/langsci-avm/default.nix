@@ -19,7 +19,7 @@ stdenv.mkDerivation rec {
         name = "l3packages";
         stripRoot = false;
         url = "http://mirrors.ctan.org/macros/latex/contrib/l3packages.zip";
-        sha256 = "1s4ndzlxfdqj0r3bmqwhn97rpd17yxzy17vi8s6x3d8l4fm407p4";
+        sha256 = "09skp640ywb61lfc8x6f6d43fyl8b201nwv7njjm56h48vbfq3fq";
       }
     )
   ];
@@ -49,6 +49,7 @@ stdenv.mkDerivation rec {
     cp l3packages/l3packages/xparse.pdf $out/doc/latex/xparse
     mkdir -p $out/tex/latex/xparse
     cp l3packages/l3packages/xparse.sty $out/tex/latex/xparse
+    cp l3packages/l3packages/xparse-generic.tex $out/tex/latex/xparse
     mkdir $out/doc/latex/langsci-avm
     cp langsci-avm/langsci-avm/langsci-avm.pdf $out/doc/latex/langsci-avm
     mkdir $out/tex/latex/langsci-avm

@@ -1,5 +1,8 @@
 { config, pkgs, ... }:
 let
+  emacs-overlay = fetchTarball {
+    url = https://github.com/nix-community/emacs-overlay/archive/master.tar.gz;
+  };
   mozilla-overlay = fetchTarball {
     url = https://github.com/mozilla/nixpkgs-mozilla/archive/master.tar.gz;
   };
@@ -35,6 +38,7 @@ in
     config.allowUnfree = true;
     # overlays
     overlays = [
+      (import "${emacs-overlay}")
       (import "${mozilla-overlay}")
     ];
   };

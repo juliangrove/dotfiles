@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   imports =
@@ -14,7 +14,7 @@
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
     };
-    kernelPackages = (import <nixos-unstable> {}).linuxPackages_latest;
+    kernelPackages = pkgs.linuxPackages_latest;
   };
 
   networking = {
@@ -62,8 +62,9 @@
   # $ nix search wget
   environment.systemPackages =
     let
-      unstable = import <nixos-unstable> {};
-    in with pkgs; [
+      unstable = import <nixos-unstable> { };
+    in
+    with pkgs; [
       unstable.home-manager # personal config
       nitrogen # wallpaper
       lxqt.pavucontrol-qt # pulseaudio control
@@ -139,17 +140,17 @@
       xautolock = {
         enable = true;
         locker = ''${pkgs.writeShellScript "lock-screen-i3lock-fancy-rapid" ''
-          ~/.nix-profile/bin/i3lock-fancy-rapid 40 10 -n \
-          --insidecolor=1d202180 \
-          --ringcolor=b8bb2680 \
-          --keyhlcolor=fabd2f80 \
-          --bshlcolor=cc241dff \
-          --linecolor=282828ff \
-          --insidevercolor=83a5984d \
-          --ringvercolor=45858880 \
-          --insidewrongcolor=cc241d80 \
-          --ringwrongcolor=fb493480
-        ''}'';
+            ~/.nix-profile/bin/i3lock-fancy-rapid 40 10 -n \
+            --insidecolor=1d202180 \
+            --ringcolor=b8bb2680 \
+            --keyhlcolor=fabd2f80 \
+            --bshlcolor=cc241dff \
+            --linecolor=282828ff \
+            --insidevercolor=83a5984d \
+            --ringvercolor=45858880 \
+            --insidewrongcolor=cc241d80 \
+            --ringwrongcolor=fb493480
+          ''}'';
         time = 3;
         extraOptions = [ "-corners" "00-0" ];
       };
@@ -164,6 +165,10 @@
     enable = true;
     package = pkgs.pulseaudioFull;
     support32Bit = true;
+    extraConfig = ''
+      load-module module-alsa-sink   device=hw:0,0 channels=4
+      load-module module-alsa-source device=hw:0,6 channels=4
+    '';
   };
 
   # fonts

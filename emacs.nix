@@ -24,7 +24,7 @@
       haskell-mode
       idris-mode
       merlin
-      mu4e-conversation # subsumes mu4e
+      mu4e-conversation # wraps mu4e
       nix-haskell-mode
       nix-mode
       nixpkgs-fmt
