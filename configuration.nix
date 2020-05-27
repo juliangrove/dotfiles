@@ -107,8 +107,6 @@
       };
 
       # wm
-      windowManager.default = "xmonad";
-      desktopManager.default = "none";
       windowManager.xmonad = {
         enable = true;
         enableContribAndExtras = true;
@@ -129,6 +127,9 @@
             user = "juliangrove";
           };
         };
+
+        defaultSession = "none+xmonad";
+
         sessionCommands = ''
           nitrogen --restore
           xbindkeys &
@@ -154,6 +155,14 @@
         time = 3;
         extraOptions = [ "-corners" "00-0" ];
       };
+    };
+
+    picom = {
+      enable = true;
+      backend = "glx";
+      vSync = true; # to prevent tearing
+      shadow = true;
+      shadowExclude = [ "name = 'xmobar'" ];
     };
 
     blueman.enable = true;

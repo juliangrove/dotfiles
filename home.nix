@@ -45,9 +45,9 @@ in
 
   home.packages =
     let
-      i3lock-fancy-rapid = pkgs.callPackage ./programs/i3lock-fancy-rapid {};
-      nixos = import <nixos> {};
-      unstable = import <nixos-unstable> {};
+      i3lock-fancy-rapid = pkgs.callPackage ./programs/i3lock-fancy-rapid { };
+      nixos = import <nixos> { };
+      unstable = import <nixos-unstable> { };
       python-packages = py-pkgs: with py-pkgs; [
         matplotlib
         numpy
@@ -60,8 +60,9 @@ in
           ggplot2
         ];
       };
-      tex = (pkgs.callPackage ./tex.nix {}).tex;
-    in with pkgs; [
+      tex = (pkgs.callPackage ./tex.nix { }).tex;
+    in
+    with pkgs; [
       # cli tools
       nixos.dict
       feh
@@ -155,13 +156,6 @@ in
   # systemd user services
   services = {
     emacs.enable = true;
-
-    picom = {
-      enable = true;
-      vSync = true; # to prevent tearing
-      shadow = true;
-      shadowExclude = [ "name = 'xmobar'" ];
-    };
 
     mbsync = {
       enable = true;

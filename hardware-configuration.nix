@@ -14,14 +14,13 @@
 
   boot = {
     initrd = {
-      luks.devices = [
-        {
-          name = "root";
+      luks.devices = {
+        root = {
           device = "/dev/disk/by-uuid/d7fd1b5b-114e-4b0c-9a8b-7a0879bfcda6";
           preLVM = true;
           allowDiscards = true;
-        }
-      ];
+        };
+      };
       availableKernelModules = [ "xhci_pci" "nvme" ];
       kernelModules = [ "i915" ];
     };
@@ -61,10 +60,14 @@
       lib.mkDefault config.hardware.enableRedistributableFirmware;
   };
 
-  services.throttled.enable = lib.mkDefault true;
+  services.throttled.enable = lib.mkDefault
+    true;
 
-  nix.maxJobs = lib.mkDefault 8;
-  powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
+  nix.maxJobs = lib.mkDefault
+    8;
+  powerManagement.cpuFreqGovernor = lib.mkDefault
+    "powersave";
   # High-DPI console
-  i18n.consoleFont = lib.mkDefault "${pkgs.terminus_font}/share/consolefonts/ter-u28n.psf.gz";
+  console.font = lib.mkDefault
+    "${pkgs.terminus_font}/share/consolefonts/ter-u28n.psf.gz";
 }
