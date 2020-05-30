@@ -170,14 +170,23 @@
 
   # Enable sound.
   sound.enable = true;
-  hardware.pulseaudio = {
-    enable = true;
-    package = pkgs.pulseaudioFull;
-    support32Bit = true;
-    extraConfig = ''
-      load-module module-alsa-sink   device=hw:0,0 channels=4
-      load-module module-alsa-source device=hw:0,6 channels=4
-    '';
+
+  hardware = {
+    bluetooth = {
+      enable = true;
+      powerOnBoot = false;
+      package = pkgs.bluezFull;
+    };
+
+    pulseaudio = {
+      enable = true;
+      package = pkgs.pulseaudioFull;
+      support32Bit = true;
+      extraConfig = ''
+        load-module module-alsa-sink   device=hw:0,0 channels=4
+        load-module module-alsa-source device=hw:0,6 channels=4
+      '';
+    };
   };
 
   # fonts
@@ -204,16 +213,9 @@
     powertop.enable = true;
   };
 
-  # bluetooth
-  hardware.bluetooth = {
-    enable = true;
-    powerOnBoot = false;
-    package = pkgs.bluezFull;
-  };
-
   # This value determines the NixOS release with which your system is to be
   # compatible, in order to avoid breaking some software such as database
   # servers. You should change this only after NixOS release notes say you
   # should.
-  system.stateVersion = " 19.09 "; # Did you read the comment?
+  system.stateVersion = " 20.03 "; # Did you read the comment?
 }

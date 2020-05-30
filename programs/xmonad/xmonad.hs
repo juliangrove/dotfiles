@@ -22,6 +22,8 @@ mybar = "xmobar"
 mypp = def { ppCurrent = const "<fc=#fe8019>\x25cf</fc>"
            , ppHidden = const "<fc=#3c3836>\x25cf</fc>" -- "<fc=#fe8019>\x25cb</fc>"
            , ppHiddenNoWindows = const "<fc=#3c3836>\x25cf</fc>"
+           , ppVisible = const "<fc=#8ec07c>\x25cf</fc>"
+           , ppVisibleNoWindows = Just $ const "<fc=#8ec07c>\x25cf</fc>"
            , ppTitle = const ""
            , ppOrder = return . head
            , ppWsSep = "   " }
@@ -71,7 +73,8 @@ mykeys c = mkKeymap c $
                    ++ " --insidewrongcolor=cc241d80"
                    ++ " --ringwrongcolor=fb493480")
   , ("M-S-i", spawn "escrotum -s")
-  , ("M-S-s", spawn "spotify") ]
+  , ("M-S-s", spawn "spotify")
+  , ("M-S-z", spawn "zoom-us") ]
 
 -- -\- Override the PP values as you would otherwise, adding colors etc depending
 -- -\- on  the statusbar used
