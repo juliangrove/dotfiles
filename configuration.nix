@@ -90,7 +90,12 @@
     };
 
     # Enable  CUPS to print documents.
-    printing.enable = true;
+    printing = {
+      enable = true;
+      drivers = with pkgs; [
+        brlaser
+      ];
+    };
 
     # xserver config
     xserver = {
