@@ -114,7 +114,6 @@ in
       pinentry_qt5 # support for gpg passphrase entry
       skype
       spotify
-      unstable.haskellPackages.xmobar
       zoom-us
       zotero
     ];

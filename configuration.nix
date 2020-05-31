@@ -69,6 +69,7 @@
       nitrogen # wallpaper
       lxqt.pavucontrol-qt # pulseaudio control
       xbindkeys # keybindings
+      unstable.haskellPackages.xmobar # status bar
     ];
 
   # Some programs need SUID wrappers, can be configured further or are
