@@ -58,6 +58,7 @@ in
       R-stuff = pkgs.rWrapper.override {
         packages = with pkgs.rPackages; [
           ggplot2
+          lme4
         ];
       };
       tex = (pkgs.callPackage ./tex.nix { }).tex;

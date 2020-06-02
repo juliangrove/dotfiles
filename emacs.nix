@@ -18,6 +18,7 @@
       dired-sidebar
       dired-subtree
       elpy # python
+      ess # R
       evil # used to use vim
       flycheck
       gruvbox-theme
