@@ -130,17 +130,14 @@
 ;; (require 'nix-haskell-mode)
 ;; (add-hook 'haskell-mode-hook 'nix-haskell-mode)
 (add-hook 'haskell-mode-hook 'interactive-haskell-mode)
-(add-hook 'haskell-mode-hook 'detectlonglines)
 
 ;; ocaml
 (autoload 'merlin-mode "merlin" "Merlin mode" t)
 (add-hook 'tuareg-mode-hook 'merlin-mode)
-(add-hook 'tuareg-mode-hook 'detectlonglines)
 (add-hook 'caml-mode-hook 'merlin-mode)
 
 ;; coq
 (add-hook 'coq-mode-hook 'coq-commenter-mode)
-(add-hook 'coq-mode-hook 'detectlonglines)
 
 ;; prolog
 (setq auto-mode-alist (append '(("\\.pl\\'" . prolog-mode))
