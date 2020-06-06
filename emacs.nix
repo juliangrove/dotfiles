@@ -25,7 +25,6 @@
       haskell-mode
       idris-mode
       merlin
-      mu4e-conversation # wraps mu4e
       nix-haskell-mode
       nix-mode
       nixpkgs-fmt
@@ -38,6 +37,7 @@
       racket-mode
       tuareg # ocaml
       use-package
+      yaml-mode
       xclip
     ]
   )

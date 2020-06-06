@@ -202,6 +202,7 @@
       emacs-all-the-icons-fonts
       font-awesome_4
       lohit-fonts.kannada
+      powerline-fonts
     ];
   };
 

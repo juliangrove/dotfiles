@@ -65,6 +65,7 @@ in
     in
     with pkgs; [
       # cli tools
+      escrotum
       nixos.dict
       feh
       gcc
@@ -73,6 +74,7 @@ in
       i3lock-fancy-rapid
       isync
       killall
+      lm_sensors
       lshw
       mu
       neofetch
@@ -82,9 +84,7 @@ in
       pciutils
       pdftk
       prettyping
-      escrotum
       unzip
-      lm_sensors
       wget
       xorg.xdpyinfo
 

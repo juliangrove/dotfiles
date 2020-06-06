@@ -29,6 +29,7 @@
 
 (require 'airline-themes)
 (load-theme 'airline-gruvbox-dark t)
+(setq airline-cursor-column t)
 
 (setq column-number-mode t)
 
@@ -38,12 +39,19 @@
 (global-linum-mode t)
 (add-hook 'pdf-view-mode-hook (lambda() (linum-mode -1)))
 
+(defun detectlonglines ()
+  (interactive)
+  (highlight-lines-matching-regexp ".\\{81\\}" 'hi-yellow))
+
 ;; mu4e
 (require 'mu4e)
 
+(setq mu4e-user-mail-address-list '("julian.grove@gmail.com" "juliangrove@gmail.com" "juliang@uchicago.edu"))
+(setq mu4e-compose-dont-reply-to-self t)
+
 (setq mail-user-agent 'mu4e-user-agent)
 
-(global-set-key (kbd "C-M-v") 'mu4e-conversation-toggle-view)
+;; (global-set-key (kbd "C-M-v") 'mu4e-conversation-toggle-view)
 
 (setq mu4e-maildir "~/.mail")
 
@@ -85,9 +93,6 @@
 
 (add-hook 'mu4e-compose-mode-hook #'no-auto-fill)
 
-(setq mu4e-user-mail-address-list '("julian.grove@gmail.com" "juliangrove@gmail.com" "juliang@uchicago.edu"))
-(setq mu4e-compose-dont-reply-to-self t)
-
 ;; latex
 (setq-default TeX-PDF-mode t)
 (setq-default TeX-master t)
@@ -121,17 +126,21 @@
 
 ;; haskell
 (require 'haskell-mode)
+(custom-set-variables '(haskell-process-type 'stack-ghci))
 ;; (require 'nix-haskell-mode)
 ;; (add-hook 'haskell-mode-hook 'nix-haskell-mode)
 (add-hook 'haskell-mode-hook 'interactive-haskell-mode)
+(add-hook 'haskell-mode-hook 'detectlonglines)
 
 ;; ocaml
 (autoload 'merlin-mode "merlin" "Merlin mode" t)
 (add-hook 'tuareg-mode-hook 'merlin-mode)
+(add-hook 'tuareg-mode-hook 'detectlonglines)
 (add-hook 'caml-mode-hook 'merlin-mode)
 
 ;; coq
 (add-hook 'coq-mode-hook 'coq-commenter-mode)
+(add-hook 'coq-mode-hook 'detectlonglines)
 
 ;; prolog
 (setq auto-mode-alist (append '(("\\.pl\\'" . prolog-mode))
@@ -142,10 +151,6 @@
 
 ;; python
 (elpy-enable)
-;; enable flycheck for elpy
-(when (require 'flycheck nil t)
-  (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
-  (add-hook 'elpy-mode-hook 'flycheck-mode))
 
 ;; R
 (require 'ess-r-mode)
@@ -156,7 +161,7 @@
 (global-set-key (kbd "C-c c") 'org-capture)
 
 ;; org-gcal
-(setq org-agenda-files (list "~/Documents/org/gcal/gcal.org"))
+(setq org-agenda-files (list "~/.emacs.d/gcal.org"))
 
 (require 'json)
 (defun get-gcal-config-value (key)
@@ -165,7 +170,7 @@
 (require 'org-gcal)
 (setq org-gcal-client-id (get-gcal-config-value 'client_id)
       org-gcal-client-secret (get-gcal-config-value 'client_secret)
-      org-gcal-file-alist '(("juliangrove@gmail.com" . "~/Documents/org/gcal/gcal.org")))
+      org-gcal-file-alist '(("juliangrove@gmail.com" . "~/.emacs.d/gcal.org")))
 
 (defun my-org-gcal-fetch (&optional arg)
   (interactive "P")
@@ -176,11 +181,11 @@
 (add-hook 'org-capture-after-finalize-hook (lambda () (org-gcal-sync)))
 
 (setq org-capture-templates
-'(("a" "Appointment" entry (file  "~/Documents/org/gcal/gcal.org")
+'(("a" "Appointment" entry (file  "~/.emacs.d/gcal.org")
 "* %?\n\n%^T\n\n:PROPERTIES:\n\n:END:\n\n")))
 
 ;; org-agenda
-(setq org-agenda-files (list "~/Documents/org/gcal/gcal.org"))
+(setq org-agenda-files (list "~/.emacs.d/gcal.org"))
 
 ;; calfw
 (require 'calfw)
@@ -191,7 +196,7 @@
 (interactive)
 (cfw:open-org-calendar))
 
-(set-default-font "DejaVu Sans Mono-12")
+(set-frame-font "DejaVu Sans Mono-12")
 (setq default-frame-alist '((font . "DejaVu Sans Mono-12")))
 
 ;; dired
