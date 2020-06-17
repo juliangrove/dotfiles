@@ -39,21 +39,21 @@
 (global-linum-mode t)
 (add-hook 'pdf-view-mode-hook (lambda() (linum-mode -1)))
 
-(defun detectlonglines ()
-  (interactive)
-  (highlight-lines-matching-regexp ".\\{81\\}" 'hi-yellow))
+(require 'fill-column-indicator)
+(global-set-key (kbd "C-c r") 'fci-mode)
+(setq fci-rule-column 80)
+(setq fci-rule-color "#cc241d")
+(setq fci-rule-width 2)
+
+;; text-mode hooks
+
+(dolist (hook '(text-mode-hook))
+  (add-hook hook (lambda () (flyspell-mode 1))))
 
 ;; mu4e
 (require 'mu4e)
 
-(setq mu4e-user-mail-address-list '("julian.grove@gmail.com" "juliangrove@gmail.com" "juliang@uchicago.edu"))
-(setq mu4e-compose-dont-reply-to-self t)
-
 (setq mail-user-agent 'mu4e-user-agent)
-
-;; (global-set-key (kbd "C-M-v") 'mu4e-conversation-toggle-view)
-
-(setq mu4e-maildir "~/.mail")
 
 (setq mu4e-drafts-folder "/gmail/drafts")
 (setq mu4e-sent-folder "/gmail/sent")
@@ -228,3 +228,11 @@
 ;; pdf viewer
 (pdf-loader-install)
 (add-hook 'TeX-after-compilation-finished-functions #'TeX-revert-document-buffer)
+
+;; markdown
+(use-package markdown-mode
+  :commands (markdown-mode gfm-mode)
+  :mode (("README\\.md\\'" . gfm-mode)
+         ("\\.md\\'" . markdown-mode)
+         ("\\.markdown\\'" . markdown-mode))
+  :init (setq markdown-command "multimarkdown"))

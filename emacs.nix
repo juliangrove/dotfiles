@@ -18,13 +18,16 @@
       dired-sidebar
       dired-subtree
       elpy # python
+      emojify
       ess # R
       evil # used to use vim
+      fill-column-indicator
       flycheck
       gruvbox-theme
       haskell-mode
       idris-mode
-      merlin
+      markdown-mode
+      merlin # ocaml
       nix-haskell-mode
       nix-mode
       nixpkgs-fmt

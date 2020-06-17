@@ -65,13 +65,15 @@ in
     in
     with pkgs; [
       # cli tools
-      escrotum
+      croc
       nixos.dict
+      escrotum
       feh
       gcc
       gnupg
       htop
       i3lock-fancy-rapid
+      ispell
       isync
       killall
       lm_sensors
@@ -160,7 +162,7 @@ in
     mbsync = {
       enable = true;
       frequency = "*:0/1";
-      postExec = ''${pkgs.mu}/bin/mu index --maildir=~/.mail'';
+      postExec = "${pkgs.mu}/bin/mu index";
     };
   };
 }
