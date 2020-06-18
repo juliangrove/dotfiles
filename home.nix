@@ -73,7 +73,10 @@ in
       gnupg
       htop
       i3lock-fancy-rapid
-      ispell
+      aspell
+      aspellDicts.en
+      aspellDicts.en-computers
+      aspellDicts.en-science
       isync
       killall
       lm_sensors
