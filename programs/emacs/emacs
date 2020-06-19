@@ -232,8 +232,6 @@
 
 (require 'org-ref)
 
-(require 'ox-linguistics)
-
 ;; org-gcal
 (setq org-agenda-files (list "~/.emacs.d/gcal.org"))
 
