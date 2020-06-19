@@ -8,6 +8,7 @@
           inherit (texlive)
             appendix
             bussproofs
+            capt-of
             enumitem
             etoolbox
             expex
@@ -26,11 +27,12 @@
             tipa
             titling
             ulem
+            wrapfig
             xcolor
             ;
-          langsci-avm.pkgs = [ (pkgs.callPackage ./latex/langsci-avm {}) ];
-          libib.pkgs = [ (pkgs.callPackage ./latex/libib {}) ];
-          minionpro.pkgs = [ (pkgs.callPackage ./latex/minionpro {}) ];
+          langsci-avm.pkgs = [ (pkgs.callPackage ./latex/langsci-avm { }) ];
+          libib.pkgs = [ (pkgs.callPackage ./latex/libib { }) ];
+          minionpro.pkgs = [ (pkgs.callPackage ./latex/minionpro { }) ];
         }
       )
       (

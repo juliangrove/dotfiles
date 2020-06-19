@@ -31,10 +31,12 @@
       nix-haskell-mode
       nix-mode
       nixpkgs-fmt
+      openwith
       org
       org-agenda-property
       org-gcal
       org-plus-contrib
+      org-ref
       pdf-tools
       proof-general # coq
       racket-mode

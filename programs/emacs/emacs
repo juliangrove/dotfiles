@@ -1,4 +1,5 @@
 (require 'package)
+
 (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/"))
 (add-to-list 'package-archives '("org" . "https://orgmode.org/elpa/") t)
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
@@ -153,9 +154,83 @@
 (require 'ess-r-mode)
 
 ;; org
+(setq org-startup-truncated nil)
+
 (global-set-key (kbd "C-c l") 'org-store-link)
 (global-set-key (kbd "C-c a") 'org-agenda)
 (global-set-key (kbd "C-c c") 'org-capture)
+
+;; org latex
+(require 'ox-latex)
+(add-to-list 'org-latex-classes
+	     '("manuscript"
+	       "\\documentclass[10pt,twoside]{article}
+\\usepackage[margin=1.85in]{geometry}
+\\usepackage{etoolbox}
+\\ifundef{\\abstract}{}{\\patchcmd{\\abstract}%
+  {\\quotation}{\\quotation\\noindent\\ignorespaces\\textbf{Abstract}\\hspace{1mm}}{}{}}
+\\renewcommand{\\abstractname}{\\vspace{-1.4\\baselineskip}}
+\\usepackage{lscape}
+\\usepackage{titling}
+\\usepackage{graphicx}
+\\usepackage{amssymb}
+\\usepackage{mathtools}
+\\usepackage{amsthm}
+\\theoremstyle{definition}
+\\newtheorem{thm}{Theorem}
+\\usepackage{enumitem}
+\\usepackage{xcolor}
+\\pagestyle{plain}
+\\usepackage{libertine}
+\\usepackage[T1]{fontenc}
+\\usepackage{MinionPro}
+\\usepackage{tipa}
+\\usepackage{tikz}
+\\usepackage{tikz-qtree}
+\\usetikzlibrary{fit}
+\\usetikzlibrary{positioning}
+\\usepackage{natbib}
+\\usepackage{stmaryrd}
+\\usepackage{fancyhdr}
+\\pagestyle{fancy}
+\\usepackage{sectsty}
+\\usepackage{expex}
+\\usepackage{stackrel}
+\\usepackage{stackengine}
+\\usepackage{relsize}
+\\usepackage{fixltx2e}
+\\raggedbottom
+\\sectionfont{\\normalsize\\sf}
+\\subsectionfont{\\normalsize\\sf}
+\\subsubsectionfont{\\normalsize\\sf}
+\\usepackage{langsci-avm}
+\\usepackage[colorlinks=true,urlcolor=blue!60!black!80,citecolor=blue!60!black!80,linkcolor=black,bookmarks,bookmarksopen,bookmarksdepth=2]{hyperref}
+\\renewcommand\\UrlFont{\\normalsize}
+\\usepackage[normalem]{ulem}
+\\usepackage{appendix}
+\\fancyfoot{}
+\\fancyhead[LO]{\\scriptsize\\sf \\MakeUppercase{\\thetitle}}
+\\fancyhead[RE]{\\scriptsize\\sf \\MakeUppercase{\\theauthor}}
+\\fancyhead[LE,RO]{\\thepage}
+\\renewcommand{\\headrulewidth}{0pt}
+\\pretitle{\\LARGE\\sf\\noindent}\\posttitle{\\par\\vskip 1em}
+\\preauthor{\\normalsize\\sf\\noindent\\lineskip 0.5em}\\postauthor{\\par\\vskip 1em}
+\\predate{\\normalsize\\sf\\noindent}\\postdate{\\par\\vskip 1em}
+\\bibliographystyle{li}
+[NO-DEFAULT-PACKAGES]
+[PACKAGES]
+[EXTRA]"
+	       ("\\section{%s}" . "\\section*{%s}")
+	       ("\\subsection{%s}" . "\\subsection*{%s}")
+	       ("\\subsubsection{%s}" . "\\subsubsection*{%s}")))
+
+(setq org-latex-pdf-process
+      '("%latex -interaction nonstopmode -output-directory %o %f"
+	"bibtex %b"
+	"%latex -interaction nonstopmode -output-directory %o %f"
+	"%latex -interaction nonstopmode -output-directory %o %f"))
+
+(require 'org-ref)
 
 ;; org-gcal
 (setq org-agenda-files (list "~/.emacs.d/gcal.org"))
@@ -228,6 +303,10 @@
 ;; pdf viewer
 (pdf-loader-install)
 (add-hook 'TeX-after-compilation-finished-functions #'TeX-revert-document-buffer)
+
+(require 'openwith)
+(openwith-mode t)
+(setq openwith-associations '(("\\.pdf\\'" "zathura" (file))))
 
 ;; markdown
 (use-package markdown-mode
