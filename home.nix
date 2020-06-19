@@ -51,10 +51,10 @@ in
       python-packages = py-pkgs: with py-pkgs; [
         matplotlib
         numpy
-        pandas
+        # pandas # some dependency version issues
         scikitlearn
       ];
-      python-stuff = pkgs.python39.withPackages python-packages;
+      python-stuff = pkgs.python38.withPackages python-packages;
       R-stuff = pkgs.rWrapper.override {
         packages = with pkgs.rPackages; [
           ggplot2
@@ -103,7 +103,7 @@ in
       ocamlPackages.findlib
       ocamlPackages.ocamlbuild
       ocamlPackages.merlin
-      # python-stuff # python + packages
+      python-stuff # python + packages
       racket
       R-stuff # R + packages
       stack # haskell
