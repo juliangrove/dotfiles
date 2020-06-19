@@ -1,5 +1,7 @@
 { pkgs }:
-
+let
+  ox-linguistics = pkgs.callPackage ./emacs/ox-linguistics { };
+in
 (
   epkgs: (
     with epkgs; [
@@ -37,6 +39,7 @@
       org-gcal
       org-plus-contrib
       org-ref
+      ox-linguistics
       pdf-tools
       proof-general # coq
       racket-mode
