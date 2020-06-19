@@ -178,7 +178,7 @@
 \\usepackage{amsthm}
 \\theoremstyle{definition}
 \\newtheorem{thm}{Theorem}
-\\usepackage{enumitem}
+\\usepackage[inline]{enumitem}
 \\usepackage{xcolor}
 \\pagestyle{plain}
 \\usepackage{libertine}
@@ -223,12 +223,12 @@
 	       ("\\section{%s}" . "\\section*{%s}")
 	       ("\\subsection{%s}" . "\\subsection*{%s}")
 	       ("\\subsubsection{%s}" . "\\subsubsection*{%s}")))
-
 (setq org-latex-pdf-process
       '("%latex -interaction nonstopmode -output-directory %o %f"
 	"bibtex %b"
 	"%latex -interaction nonstopmode -output-directory %o %f"
 	"%latex -interaction nonstopmode -output-directory %o %f"))
+(setq org-latex-listings 'minted)
 
 (require 'org-ref)
 
