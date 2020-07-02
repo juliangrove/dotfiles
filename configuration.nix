@@ -90,6 +90,11 @@
       nssmdns = true; # local hostname resolution for apps
     };
 
+    geoclue2 = {
+      enable = true;
+      enableWifi = true;
+    };
+
     # Enable  CUPS to print documents.
     printing = {
       enable = true;

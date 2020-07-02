@@ -94,6 +94,8 @@
 
 (add-hook 'mu4e-compose-mode-hook #'no-auto-fill)
 
+(add-to-list 'mm-inhibit-file-name-handlers 'openwith-file-handler)
+
 ;; latex
 (setq-default TeX-PDF-mode t)
 (setq-default TeX-master t)
@@ -136,6 +138,12 @@
 (autoload 'merlin-mode "merlin" "Merlin mode" t)
 (add-hook 'tuareg-mode-hook 'merlin-mode)
 (add-hook 'caml-mode-hook 'merlin-mode)
+(add-hook 'merlin-mode-hook #'company-mode)
+
+(use-package utop
+  :config
+  (autoload 'utop-minor-mode "utop" "Minor mode for utop" t)
+  (add-hook 'tuareg-mode-hook 'utop-minor-mode))
 
 ;; coq
 (add-hook 'coq-mode-hook 'coq-commenter-mode)
@@ -186,7 +194,6 @@
 \\usepackage{MinionPro}
 \\usepackage{tipa}
 \\usepackage{tikz}
-\\usepackage{tikz-qtree}
 \\usetikzlibrary{fit}
 \\usetikzlibrary{positioning}
 \\usepackage{natbib}
@@ -224,10 +231,10 @@
 	       ("\\subsection{%s}" . "\\subsection*{%s}")
 	       ("\\subsubsection{%s}" . "\\subsubsection*{%s}")))
 (setq org-latex-pdf-process
-      '("%latex -interaction nonstopmode -output-directory %o %f"
+      '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
 	"bibtex %b"
-	"%latex -interaction nonstopmode -output-directory %o %f"
-	"%latex -interaction nonstopmode -output-directory %o %f"))
+	"pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+	"pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
 (setq org-latex-listings 'minted)
 
 (require 'org-ref)

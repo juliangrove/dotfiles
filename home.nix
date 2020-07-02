@@ -51,7 +51,8 @@ in
       python-packages = py-pkgs: with py-pkgs; [
         matplotlib
         numpy
-        # pandas # some dependency version issues
+        # pandas # dependency version issues
+        pygments
         scikitlearn
       ];
       python-stuff = pkgs.python38.withPackages python-packages;
@@ -69,6 +70,7 @@ in
       aspellDicts.en
       aspellDicts.en-computers
       aspellDicts.en-science
+      bibtool
       croc
       nixos.dict
       escrotum
@@ -92,6 +94,7 @@ in
       unzip
       wget
       xorg.xdpyinfo
+      zip
 
       # editors
       vim
@@ -166,6 +169,11 @@ in
       enable = true;
       frequency = "*:0/1";
       postExec = "${pkgs.mu}/bin/mu index";
+    };
+
+    redshift = {
+      enable = true;
+      provider = "geoclue2";
     };
   };
 }

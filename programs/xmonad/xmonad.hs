@@ -73,7 +73,7 @@ mykeys c = mkKeymap c $
                    ++ " --insidewrongcolor=cc241d80"
                    ++ " --ringwrongcolor=fb493480")
   , ("M-S-i", spawn "escrotum -s")
-  , ("M-S-j", spawn "escrotum")
+  , ("M-S-u", spawn "escrotum")
   , ("M-S-s", spawn "spotify")
   , ("M-S-z", spawn "zoom-us") ]
 

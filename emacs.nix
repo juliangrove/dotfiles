@@ -41,6 +41,7 @@
       racket-mode
       tuareg # ocaml
       use-package
+      utop # ocaml
       yaml-mode
       xclip
     ]

@@ -8,16 +8,29 @@
           inherit (texlive)
             appendix
             bussproofs
-            capt-of
+            catchfile
+            dejavu
             enumitem
+            environ
+            eso-pic
             etoolbox
             expex
+            fancyvrb
+            float
+            forest
+            framed
+            fvextra
+            gitinfo2
+            inlinedef
             kpfonts
             libertine
+            lineno
             mathtools
+            minted
             mnsymbol
             multirow
             pgf
+            pgfopts
             relsize
             scheme-basic
             sectsty
@@ -26,9 +39,12 @@
             tikz-qtree
             tipa
             titling
+            tracklang
+            trimspaces
             ulem
-            wrapfig
+            upquote
             xcolor
+            xstring
             ;
           langsci-avm.pkgs = [ (pkgs.callPackage ./latex/langsci-avm { }) ];
           libib.pkgs = [ (pkgs.callPackage ./latex/libib { }) ];
