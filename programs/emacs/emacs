@@ -129,10 +129,12 @@
 
 ;; haskell
 (require 'haskell-mode)
+(require 'dante)
 (custom-set-variables '(haskell-process-type 'stack-ghci))
 ;; (require 'nix-haskell-mode)
 ;; (add-hook 'haskell-mode-hook 'nix-haskell-mode)
 (add-hook 'haskell-mode-hook 'interactive-haskell-mode)
+(add-hook 'haskell-mode-hook 'dante-mode)
 
 ;; ocaml
 (autoload 'merlin-mode "merlin" "Merlin mode" t)

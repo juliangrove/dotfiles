@@ -7,6 +7,7 @@
         texlive.combine {
           inherit (texlive)
             appendix
+            biber
             bussproofs
             catchfile
             dejavu

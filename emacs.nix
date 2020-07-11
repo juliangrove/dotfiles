@@ -13,6 +13,7 @@
       calfw-org
       caml
       coq-commenter
+      dante
       dired-hide-dotfiles
       dired-sidebar
       dired-subtree
