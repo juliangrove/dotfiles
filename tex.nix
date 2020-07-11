@@ -8,6 +8,7 @@
           inherit (texlive)
             appendix
             biber
+            biblatex
             bussproofs
             catchfile
             dejavu
