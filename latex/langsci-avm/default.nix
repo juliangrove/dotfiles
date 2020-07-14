@@ -11,7 +11,7 @@ stdenv.mkDerivation rec {
         name = "langsci-avm";
         stripRoot = false;
         url = "http://mirrors.ctan.org/macros/latex/contrib/langsci-avm.zip";
-        sha256 = "100zk8v606c0wnc8w6j2fr1arws5svyqafqir76saznnpx5d85nj";
+        sha256 = "0hmhanbfd1nl5mb7w3xd7jsckc81vcbf8772p248aj7rzkinjfym";
       }
     )
     (

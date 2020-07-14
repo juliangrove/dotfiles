@@ -54,7 +54,7 @@ in
         pandas
         pygments
         scikitlearn
-        tensorflowWithoutCuda
+        # tensorflowWithoutCuda
       ];
       python-stuff = pkgs.python37.withPackages python-packages;
       R-stuff = pkgs.rWrapper.override {
