@@ -56,7 +56,7 @@ in
         scikitlearn
         # tensorflowWithoutCuda
       ];
-      python-stuff = pkgs.python37.withPackages python-packages;
+      python-stuff = pkgs.python38.withPackages python-packages;
       R-stuff = pkgs.rWrapper.override {
         packages = with pkgs.rPackages; [
           ggplot2
