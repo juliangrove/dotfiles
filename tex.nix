@@ -1,5 +1,4 @@
 { pkgs, lib, texlive, ... }:
-
 {
   tex = (
     lib.overrideDerivation
@@ -27,6 +26,7 @@
             kpfonts
             libertine
             lineno
+            mathpazo
             mathtools
             minted
             mnsymbol

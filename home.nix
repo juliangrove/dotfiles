@@ -34,10 +34,10 @@ in
   };
 
   nixpkgs = {
-    # for things like spotify
-    config.allowUnfree = true;
+    config.allowUnfree = true; # for things like spotify
     # overlays
     overlays = [
+      # (import ./overlays/python-pygments.nix)
       (import "${emacs-overlay}")
       (import "${mozilla-overlay}")
     ];
@@ -47,7 +47,9 @@ in
     let
       i3lock-fancy-rapid = pkgs.callPackage ./programs/i3lock-fancy-rapid { };
       nixos = import <nixos> { };
-      unstable = import <nixos-unstable> { };
+      unstable = import <nixos-unstable> {
+        config.allowUnfree = true;
+      };
       python-packages = py-pkgs: with py-pkgs; [
         matplotlib
         numpy
@@ -72,6 +74,7 @@ in
       aspellDicts.en-computers
       aspellDicts.en-science
       bibtool
+      bibtex2html
       croc
       nixos.dict
       escrotum
@@ -120,11 +123,11 @@ in
       briss
       clementineUnfree
       latest.firefox-nightly-bin
-      google-chrome
+      unstable.google-chrome
       pinentry_qt5 # support for gpg passphrase entry
       skype
       spotify
-      zoom-us
+      unstable.zoom-us
       zotero
     ];
 

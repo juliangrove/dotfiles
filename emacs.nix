@@ -35,6 +35,7 @@
       org
       org-agenda-property
       org-gcal
+      org-noter
       org-plus-contrib
       org-ref
       pdf-tools

@@ -175,7 +175,7 @@
 (add-to-list 'org-latex-classes
 	     '("manuscript"
 	       "\\documentclass[10pt,twoside]{article}
-\\usepackage[margin=1.85in]{geometry}
+\\usepackage[margin=1.5in]{geometry}
 \\usepackage{etoolbox}
 \\ifundef{\\abstract}{}{\\patchcmd{\\abstract}%
   {\\quotation}{\\quotation\\noindent\\ignorespaces\\textbf{Abstract}\\hspace{1mm}}{}{}}
@@ -193,7 +193,7 @@
 \\pagestyle{plain}
 \\usepackage{libertine}
 \\usepackage[T1]{fontenc}
-\\usepackage{MinionPro}
+\\usepackage{mathpazo}
 \\usepackage{tipa}
 \\usepackage{tikz}
 \\usetikzlibrary{fit}
@@ -209,17 +209,17 @@
 \\usepackage{relsize}
 \\usepackage{fixltx2e}
 \\raggedbottom
-\\sectionfont{\\normalsize\\sf}
-\\subsectionfont{\\normalsize\\sf}
-\\subsubsectionfont{\\normalsize\\sf}
+\\sectionfont{\\large\\sf}
+\\subsectionfont{\\large\\sf}
+\\subsubsectionfont{\\large\\sf}
 \\usepackage{langsci-avm}
 \\usepackage[colorlinks=true,urlcolor=blue!60!black!80,citecolor=blue!60!black!80,linkcolor=black,bookmarks,bookmarksopen,bookmarksdepth=2]{hyperref}
 \\renewcommand\\UrlFont{\\normalsize}
 \\usepackage[normalem]{ulem}
 \\usepackage{appendix}
 \\fancyfoot{}
-\\fancyhead[LO]{\\scriptsize\\sf \\MakeUppercase{\\thetitle}}
-\\fancyhead[RE]{\\scriptsize\\sf \\MakeUppercase{\\theauthor}}
+\\fancyhead[LO]{\\footnotesize\\sf \\MakeUppercase{\\thetitle}}
+\\fancyhead[RE]{\\footnotesize\\sf \\MakeUppercase{\\theauthor}}
 \\fancyhead[LE,RO]{\\thepage}
 \\renewcommand{\\headrulewidth}{0pt}
 \\pretitle{\\LARGE\\sf\\noindent}\\posttitle{\\par\\vskip 1em}
@@ -240,6 +240,8 @@
 (setq org-latex-listings 'minted)
 
 (require 'org-ref)
+
+(require 'ox-bibtex)
 
 ;; org-gcal
 (setq org-agenda-files (list "~/.emacs.d/gcal.org"))
