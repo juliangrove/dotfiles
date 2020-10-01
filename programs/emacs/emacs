@@ -340,3 +340,6 @@
 (require 'ac-octave)
 (add-hook 'octave-mode-hook
           '(lambda () (ac-octave-setup)))
+
+;; agda
+(require 'agda2-mode)
