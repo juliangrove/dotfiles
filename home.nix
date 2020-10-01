@@ -10,6 +10,9 @@ in
 {
   # dotfiles
   home.file = {
+    ".agda/defaults" = {
+      source = programs/agda/defaults;
+    };
     ".config/alacritty/alacritty.yml" = {
       source = programs/alacritty/alacritty.yml;
     };
@@ -45,11 +48,11 @@ in
 
   home.packages =
     let
+      agda-stuff = (pkgs.agda.withPackages (with pkgs; [
+        agdaPackages.standard-library
+      ]));
       i3lock-fancy-rapid = pkgs.callPackage ./programs/i3lock-fancy-rapid { };
       nixos = import <nixos> { };
-      unstable = import <nixos-unstable> {
-        config.allowUnfree = true;
-      };
       python-packages = py-pkgs: with py-pkgs; [
         matplotlib
         numpy
@@ -64,6 +67,9 @@ in
           ggplot2
           lme4
         ];
+      };
+      unstable = import <nixos-unstable> {
+        config.allowUnfree = true;
       };
       tex = (pkgs.callPackage ./tex.nix { }).tex;
     in
@@ -104,12 +110,14 @@ in
       vim
 
       # languages
+      agda-stuff # agda + packages
       coq
       idris
       ocaml
       ocamlPackages.findlib
       ocamlPackages.ocamlbuild
       ocamlPackages.merlin
+      octave
       python-stuff # python + packages
       racket
       R-stuff # R + packages

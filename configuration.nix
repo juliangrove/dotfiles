@@ -207,8 +207,13 @@
       corefonts
       emacs-all-the-icons-fonts
       font-awesome_4
+      ipafont
+      kochi-substitute
       lohit-fonts.kannada
       powerline-fonts
+      source-han-sans-simplified-chinese
+      source-han-sans-traditional-chinese
+      source-han-sans-korean
     ];
   };
 

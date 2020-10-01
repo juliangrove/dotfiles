@@ -26,6 +26,9 @@
 
 (setq split-width-threshold 1)
 
+(put 'dired-find-alternate-file 'disabled nil)
+(add-hook 'dired-mode-hook (lambda () (local-set-key (kbd "<mouse-2>") #'dired-find-alternate-file)))
+
 (load-theme 'gruvbox t)
 
 (require 'airline-themes)
@@ -133,6 +136,12 @@
 (custom-set-variables '(haskell-process-type 'stack-ghci))
 ;; (require 'nix-haskell-mode)
 ;; (add-hook 'haskell-mode-hook 'nix-haskell-mode)
+(require 'haskell-interactive-mode)
+(require 'haskell-process)
+(custom-set-variables
+ '(haskell-process-suggest-remove-import-lines t)
+ '(haskell-process-auto-import-loaded-modules t)
+ '(haskell-process-log t))
 (add-hook 'haskell-mode-hook 'interactive-haskell-mode)
 (add-hook 'haskell-mode-hook 'dante-mode)
 
@@ -174,7 +183,7 @@
 (require 'ox-latex)
 (add-to-list 'org-latex-classes
 	     '("manuscript"
-	       "\\documentclass[10pt,twoside]{article}
+	       "\\documentclass[11pt,twoside]{article}
 \\usepackage[margin=1.2in]{geometry}
 \\usepackage{etoolbox}
 \\ifundef{\\abstract}{}{\\patchcmd{\\abstract}%
@@ -326,3 +335,8 @@
          ("\\.md\\'" . markdown-mode)
          ("\\.markdown\\'" . markdown-mode))
   :init (setq markdown-command "multimarkdown"))
+
+;; octave
+(require 'ac-octave)
+(add-hook 'octave-mode-hook
+          '(lambda () (ac-octave-setup)))
