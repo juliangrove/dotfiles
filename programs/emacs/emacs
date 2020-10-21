@@ -24,6 +24,57 @@
 
 (cua-mode 1)
 
+;; automatic abbreviations
+(global-set-key (kbd "<f5>") 'abbrev-mode)
+(clear-abbrev-table global-abbrev-table)
+(define-abbrev-table 'global-abbrev-table
+  '(
+    ("ra" "→" )
+    ("la" "←" )
+    ("box" "□" )
+    ("dmd" "◇" )
+    ("llrr" "⟦⟧" )
+    ("exists" "∃" )
+    ("forall" "∀" )
+    ("alpha" "α" )
+    ("beta" "β" )
+    ("gamma" "γ" )
+    ("delta" "δ" )
+    ("epsilon" "ε" )
+    ("zeta" "ζ" )
+    ("eta" "η" )
+    ("theta" "θ" )
+    ("iota" "ι" )
+    ("kappa" "κ" )
+    ("lambda" "λ" )
+    ("mu" "μ" )
+    ("nu" "ν" )
+    ("omicron" "ο" )
+    ("xi" "ξ" )
+    ("pi" "π" )
+    ("rho" "ρ" )
+    ("sigma" "σ" )
+    ("tao" "τ" )
+    ("upsilon" "υ" )
+    ("phi" "φ" )
+    ("chi" "χ" )
+    ("psi" "ψ" )
+    ("omega" "ω" )
+    ("Gamma" "γ" )
+    ("Delta" "Δ" )
+    ("Theta" "Θ" )
+    ("Lambda" "Λ" )
+    ("Xi" "Ξ" )
+    ("Pi" "Π" )
+    ("Sigma" "Σ" )
+    ("Phi" "Φ" )
+    ("Psi" "Ψ" )
+    ("Omega" "Ω" )
+    ("sqeq" "≈" )
+    ("cra" "⊸")
+    ))
+(setq save-abbrevs nil) 
+
 (setq split-width-threshold 1)
 
 (put 'dired-find-alternate-file 'disabled nil)
@@ -181,10 +232,11 @@
 
 ;; org latex
 (require 'ox-latex)
+(require 'ox-beamer)
 (add-to-list 'org-latex-classes
 	     '("manuscript"
-	       "\\documentclass[11pt,twoside]{article}
-\\usepackage[margin=1.2in]{geometry}
+	       "\\documentclass[10pt,twoside]{article}
+\\usepackage[margin=1.5in]{geometry}
 \\usepackage{etoolbox}
 \\ifundef{\\abstract}{}{\\patchcmd{\\abstract}%
   {\\quotation}{\\quotation\\noindent\\ignorespaces\\textbf{Abstract}\\hspace{1mm}}{}{}}
@@ -232,7 +284,8 @@
 \\fancyhead[LE,RO]{\\thepage}
 \\renewcommand{\\headrulewidth}{0pt}
 \\pretitle{\\LARGE\\sf\\noindent}\\posttitle{\\par\\vskip 1em}
-\\preauthor{\\normalsize\\sf\\noindent\\lineskip 0.5em}\\postauthor{\\par\\vskip 1em}
+\\newcommand{\\affil}{\\vspace{-1em}}
+\\preauthor{\\normalsize\\sf\\noindent\\lineskip 0.5em}\\postauthor{\\\\\\affil\\par\\vskip 1em}
 \\predate{\\normalsize\\sf\\noindent}\\postdate{\\par\\vskip 1em}
 \\bibliographystyle{li}
 [NO-DEFAULT-PACKAGES]
@@ -241,6 +294,64 @@
 	       ("\\section{%s}" . "\\section*{%s}")
 	       ("\\subsection{%s}" . "\\subsection*{%s}")
 	       ("\\subsubsection{%s}" . "\\subsubsection*{%s}")))
+(add-to-list 'org-latex-classes
+             '("slides"
+               "\\documentclass[presentation]{beamer}
+\\usepackage[T1]{fontenc}
+\\setbeamerfont{frametitle}{size=\\large}
+\\definecolor{gbbg}{HTML}{282828}
+\\definecolor{gbred}{HTML}{9d0006}
+\\definecolor{gblightred}{HTML}{cc241d}
+\\definecolor{gbgreen}{HTML}{98971a}
+\\definecolor{gbyellow}{HTML}{d79921}
+\\definecolor{gbblue}{HTML}{076678}
+\\definecolor{gbpurple}{HTML}{b16286}
+\\definecolor{gbaqua}{HTML}{689d6a}
+\\definecolor{gbgray}{HTML}{928374}
+\\setbeamercolor*{structure}{bg=gbblue!20,fg=gbred}
+\\setbeamercolor*{palette primary}{use=structure,fg=white,bg=structure.bg}
+\\setbeamercolor*{palette secondary}{fg=white,bg=gbblue!75}
+\\setbeamercolor*{palette tertiary}{fg=white,bg=gbgreen!50}
+\\setbeamercolor*{palette quaternary}{fg=white,bg=gbpurple}
+\\setbeamercolor{section in toc}{fg=gbbg,bg=white}
+\\setbeamercolor{alerted text}{fg=gbpurple}
+\\setbeamercolor{titlelike}{bg=gbbg!50,fg=gbgreen}
+\\setbeamercolor{frametitle}{bg=gbgray!10!white,fg=gbblue}
+\\setbeamercolor{title}{fg=gbred}
+\\setbeamertemplate{footline}{
+\\begin{flushright}
+\\insertframenumber/\\inserttotalframenumber\\hspace{2mm}\\mbox{}
+\\end{flushright}}
+\\usepackage[T1]{fontenc}
+\\usepackage{libertine}
+\\renewcommand*\\familydefault{\\sfdefault}
+\\usepackage[small]{eulervm}
+\\usepackage{tipa}
+\\usepackage{adjustbox}
+\\usepackage{multirow}
+\\usepackage{multicol}
+\\usepackage{tikz}
+\\usetikzlibrary{positioning}
+\\usepackage{tikz-qtree}
+\\usepackage{expex}
+\\usepackage{natbib}
+\\usepackage{stmaryrd}
+\\usepackage{stackrel}
+\\usepackage{stackengine}
+\\usepackage{relsize}
+\\usepackage{amsmath}
+\\usepackage{mathtools}
+\\usepackage{fixltx2e}
+\\usepackage{graphicx}
+\\usepackage{xcolor}
+\\usepackage[normalem]{ulem}
+\\bibliographystyle{li}
+[NO-DEFAULT-PACKAGES]
+[PACKAGES]
+[EXTRA]"
+               ("\\section{%s}" . "\\section*{%s}")
+               ("\\subsection{%s}" . "\\subsection*{%s}")
+               ("\\subsubsection{%s}" . "\\subsubsection*{%s}")))
 (setq org-latex-pdf-process
       '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
 	"bibtex %b"
@@ -337,9 +448,9 @@
   :init (setq markdown-command "multimarkdown"))
 
 ;; octave
-(require 'ac-octave)
-(add-hook 'octave-mode-hook
-          '(lambda () (ac-octave-setup)))
+;; (require 'ac-octave)
+;; (add-hook 'octave-mode-hook
+;;           '(lambda () (ac-octave-setup)))
 
 ;; agda
 (require 'agda2-mode)

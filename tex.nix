@@ -5,16 +5,20 @@
       (
         texlive.combine {
           inherit (texlive)
+            adjustbox
             appendix
+            beamer
             biber
             biblatex
             bussproofs
             catchfile
+            collectbox
             dejavu
             enumitem
             environ
             eso-pic
             etoolbox
+            eulervm
             expex
             fancyvrb
             float

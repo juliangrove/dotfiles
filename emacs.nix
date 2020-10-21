@@ -2,7 +2,7 @@
 (
   epkgs: (
     with epkgs; [
-      ac-octave
+      # ac-octave
       agda2-mode
       airline-themes
       all-the-icons
