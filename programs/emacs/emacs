@@ -54,7 +54,7 @@
     ("pi" "π" )
     ("rho" "ρ" )
     ("sigma" "σ" )
-    ("tao" "τ" )
+    ("tau" "τ" )
     ("upsilon" "υ" )
     ("phi" "φ" )
     ("chi" "χ" )
@@ -101,7 +101,6 @@
 (setq fci-rule-width 2)
 
 ;; text-mode hooks
-
 (dolist (hook '(text-mode-hook))
   (add-hook hook (lambda () (flyspell-mode 1))))
 
@@ -181,9 +180,12 @@
 	       "\""))
 (setq TeX-view-program-selection '((output-pdf "Zathura")))
 
+;; flycheck
+(use-package flycheck
+  :init (global-flycheck-mode))
+
 ;; haskell
 (require 'haskell-mode)
-(require 'dante)
 (custom-set-variables '(haskell-process-type 'stack-ghci))
 ;; (require 'nix-haskell-mode)
 ;; (add-hook 'haskell-mode-hook 'nix-haskell-mode)
@@ -194,7 +196,12 @@
  '(haskell-process-auto-import-loaded-modules t)
  '(haskell-process-log t))
 (add-hook 'haskell-mode-hook 'interactive-haskell-mode)
-(add-hook 'haskell-mode-hook 'dante-mode)
+(use-package dante
+  :after haskell-mode
+  :commands 'dante-mode
+  :init
+  (add-hook 'haskell-mode-hook 'flycheck-mode)
+  (add-hook 'haskell-mode-hook 'dante-mode))
 
 ;; ocaml
 (autoload 'merlin-mode "merlin" "Merlin mode" t)
@@ -299,25 +306,6 @@
                "\\documentclass[presentation]{beamer}
 \\usepackage[T1]{fontenc}
 \\setbeamerfont{frametitle}{size=\\large}
-\\definecolor{gbbg}{HTML}{282828}
-\\definecolor{gbred}{HTML}{9d0006}
-\\definecolor{gblightred}{HTML}{cc241d}
-\\definecolor{gbgreen}{HTML}{98971a}
-\\definecolor{gbyellow}{HTML}{d79921}
-\\definecolor{gbblue}{HTML}{076678}
-\\definecolor{gbpurple}{HTML}{b16286}
-\\definecolor{gbaqua}{HTML}{689d6a}
-\\definecolor{gbgray}{HTML}{928374}
-\\setbeamercolor*{structure}{bg=gbblue!20,fg=gbred}
-\\setbeamercolor*{palette primary}{use=structure,fg=white,bg=structure.bg}
-\\setbeamercolor*{palette secondary}{fg=white,bg=gbblue!75}
-\\setbeamercolor*{palette tertiary}{fg=white,bg=gbgreen!50}
-\\setbeamercolor*{palette quaternary}{fg=white,bg=gbpurple}
-\\setbeamercolor{section in toc}{fg=gbbg,bg=white}
-\\setbeamercolor{alerted text}{fg=gbpurple}
-\\setbeamercolor{titlelike}{bg=gbbg!50,fg=gbgreen}
-\\setbeamercolor{frametitle}{bg=gbgray!10!white,fg=gbblue}
-\\setbeamercolor{title}{fg=gbred}
 \\setbeamertemplate{footline}{
 \\begin{flushright}
 \\insertframenumber/\\inserttotalframenumber\\hspace{2mm}\\mbox{}

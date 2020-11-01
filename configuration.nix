@@ -131,12 +131,9 @@
 
       # auto-login
       displayManager = {
-        lightdm = {
+        autoLogin = {
           enable = true;
-          autoLogin = {
-            enable = true;
-            user = "juliangrove";
-          };
+          user = "juliangrove";
         };
 
         defaultSession = "none+xmonad";
@@ -193,6 +190,7 @@
       enable = true;
       package = pkgs.pulseaudioFull;
       support32Bit = true;
+      systemWide = false;
       extraConfig = ''
         load-module module-alsa-sink   device=hw:0,0 channels=4
         load-module module-alsa-source device=hw:0,6 channels=4
@@ -222,7 +220,7 @@
     description = "Julian Grove";
     isNormalUser = true;
     createHome = true;
-    extraGroups = [ "wheel" "audio" "video" "cups" ]; # stuff I can do
+    extraGroups = [ "wheel" "audio" "pulse" "networkmanager" "video" "cups" ]; # stuff I can do
   };
 
   # some extra hardware management
@@ -235,5 +233,5 @@
   # compatible, in order to avoid breaking some software such as database
   # servers. You should change this only after NixOS release notes say you
   # should.
-  system.stateVersion = " 20.03 "; # Did you read the comment?
+  system.stateVersion = " 20.09 "; # Did you read the comment?
 }

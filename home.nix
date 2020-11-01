@@ -112,6 +112,7 @@ in
       # languages
       agda-stuff # agda + packages
       coq
+      eff
       idris
       ocaml
       ocamlPackages.findlib

@@ -1,6 +1,6 @@
-volume=$(pactl list sinks | grep '^[[:space:]]Volume:' | head -n $(( $SINK + 2 )) | tail -n 1 | sed -e 's,.* \([0-9][0-9]*\)%.*,\1,')
+volume=$(pactl list sinks | grep '^[[:space:]]Volume:' | head -n $(( $SINK + 4 )) | tail -n 1 | sed -e 's,.* \([0-9][0-9]*\)%.*,\1,')
 
-mute=$(pactl list sinks | grep '^[[:space:]]Mute:' |     head -n $(( $SINK + 2 )) | tail -n 1 | sed -e 's,.* \([0-9][0-9]*\)%.*,\1,')
+mute=$(pactl list sinks | grep '^[[:space:]]Mute:' |     head -n $(( $SINK + 4 )) | tail -n 1 | sed -e 's,.* \([0-9][0-9]*\)%.*,\1,')
 
 if [[ "$mute" == "	Mute: yes" ]]
 then printf "<fc=#a89984></fc>"
