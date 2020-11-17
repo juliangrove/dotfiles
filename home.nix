@@ -68,9 +68,6 @@ in
           lme4
         ];
       };
-      unstable = import <nixos-unstable> {
-        config.allowUnfree = true;
-      };
       tex = (pkgs.callPackage ./tex.nix { }).tex;
     in
     with pkgs; [
@@ -135,41 +132,42 @@ in
       briss
       clementineUnfree
       latest.firefox-nightly-bin
-      unstable.google-chrome
+      google-chrome
       pinentry_qt5 # support for gpg passphrase entry
       skype
       spotify
-      unstable.zoom-us
+      zoom-us
       zotero
     ];
 
-  programs = {
-    alacritty.enable = true; # terminal emulator
+  programs =
+    {
+      alacritty.enable = true; # terminal emulator
 
-    bash = {
-      enable = true;
-      historyControl = [ "ignoredups" ];
-      historyIgnore = [ "ls*" "cd*" "exit" "pwd" ];
-      bashrcExtra = ''
-        PS1=$'\[\033[32m\e[2m\]\u03bb\[\033[00m\] '
-        neofetch
-      '';
+      bash = {
+        enable = true;
+        historyControl = [ "ignoredups" ];
+        historyIgnore = [ "ls*" "cd*" "exit" "pwd" ];
+        bashrcExtra = ''
+          PS1=$'\[\033[32m\e[2m\]\u03bb\[\033[00m\] '
+          neofetch
+        '';
+      };
+
+      emacs = {
+        enable = true;
+        package = pkgs.emacs;
+        extraPackages = import ./emacs.nix { inherit pkgs; };
+      };
+
+      git = {
+        enable = true;
+        userEmail = "julian.grove@gmail.com";
+        userName = "juliangrove";
+      };
+
+      zathura.enable = true; # zathura
     };
-
-    emacs = {
-      enable = true;
-      package = pkgs.emacs;
-      extraPackages = import ./emacs.nix { inherit pkgs; };
-    };
-
-    git = {
-      enable = true;
-      userEmail = "julian.grove@gmail.com";
-      userName = "juliangrove";
-    };
-
-    zathura.enable = true; # zathura
-  };
 
   # cursors
   xsession.pointerCursor = {

@@ -19,7 +19,7 @@ stdenv.mkDerivation rec {
         name = "l3packages";
         stripRoot = false;
         url = "http://mirrors.ctan.org/macros/latex/contrib/l3packages.zip";
-        sha256 = "1s15nxwihmansrby9x2k12h9jvaznggxxdm21qfd4b7jxrp1gnq7";
+        sha256 = "1nf2ipx58f47rsqjmbcw383lafi3x66m77ld0c0mknxprafkgd93";
       }
     )
   ];

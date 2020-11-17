@@ -57,7 +57,7 @@ Channel gmail-all
 
 # IMAPAccount gu
 # Host owa.gu.se
-# User julian.grove@gu.se
+# User xgrovj@gu.se
 # PassCmd "~/.nix-profile/bin/gpg2 -q --for-your-eyes-only --no-tty -d ~/.gupass.gpg"
 # SSLType IMAPS
 # CertificateFile /etc/ssl/certs/ca-certificates.crt

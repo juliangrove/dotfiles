@@ -3,6 +3,7 @@
   epkgs: (
     with epkgs; [
       # ac-octave
+      agda-input
       agda2-mode
       airline-themes
       all-the-icons

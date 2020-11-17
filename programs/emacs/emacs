@@ -25,55 +25,8 @@
 (cua-mode 1)
 
 ;; automatic abbreviations
-(global-set-key (kbd "<f5>") 'abbrev-mode)
-(clear-abbrev-table global-abbrev-table)
-(define-abbrev-table 'global-abbrev-table
-  '(
-    ("ra" "→" )
-    ("la" "←" )
-    ("box" "□" )
-    ("dmd" "◇" )
-    ("llrr" "⟦⟧" )
-    ("exists" "∃" )
-    ("forall" "∀" )
-    ("alpha" "α" )
-    ("beta" "β" )
-    ("gamma" "γ" )
-    ("delta" "δ" )
-    ("epsilon" "ε" )
-    ("zeta" "ζ" )
-    ("eta" "η" )
-    ("theta" "θ" )
-    ("iota" "ι" )
-    ("kappa" "κ" )
-    ("lambda" "λ" )
-    ("mu" "μ" )
-    ("nu" "ν" )
-    ("omicron" "ο" )
-    ("xi" "ξ" )
-    ("pi" "π" )
-    ("rho" "ρ" )
-    ("sigma" "σ" )
-    ("tau" "τ" )
-    ("upsilon" "υ" )
-    ("phi" "φ" )
-    ("chi" "χ" )
-    ("psi" "ψ" )
-    ("omega" "ω" )
-    ("Gamma" "γ" )
-    ("Delta" "Δ" )
-    ("Theta" "Θ" )
-    ("Lambda" "Λ" )
-    ("Xi" "Ξ" )
-    ("Pi" "Π" )
-    ("Sigma" "Σ" )
-    ("Phi" "Φ" )
-    ("Psi" "Ψ" )
-    ("Omega" "Ω" )
-    ("sqeq" "≈" )
-    ("cra" "⊸")
-    ))
-(setq save-abbrevs nil) 
+(use-package agda-input
+  :config (setq default-input-method "Agda"))
 
 (setq split-width-threshold 1)
 
@@ -200,8 +153,9 @@
   :after haskell-mode
   :commands 'dante-mode
   :init
-  (add-hook 'haskell-mode-hook 'flycheck-mode)
+  (add-hook 'haskell-mode-hook 'flymake-mode)
   (add-hook 'haskell-mode-hook 'dante-mode))
+(setq dante-debug '(inputs outputs responses))
 
 ;; ocaml
 (autoload 'merlin-mode "merlin" "Merlin mode" t)
@@ -243,7 +197,7 @@
 (add-to-list 'org-latex-classes
 	     '("manuscript"
 	       "\\documentclass[10pt,twoside]{article}
-\\usepackage[margin=1.5in]{geometry}
+\\usepackage[margin=1.25in]{geometry}
 \\usepackage{etoolbox}
 \\ifundef{\\abstract}{}{\\patchcmd{\\abstract}%
   {\\quotation}{\\quotation\\noindent\\ignorespaces\\textbf{Abstract}\\hspace{1mm}}{}{}}
