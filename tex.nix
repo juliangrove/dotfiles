@@ -45,6 +45,7 @@
             tikz-qtree
             tipa
             titling
+            titlesec
             tracklang
             trimspaces
             ulem

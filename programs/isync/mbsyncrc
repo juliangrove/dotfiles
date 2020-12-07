@@ -55,43 +55,43 @@ Channel gmail-sent
 Channel gmail-trash
 Channel gmail-all
 
-# IMAPAccount gu
-# Host owa.gu.se
-# User xgrovj@gu.se
-# PassCmd "~/.nix-profile/bin/gpg2 -q --for-your-eyes-only --no-tty -d ~/.gupass.gpg"
-# SSLType IMAPS
-# CertificateFile /etc/ssl/certs/ca-certificates.crt
+IMAPAccount gu
+Host outlook.office365.com
+User julian.grove@gu.se
+PassCmd "~/.nix-profile/bin/gpg2 -q --for-your-eyes-only --no-tty -d ~/.gupass.gpg"
+SSLType IMAPS
+CertificateFile /etc/ssl/certs/ca-certificates.crt
 
-# IMAPStore gu-remote
-# Account gu
+IMAPStore gu-remote
+Account gu
 
-# MaildirStore gu-local
-# Path ~/.mail/gu/
-# Inbox ~/.mail/gu/inbox
+MaildirStore gu-local
+Path ~/.mail/gu/
+Inbox ~/.mail/gu/inbox
 
-# Channel gu-inbox
-# Master :gu-remote:
-# Slave :gu-local:
-# Patterns "INBOX"
-# Create Slave
-# Remove Slave
-# SyncState *
+Channel gu-inbox
+Master :gu-remote:
+Slave :gu-local:
+Patterns "INBOX"
+Create Slave
+Remove Slave
+SyncState *
 
-# Channel gu-sent
-# Master :gu-remote:"Sent Items"
-# Slave :gu-local:sent
-# Create Slave
-# Remove Slave
-# SyncState *
+Channel gu-sent
+Master :gu-remote:"Sent Items"
+Slave :gu-local:sent
+Create Slave
+Remove Slave
+SyncState *
 
-# Channel gu-trash
-# Master :gu-remote:"Deleted Items"
-# Slave :gu-local:trash
-# Create Slave
-# Remove Slave
-# SyncState *
+Channel gu-trash
+Master :gu-remote:"Deleted Items"
+Slave :gu-local:trash
+Create Slave
+Remove Slave
+SyncState *
 
-# Group gu
-# Channel gu-inbox
-# Channel gu-sent
-# Channel gu-trash
+Group gu
+Channel gu-inbox
+Channel gu-sent
+Channel gu-trash

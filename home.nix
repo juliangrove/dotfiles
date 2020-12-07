@@ -108,9 +108,11 @@ in
 
       # languages
       agda-stuff # agda + packages
+      cabal-install # haskell
       coq
       eff
-      idris
+      ghc # haskell
+      # idris
       ocaml
       ocamlPackages.findlib
       ocamlPackages.ocamlbuild

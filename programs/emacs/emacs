@@ -24,7 +24,7 @@
 
 (cua-mode 1)
 
-;; automatic abbreviations
+;; abbreviations
 (use-package agda-input
   :config (setq default-input-method "Agda"))
 
@@ -139,9 +139,7 @@
 
 ;; haskell
 (require 'haskell-mode)
-(custom-set-variables '(haskell-process-type 'stack-ghci))
-;; (require 'nix-haskell-mode)
-;; (add-hook 'haskell-mode-hook 'nix-haskell-mode)
+(custom-set-variables '(haskell-process-type 'cabal-repl))
 (require 'haskell-interactive-mode)
 (require 'haskell-process)
 (custom-set-variables
@@ -294,6 +292,51 @@
                ("\\section{%s}" . "\\section*{%s}")
                ("\\subsection{%s}" . "\\subsection*{%s}")
                ("\\subsubsection{%s}" . "\\subsubsection*{%s}")))
+(add-to-list 'org-latex-classes
+	     '("abstract"
+	       "\\documentclass[12pt,letterpaper]{article}
+\\usepackage[margin=1in]{geometry}
+\\usepackage{etoolbox}
+\\usepackage{lscape}
+\\usepackage{titling}
+\\usepackage{titlesec}
+\\usepackage{graphicx}
+\\usepackage{amssymb}
+\\usepackage{mathtools}
+\\usepackage{amsthm}
+\\theoremstyle{definition}
+\\newtheorem{thm}{Theorem}
+\\usepackage[inline]{enumitem}
+\\usepackage{xcolor}
+\\pagestyle{plain}
+\\usepackage[T1]{fontenc}
+\\usepackage{MinionPro}
+\\usepackage{tipa}
+\\usepackage{tikz}
+\\usetikzlibrary{fit}
+\\usetikzlibrary{positioning}
+\\usepackage{natbib}
+\\usepackage{stmaryrd}
+\\usepackage{expex}
+\\usepackage{stackrel}
+\\usepackage{stackengine}
+\\usepackage{relsize}
+\\usepackage{fixltx2e}
+\\raggedbottom
+\\usepackage{langsci-avm}
+\\usepackage[colorlinks=true,urlcolor=blue!60!black!80,citecolor=blue!60!black!80,linkcolor=black,bookmarks,bookmarksopen,bookmarksdepth=2]{hyperref}
+\\renewcommand\\UrlFont{\\normalsize}
+\\renewcommand{\\maketitle}{\\normalsize\\begin{center}\\textbf{\\thetitle}\\end{center}\\vspace{-5mm}}
+\\titleformat{\\section}[runin]{\\normalfont\\bfseries}{}{0pt}{}\\titlespacing{\\section}{0pt}{*0.5}{\\wordsep}
+\\usepackage[normalem]{ulem}
+\\bibliographystyle{li}
+\\usepackage{bibentry}
+[NO-DEFAULT-PACKAGES]
+[PACKAGES]
+[EXTRA]"
+	       ("\\section{%s}" . "\\section*{%s}")
+	       ("\\subsection{%s}" . "\\subsection*{%s}")
+	       ("\\subsubsection{%s}" . "\\subsubsection*{%s}")))
 (setq org-latex-pdf-process
       '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
 	"bibtex %b"
@@ -338,8 +381,8 @@
 (require 'calfw-gcal)
 
 (defun schedule ()
-(interactive)
-(cfw:open-org-calendar))
+  (interactive)
+  (cfw:open-org-calendar))
 
 (set-frame-font "DejaVu Sans Mono-12")
 (setq default-frame-alist '((font . "DejaVu Sans Mono-12")))

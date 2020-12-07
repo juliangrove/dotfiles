@@ -58,7 +58,7 @@ mylayout = tiled ||| Mirror tiled ||| Full
     delta   = 3/100
 mystartup = do
   spawn $ "gpg2 -q --for-your-eyes-only --no-tty -d ~/.gmailpass.gpg"
-    -- ++ " && gpg2 -q --for-your-eyes-only --no-tty -d ~/.gupass.gpg"
+    ++ " && gpg2 -q --for-your-eyes-only --no-tty -d ~/.gupass.gpg"
 mykeys c = mkKeymap c $
   [ ("M-S-e", spawn "emacsclient -c --eval \'(dired \"~/Documents\")\'")
   , ("M-S-f", spawn "firefox")
