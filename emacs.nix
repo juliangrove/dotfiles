@@ -29,6 +29,7 @@
       gruvbox-theme
       haskell-mode
       idris-mode
+      magit
       markdown-mode
       merlin # ocaml
       nix-haskell-mode

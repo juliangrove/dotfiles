@@ -94,6 +94,7 @@ in
       neofetch
       nixpkgs-fmt
       nix-prefetch-git
+      openvpn
       pandoc
       pciutils
       pdftk
