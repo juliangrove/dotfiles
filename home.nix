@@ -169,6 +169,8 @@ in
         userName = "juliangrove";
       };
 
+      ssh.enable = true;
+
       zathura.enable = true; # zathura
     };
 

@@ -137,6 +137,11 @@
 (use-package flycheck
   :init (global-flycheck-mode))
 
+;; (setq flycheck-command-wrapper-function
+        ;; (lambda (command) (apply 'nix-shell-command (nix-current-sandbox) command))
+      ;; flycheck-executable-find
+        ;; (lambda (cmd) (nix-executable-find (nix-current-sandbox) cmd)))
+
 ;; haskell
 (require 'haskell-mode)
 (custom-set-variables '(haskell-process-type 'cabal-repl))
@@ -154,6 +159,7 @@
   (add-hook 'haskell-mode-hook 'flymake-mode)
   (add-hook 'haskell-mode-hook 'dante-mode))
 (setq dante-debug '(inputs outputs responses))
+(setq dante-repl-command-line '("nix-shell" "--run" "cabal repl"))
 
 ;; ocaml
 (autoload 'merlin-mode "merlin" "Merlin mode" t)
@@ -194,8 +200,8 @@
 (require 'ox-beamer)
 (add-to-list 'org-latex-classes
 	     '("manuscript"
-	       "\\documentclass[10pt,twoside]{article}
-\\usepackage[margin=1.25in]{geometry}
+	       "\\documentclass[12pt,twoside]{article}
+\\usepackage[margin=1in]{geometry}
 \\usepackage{etoolbox}
 \\ifundef{\\abstract}{}{\\patchcmd{\\abstract}%
   {\\quotation}{\\quotation\\noindent\\ignorespaces\\textbf{Abstract}\\hspace{1mm}}{}{}}
@@ -212,8 +218,10 @@
 \\usepackage{xcolor}
 \\pagestyle{plain}
 \\usepackage{libertine}
+\\usepackage[small]{eulervm}
+%%\\usepackage[{libertinust1math}
 \\usepackage[T1]{fontenc}
-\\usepackage{mathpazo}
+%%\\usepackage[notextcomp,nosf]{kpfonts}
 \\usepackage{tipa}
 \\usepackage{tikz}
 \\usetikzlibrary{fit}
@@ -229,20 +237,18 @@
 \\usepackage{relsize}
 \\usepackage{fixltx2e}
 \\raggedbottom
-\\sectionfont{\\large\\sf}
-\\subsectionfont{\\large\\sf}
-\\subsubsectionfont{\\large\\sf}
+\\allsectionsfont{\\normalsize\\bfseries\\sffamily}
 \\usepackage{langsci-avm}
 \\usepackage[colorlinks=true,urlcolor=blue!60!black!80,citecolor=blue!60!black!80,linkcolor=black,bookmarks,bookmarksopen,bookmarksdepth=2]{hyperref}
 \\renewcommand\\UrlFont{\\normalsize}
 \\usepackage[normalem]{ulem}
 \\usepackage{appendix}
 \\fancyfoot{}
-\\fancyhead[LO]{\\footnotesize\\sf \\MakeUppercase{\\thetitle}}
-\\fancyhead[RE]{\\footnotesize\\sf \\MakeUppercase{\\theauthor}}
-\\fancyhead[LE,RO]{\\thepage}
+\\fancyhead[LO]{\\footnotesize\\sf\\thetitle}
+\\fancyhead[RE]{\\footnotesize\\sf\\theauthor}
+\\fancyhead[LE,RO]{\\footnotesize\\sf\\thepage}
 \\renewcommand{\\headrulewidth}{0pt}
-\\pretitle{\\LARGE\\sf\\noindent}\\posttitle{\\par\\vskip 1em}
+\\pretitle{\\Large\\bfseries\\sffamily\\noindent}\\posttitle{\\par\\vskip 1em}
 \\newcommand{\\affil}{\\vspace{-1em}}
 \\preauthor{\\normalsize\\sf\\noindent\\lineskip 0.5em}\\postauthor{\\\\\\affil\\par\\vskip 1em}
 \\predate{\\normalsize\\sf\\noindent}\\postdate{\\par\\vskip 1em}

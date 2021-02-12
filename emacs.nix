@@ -35,6 +35,7 @@
       nix-haskell-mode
       nix-mode
       nixpkgs-fmt
+      nix-sandbox
       openwith
       org
       org-agenda-property

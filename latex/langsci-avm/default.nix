@@ -1,4 +1,4 @@
-{ stdenv, fetchzip, texlive }:
+{ pkgs, stdenv, fetchzip, texlive }:
 
 stdenv.mkDerivation rec {
   name = "langsci-avm-${version}";
@@ -56,7 +56,7 @@ stdenv.mkDerivation rec {
     cp langsci-avm/langsci-avm/langsci-avm.sty $out/tex/latex/langsci-avm
   '';
 
-  meta = with stdenv.lib; {
+  meta = with pkgs.lib; {
     description = "Attribute-value matrices and feature structures for use in linguistics";
     homepage = https://ctan.org/pkg/langsci-avm;
     license = licenses.lppl13c;

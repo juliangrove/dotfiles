@@ -1,4 +1,4 @@
-{ stdenv, fetchurl, fetchzip, texlive, libarchive }:
+{ pkgs, stdenv, fetchurl, fetchzip, texlive, libarchive }:
 
 stdenv.mkDerivation rec {
   name = "minionpro-${version}";
@@ -107,7 +107,7 @@ stdenv.mkDerivation rec {
     # mktexlsr $out/texmf*
   '';
 
-  meta = with stdenv.lib; {
+  meta = with pkgs.lib; {
     description = "Myriad and Minion for LaTeX (the not-xeLaTeX way)";
     homepage = https://ctan.org/tex-archive/fonts/minionpro/;
     license = licenses.unfree;

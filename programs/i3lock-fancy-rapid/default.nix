@@ -1,4 +1,4 @@
-{ stdenv, fetchFromGitHub, xorg, i3lock-color }:
+{ pkgs, stdenv, fetchFromGitHub, xorg, i3lock-color }:
 
 stdenv.mkDerivation rec {
   name = "i3lock-fancy-rapid";
@@ -21,7 +21,7 @@ stdenv.mkDerivation rec {
     cp i3lock-fancy-rapid $out/bin/
   '';
 
-  meta = with stdenv.lib; {
+  meta = with pkgs.lib; {
     description = "A fork of i3lock-fancy-rapid that uses i3lock-color instead of i3lock.";
     homepage = https://github.com/juliangrove/i3lock-fancy-rapid;
     license = licenses.bsd3;

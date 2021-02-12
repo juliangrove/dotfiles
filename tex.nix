@@ -29,6 +29,7 @@
             inlinedef
             kpfonts
             libertine
+            libertinust1math
             lineno
             mathpazo
             mathtools
@@ -40,6 +41,7 @@
             relsize
             scheme-basic
             sectsty
+            sfmath
             stackengine
             stmaryrd
             tikz-qtree
