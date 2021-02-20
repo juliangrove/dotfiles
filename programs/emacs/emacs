@@ -41,8 +41,10 @@
 
 (setq column-number-mode t)
 
+;; evil
 (require 'evil)
 (evil-mode 1)
+;; (require 'evil-magit)
 
 (global-linum-mode t)
 (add-hook 'pdf-view-mode-hook (lambda() (linum-mode -1)))
@@ -421,6 +423,9 @@
 (add-to-list 'auto-mode-alist '("\\.nix\\'" . nix-mode))
 (add-hook 'nix-mode-hook 'nixpkgs-fmt-on-save-mode)
 (define-key nix-mode-map (kbd "C-c C-f") 'nixpkgs-fmt)
+
+;; direnv
+(require 'direnv)
 
 ;; pdf viewer
 (pdf-loader-install)

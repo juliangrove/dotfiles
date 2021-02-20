@@ -79,7 +79,8 @@ in
       bibtool
       bibtex2html
       croc
-      nixos.dict
+      direnv
+      dict
       escrotum
       feh
       gcc
@@ -108,7 +109,7 @@ in
       vim
 
       # languages
-      agda-stuff # agda + packages
+      # agda-stuff # agda + packages
       cabal-install # haskell
       coq
       eff

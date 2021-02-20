@@ -28,7 +28,7 @@ mypp = def { ppCurrent = const "<fc=#fe8019>\x25cf</fc>"
            , ppOrder = return . head
            , ppWsSep = "   " }
 -- Key binding to toggle the gap for the bar.
-togglestrutskey XConfig {XMonad.modMask = modMask} = (modMask, xK_b)
+togglestrutskey XConfig { XMonad.modMask = modMask } = (modMask, xK_b)
 
 myconfig = def
   { borderWidth        = myborderwidth

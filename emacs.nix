@@ -4,7 +4,7 @@
     with epkgs; [
       # ac-octave
       agda-input
-      agda2-mode
+      # agda2-mode
       airline-themes
       all-the-icons
       all-the-icons-dired
@@ -20,10 +20,12 @@
       dired-hide-dotfiles
       dired-sidebar
       dired-subtree
+      direnv
       elpy # python
       emojify
       ess # R
       evil # used to use vim
+      # evil-magit
       fill-column-indicator
       flycheck
       gruvbox-theme
