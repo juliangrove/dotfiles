@@ -26,6 +26,7 @@
             framed
             fvextra
             gitinfo2
+            inconsolata
             inlinedef
             kpfonts
             libertine
@@ -36,6 +37,8 @@
             minted
             mnsymbol
             multirow
+            newtx
+            newunicodechar
             pgf
             pgfopts
             relsize
@@ -45,17 +48,20 @@
             stackengine
             stmaryrd
             tikz-qtree
+            tikzsymbols
             tipa
             titling
             titlesec
             tracklang
             trimspaces
+            txfonts
             ulem
             upquote
+            wasysym
             xcolor
             xstring
             ;
-          langsci-avm.pkgs = [ (pkgs.callPackage ./latex/langsci-avm { }) ];
+          # langsci-avm.pkgs = [ (pkgs.callPackage ./latex/langsci-avm { }) ];
           libib.pkgs = [ (pkgs.callPackage ./latex/libib { }) ];
           minionpro.pkgs = [ (pkgs.callPackage ./latex/minionpro { }) ];
         }

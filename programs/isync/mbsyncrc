@@ -13,39 +13,39 @@ Path ~/.mail/gmail/
 Inbox ~/.mail/gmail/inbox
 
 Channel gmail-inbox
-Master :gmail-remote:
-Slave :gmail-local:
+Far :gmail-remote:
+Near :gmail-local:
 Patterns "INBOX"
-Create Slave
-Remove Slave
+Create Near
+Remove Near
 SyncState *
 
 Channel gmail-drafts
-Master :gmail-remote:"[Gmail]/Drafts"
-Slave :gmail-local:drafts
-Create Slave
-Remove Slave
+Far :gmail-remote:"[Gmail]/Drafts"
+Near :gmail-local:drafts
+Create Near
+Remove Near
 SyncState *
 
 Channel gmail-sent
-Master :gmail-remote:"[Gmail]/Sent Mail"
-Slave :gmail-local:sent
-Create Slave
-Remove Slave
+Far :gmail-remote:"[Gmail]/Sent Mail"
+Near :gmail-local:sent
+Create Near
+Remove Near
 SyncState *
 
 Channel gmail-trash
-Master :gmail-remote:"[Gmail]/Trash"
-Slave :gmail-local:trash
-Create Slave
-Remove Slave
+Far :gmail-remote:"[Gmail]/Trash"
+Near :gmail-local:trash
+Create Near
+Remove Near
 SyncState *
 
 Channel gmail-all
-Master :gmail-remote:"[Gmail]/All Mail"
-Slave :gmail-local:all
-Create Slave
-Remove Slave
+Far :gmail-remote:"[Gmail]/All Mail"
+Near :gmail-local:all
+Create Near
+Remove Near
 SyncState *
 
 Group gmail
@@ -70,25 +70,25 @@ Path ~/.mail/gu/
 Inbox ~/.mail/gu/inbox
 
 Channel gu-inbox
-Master :gu-remote:
-Slave :gu-local:
+Far :gu-remote:
+Near :gu-local:
 Patterns "INBOX"
-Create Slave
-Remove Slave
+Create Near
+Remove Near
 SyncState *
 
 Channel gu-sent
-Master :gu-remote:"Sent Items"
-Slave :gu-local:sent
-Create Slave
-Remove Slave
+Far :gu-remote:"Sent Items"
+Near :gu-local:sent
+Create Near
+Remove Near
 SyncState *
 
 Channel gu-trash
-Master :gu-remote:"Deleted Items"
-Slave :gu-local:trash
-Create Slave
-Remove Slave
+Far :gu-remote:"Deleted Items"
+Near :gu-local:trash
+Create Near
+Remove Near
 SyncState *
 
 Group gu

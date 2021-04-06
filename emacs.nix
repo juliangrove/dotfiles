@@ -4,7 +4,7 @@
     with epkgs; [
       # ac-octave
       agda-input
-      # agda2-mode
+      agda2-mode
       airline-themes
       all-the-icons
       all-the-icons-dired
@@ -41,6 +41,7 @@
       openwith
       org
       org-agenda-property
+      org-bullets
       org-gcal
       org-noter
       org-plus-contrib

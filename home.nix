@@ -109,12 +109,12 @@ in
       vim
 
       # languages
-      # agda-stuff # agda + packages
+      agda-stuff # agda + packages
       cabal-install # haskell
       coq
       eff
       ghc # haskell
-      # idris
+      idris
       ocaml
       ocamlPackages.findlib
       ocamlPackages.ocamlbuild
@@ -134,7 +134,7 @@ in
 
       # gui apps
       briss
-      clementineUnfree
+      # clementineUnfree
       latest.firefox-nightly-bin
       google-chrome
       pinentry_qt5 # support for gpg passphrase entry
@@ -162,8 +162,19 @@ in
         enable = true;
         package = pkgs.emacs;
         extraPackages = import ./emacs.nix { inherit pkgs; };
+        overrides = self: super: {
+          auctex = super.auctex.override {
+            elpaBuild = args: super.elpaBuild
+              (args // {
+                version = "13.0.6";
+                src = pkgs.fetchurl {
+                  url = "https://elpa.gnu.org/packages/auctex-13.0.6.tar";
+                  sha256 = "00wp388rh2nnk8fam53kilykg90jylps31qxv9ijy1lsp1hqdjys";
+                };
+              });
+          };
+        };
       };
-
       git = {
         enable = true;
         userEmail = "julian.grove@gmail.com";

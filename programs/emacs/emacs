@@ -24,6 +24,7 @@
 
 (cua-mode 1)
 
+
 ;; abbreviations
 (use-package agda-input
   :config (setq default-input-method "Agda"))
@@ -49,6 +50,10 @@
 (global-linum-mode t)
 (add-hook 'pdf-view-mode-hook (lambda() (linum-mode -1)))
 
+;; line wrap at 80 chars
+(add-hook 'text-mode-hook #'auto-fill-mode)
+(setq-default fill-column 80)
+
 (require 'fill-column-indicator)
 (global-set-key (kbd "C-c r") 'fci-mode)
 (setq fci-rule-column 80)
@@ -58,6 +63,11 @@
 ;; text-mode hooks
 (dolist (hook '(text-mode-hook))
   (add-hook hook (lambda () (flyspell-mode 1))))
+
+;; opening pdfs
+(require 'openwith)
+(openwith-mode t)
+(setq openwith-associations '(("\\.pdf\\'" "zathura" (file))))
 
 ;; mu4e
 (require 'mu4e)
@@ -197,13 +207,37 @@
 (global-set-key (kbd "C-c a") 'org-agenda)
 (global-set-key (kbd "C-c c") 'org-capture)
 
+;; headers
+(require 'org-bullets)
+(add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
+
+(let* ((headline `(:inherit default :weight bold)))
+  (custom-theme-set-faces 'user
+                          `(org-level-8 ((t (,@headline))))
+                          `(org-level-7 ((t (,@headline))))
+                          `(org-level-6 ((t (,@headline))))
+                          `(org-level-5 ((t (,@headline))))
+                          `(org-level-4 ((t (,@headline))))
+                          `(org-level-3 ((t (,@headline))))
+                          `(org-level-2 ((t (,@headline))))
+                          `(org-level-1 ((t (,@headline))))
+                          `(org-document-title ((t (,@headline :underline nil))))))
+
+;; emphasis markers
+(setq org-hide-emphasis-markers t)
+
+;; bullets
+(font-lock-add-keywords 'org-mode
+                        '(("^ +\\([-*]\\) "
+                           (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
+
 ;; org latex
 (require 'ox-latex)
 (require 'ox-beamer)
 (add-to-list 'org-latex-classes
 	     '("manuscript"
-	       "\\documentclass[12pt,twoside]{article}
-\\usepackage[margin=1in]{geometry}
+	       "\\documentclass[11pt,twoside]{article}
+\\usepackage[margin=1.5in]{geometry}
 \\usepackage{etoolbox}
 \\ifundef{\\abstract}{}{\\patchcmd{\\abstract}%
   {\\quotation}{\\quotation\\noindent\\ignorespaces\\textbf{Abstract}\\hspace{1mm}}{}{}}
@@ -220,7 +254,9 @@
 \\usepackage{xcolor}
 \\pagestyle{plain}
 \\usepackage{libertine}
-\\usepackage[small]{eulervm}
+\\usepackage[varqu]{zi4}
+\\usepackage[libertine]{newtxmath}
+%%\\usepackage[small]{eulervm}
 %%\\usepackage[{libertinust1math}
 \\usepackage[T1]{fontenc}
 %%\\usepackage[notextcomp,nosf]{kpfonts}
@@ -240,7 +276,6 @@
 \\usepackage{fixltx2e}
 \\raggedbottom
 \\allsectionsfont{\\normalsize\\bfseries\\sffamily}
-\\usepackage{langsci-avm}
 \\usepackage[colorlinks=true,urlcolor=blue!60!black!80,citecolor=blue!60!black!80,linkcolor=black,bookmarks,bookmarksopen,bookmarksdepth=2]{hyperref}
 \\renewcommand\\UrlFont{\\normalsize}
 \\usepackage[normalem]{ulem}
@@ -270,10 +305,13 @@
 \\begin{flushright}
 \\insertframenumber/\\inserttotalframenumber\\hspace{2mm}\\mbox{}
 \\end{flushright}}
-\\usepackage[T1]{fontenc}
 \\usepackage{libertine}
+\\usepackage[varqu]{zi4}
+\\usepackage[libertine]{newtxmath}
+%%\\usepackage[small]{eulervm}
+%%\\usepackage[{libertinust1math}
+\\usepackage[T1]{fontenc}
 \\renewcommand*\\familydefault{\\sfdefault}
-\\usepackage[small]{eulervm}
 \\usepackage{tipa}
 \\usepackage{adjustbox}
 \\usepackage{multirow}
@@ -331,7 +369,6 @@
 \\usepackage{relsize}
 \\usepackage{fixltx2e}
 \\raggedbottom
-\\usepackage{langsci-avm}
 \\usepackage[colorlinks=true,urlcolor=blue!60!black!80,citecolor=blue!60!black!80,linkcolor=black,bookmarks,bookmarksopen,bookmarksdepth=2]{hyperref}
 \\renewcommand\\UrlFont{\\normalsize}
 \\renewcommand{\\maketitle}{\\normalsize\\begin{center}\\textbf{\\thetitle}\\end{center}\\vspace{-5mm}}
@@ -430,10 +467,6 @@
 ;; pdf viewer
 (pdf-loader-install)
 (add-hook 'TeX-after-compilation-finished-functions #'TeX-revert-document-buffer)
-
-(require 'openwith)
-(openwith-mode t)
-(setq openwith-associations '(("\\.pdf\\'" "zathura" (file))))
 
 ;; markdown
 (use-package markdown-mode
