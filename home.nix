@@ -162,18 +162,18 @@ in
         enable = true;
         package = pkgs.emacs;
         extraPackages = import ./emacs.nix { inherit pkgs; };
-        overrides = self: super: {
-          auctex = super.auctex.override {
-            elpaBuild = args: super.elpaBuild
-              (args // {
-                version = "13.0.6";
-                src = pkgs.fetchurl {
-                  url = "https://elpa.gnu.org/packages/auctex-13.0.6.tar";
-                  sha256 = "00wp388rh2nnk8fam53kilykg90jylps31qxv9ijy1lsp1hqdjys";
-                };
-              });
-          };
-        };
+        #   overrides = self: super: {
+        #     auctex = super.auctex.override {
+        #       elpaBuild = args: super.elpaBuild
+        #         (args // {
+        #           version = "13.0.6";
+        #           src = pkgs.fetchurl {
+        #             url = "https://elpa.gnu.org/packages/auctex-13.0.6.tar";
+        #             sha256 = "00wp388rh2nnk8fam53kilykg90jylps31qxv9ijy1lsp1hqdjys";
+        #           };
+        #         });
+        #     };
+        #   };
       };
       git = {
         enable = true;
