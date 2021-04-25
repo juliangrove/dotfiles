@@ -25,7 +25,7 @@
       emojify
       ess # R
       evil # used to use vim
-      # evil-magit
+      evil-collection
       fill-column-indicator
       flycheck
       gruvbox-theme

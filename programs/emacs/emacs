@@ -43,9 +43,10 @@
 (setq column-number-mode t)
 
 ;; evil
+;; (setq evil-want-keybinding nil)
 (require 'evil)
 (evil-mode 1)
-;; (require 'evil-magit)
+;; (evil-collection-init)
 
 (global-linum-mode t)
 (add-hook 'pdf-view-mode-hook (lambda() (linum-mode -1)))
