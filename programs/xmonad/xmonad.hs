@@ -64,15 +64,15 @@ mykeys c = mkKeymap c $
   , ("M-S-f", spawn "firefox")
   , ("M-S-g", spawn "google-chrome-stable")
   , ("M-S-l", spawn $ "i3lock-fancy-rapid 40 10 -n"
-                   ++ " --insidecolor=1d202180"
-                   ++ " --ringcolor=b8bb2680"
-                   ++ " --keyhlcolor=fabd2f80"
-                   ++ " --bshlcolor=cc241dff" 
-                   ++ " --linecolor=282828ff"
-                   ++ " --insidevercolor=83a5984d"
-                   ++ " --ringvercolor=45858880"
-                   ++ " --insidewrongcolor=cc241d80"
-                   ++ " --ringwrongcolor=fb493480")
+                   ++ " --inside-color=1d202180"
+                   ++ " --ring-color=b8bb2680"
+                   ++ " --keyhl-color=fabd2f80"
+                   ++ " --bshl-color=cc241dff" 
+                   ++ " --line-color=282828ff"
+                   ++ " --insidever-color=83a5984d"
+                   ++ " --ringver-color=45858880"
+                   ++ " --insidewrong-color=cc241d80"
+                   ++ " --ringwrong-color=fb493480")
   , ("M-S-i", spawn "escrotum -s")
   , ("M-S-u", spawn "escrotum")
   , ("M-S-s", spawn "spotify")

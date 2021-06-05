@@ -28,6 +28,17 @@
 ;; abbreviations
 (use-package agda-input
   :config (setq default-input-method "Agda"))
+(use-package agda-input
+  :load-path "~/.emacs.d/lisp"
+  :defer 5
+  :config
+  :custom
+  (default-input-method "Agda")
+  (agda-input-user-translations
+   '(("Phi" "Φ")
+     ("phi" "φ")))
+     ;; ("t" "▵" "▿" "▴"  "▾" "◂" "◃" "▸" "▹"  "◄" "◅" "►" "▻" "◢" "◿" "◣" "◺" "◤" "◸" "◥" "◹")))
+  (default-input-method "Agda"))
 
 (setq split-width-threshold 1)
 
@@ -383,6 +394,57 @@
 	       ("\\section{%s}" . "\\section*{%s}")
 	       ("\\subsection{%s}" . "\\subsection*{%s}")
 	       ("\\subsubsection{%s}" . "\\subsubsection*{%s}")))
+(add-to-list 'org-latex-classes
+	     '("review"
+	       "\\documentclass[12pt,twoside]{article}
+\\usepackage[margin=1.2in]{geometry}
+\\usepackage{etoolbox}
+\\ifundef{\\abstract}{}{\\patchcmd{\\abstract}%
+  {\\quotation}{\\quotation\\noindent\\ignorespaces\\textbf{Abstract}\\hspace{1mm}}{}{}}
+\\renewcommand{\\abstractname}{\\vspace{-1.4\\baselineskip}}
+\\usepackage{lscape}
+\\usepackage{titling}
+\\usepackage{graphicx}
+\\usepackage{amssymb}
+\\usepackage{mathtools}
+\\usepackage{amsthm}
+\\theoremstyle{definition}
+\\newtheorem{thm}{Theorem}
+\\usepackage[inline]{enumitem}
+\\usepackage{xcolor}
+\\pagestyle{plain}
+\\usepackage{libertine}
+\\usepackage[varqu]{zi4}
+\\usepackage[libertine]{newtxmath}
+%%\\usepackage[small]{eulervm}
+%%\\usepackage[{libertinust1math}
+\\usepackage[T1]{fontenc}
+%%\\usepackage[notextcomp,nosf]{kpfonts}
+\\usepackage{tipa}
+\\usepackage{tikz}
+\\usetikzlibrary{fit}
+\\usetikzlibrary{positioning}
+\\usepackage{natbib}
+\\usepackage{stmaryrd}
+\\usepackage{sectsty}
+\\usepackage{expex}
+\\usepackage{stackrel}
+\\usepackage{stackengine}
+\\usepackage{relsize}
+\\usepackage{fixltx2e}
+\\raggedbottom
+\\allsectionsfont{\\normalsize}
+\\usepackage[colorlinks=true,urlcolor=blue!60!black!80,citecolor=blue!60!black!80,linkcolor=black,bookmarks,bookmarksopen,bookmarksdepth=2]{hyperref}
+\\renewcommand\\UrlFont{\\normalsize}
+\\usepackage[normalem]{ulem}
+\\usepackage{appendix}
+\\bibliographystyle{li}
+[NO-DEFAULT-PACKAGES]
+[PACKAGES]
+[EXTRA]"
+	       ("\\section{%s}" . "\\section*{%s}")
+	       ("\\subsection{%s}" . "\\subsection*{%s}")
+	       ("\\subsubsection{%s}" . "\\subsubsection*{%s}")))
 (setq org-latex-pdf-process
       '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
 	"bibtex %b"
@@ -483,4 +545,27 @@
 ;;           '(lambda () (ac-octave-setup)))
 
 ;; agda
-(require 'agda2-mode)
+(use-package agda2-mode
+  :mode ("\\.agda\\'" "\\.lagda.md\\'")
+  :config
+  (setq agda2-change-default-font nil)
+  (setq agda2-fontset-name nil)
+  (setq agda2-program-args '("-l" "standard-library" "-i.")) ;; new way to load libraries. -i. allows to look for the current dir (otherwise nothing can be loaded.)
+  ;; (setq agda2-program-args (list (concat "--include-path=" (expand-file-name "~/.nix-profile/share/agda/"))))
+  ;; taken care of by nixpkgs (load-file (let ((coding-system-for-read 'utf-8)) (shell-command-to-string "agda-mode locate")))
+  (progn ;; xref support
+    (defun agda2--xref-backend () "agda2 xref backend." (when (eq major-mode 'agda2-mode) 'agda2))
+    (cl-defmethod xref-backend-identifier-at-point ((_backend (eql agda2)))
+      (point))
+    
+    (cl-defmethod xref-backend-identifier-completion-table ((_backend (eql agda2)))
+      nil)
+    
+    (cl-defmethod xref-backend-definitions ((_backend (eql agda2)) source-pos)
+      (let* ((target (get-text-property source-pos 'annotation-goto))
+             (fname (car target))
+             (buf (get-file-buffer fname))
+             (pnt (cdr target)))
+        (list (xref-make "definiton" (xref-make-buffer-location buf pnt)))))
+    
+    (add-hook 'xref-backend-functions 'agda2--xref-backend)))
