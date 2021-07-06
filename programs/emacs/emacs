@@ -24,6 +24,8 @@
 
 (cua-mode 1)
 
+(tab-bar-mode 1)
+
 
 ;; abbreviations
 (use-package agda-input
@@ -248,7 +250,7 @@
 (require 'ox-beamer)
 (add-to-list 'org-latex-classes
 	     '("manuscript"
-	       "\\documentclass[11pt,twoside]{article}
+	       "\\documentclass[12pt,twoside]{article}
 \\usepackage[margin=1.5in]{geometry}
 \\usepackage{etoolbox}
 \\ifundef{\\abstract}{}{\\patchcmd{\\abstract}%
@@ -550,7 +552,7 @@
   :config
   (setq agda2-change-default-font nil)
   (setq agda2-fontset-name nil)
-  (setq agda2-program-args '("-l" "standard-library" "-i.")) ;; new way to load libraries. -i. allows to look for the current dir (otherwise nothing can be loaded.)
+  (setq agda2-program-args '("-l" "standard-library" "-l" "cubical" "-i.")) ;; new way to load libraries. -i. allows to look for the current dir (otherwise nothing can be loaded.)
   ;; (setq agda2-program-args (list (concat "--include-path=" (expand-file-name "~/.nix-profile/share/agda/"))))
   ;; taken care of by nixpkgs (load-file (let ((coding-system-for-read 'utf-8)) (shell-command-to-string "agda-mode locate")))
   (progn ;; xref support

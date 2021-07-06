@@ -50,6 +50,7 @@ in
     let
       agda-stuff = (pkgs.agda.withPackages (with pkgs; [
         agdaPackages.standard-library
+        agdaPackages.cubical
       ]));
       i3lock-fancy-rapid = pkgs.callPackage ./programs/i3lock-fancy-rapid { };
       nixos = import <nixos> { };
@@ -115,6 +116,7 @@ in
       eff
       ghc # haskell
       idris
+      idris2
       ocaml
       ocamlPackages.findlib
       ocamlPackages.ocamlbuild

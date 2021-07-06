@@ -2,7 +2,7 @@ Config {
 
    -- appearance
      font =             "xft:SFNS Display:size=11,FontAwesome"
-   , additionalFonts = [ "xft:Book:size=11:antialiasing=true"
+   , additionalFonts = [ "xft:Calibri:size=11:antialiasing=true"
                        , "xft:Courier:size=12:antialiasing=true" ]
    , bgColor =          "black"
    , alpha =            0
@@ -87,12 +87,12 @@ Config {
 			     , "--lows" , "<fc=#fb4934></fc>" ] 5
         -- time and date indicator 
         --   (%F = y-m-d date, %a = day of week, %T = h:m:s time)
-        , Run Date           "<fc=#ebdbb2>%F (%a) %I:%M</fc>" "date" 10
+        , Run Date           "<fn=1><fc=#ebdbb2>%F (%a) %I:%M</fc></fn>" "date" 10
 
         -- keyboard layout indicator
         -- , Run Kbd            [ ("us"         , "<fc=#8B0000> us</fc>") ]
 	, Run StdinReader
-	, Run Wireless "wlp0s20f3" [ "-t", "<fc=#d65d0e></fc> <fc=#689d6a><essid></fc>" ] 5
+	, Run Wireless "wlp0s20f3" [ "-t", "<fc=#d65d0e></fc> <fn=1><fc=#689d6a><essid></fc></fn>" ] 5
 	, Run Brightness [ "-t", "<fc=#fabd2f>\xf03e</fc> <fn=2><fc=#ebdbb2><percent>%</fc></fn>"
 	                 , "--"
 	                 , "-D", "/sys/class/backlight/intel_backlight" ] 2
