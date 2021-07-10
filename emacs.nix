@@ -49,6 +49,7 @@
       pdf-tools
       proof-general # coq
       racket-mode
+      tabbar
       tuareg # ocaml
       use-package
       utop # ocaml

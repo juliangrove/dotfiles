@@ -24,9 +24,6 @@
 
 (cua-mode 1)
 
-(tab-bar-mode 1)
-
-
 ;; abbreviations
 (use-package agda-input
   :config (setq default-input-method "Agda"))
@@ -50,7 +47,8 @@
 (load-theme 'gruvbox t)
 
 (require 'airline-themes)
-(load-theme 'airline-gruvbox-dark t)
+;; (load-theme 'airline-gruvbox-dark t)
+(load-theme 'airline-base16_gruvbox_dark_hard t)
 (setq airline-cursor-column t)
 
 (setq column-number-mode t)

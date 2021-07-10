@@ -164,19 +164,21 @@ in
         enable = true;
         package = pkgs.emacs;
         extraPackages = import ./emacs.nix { inherit pkgs; };
-        #   overrides = self: super: {
-        #     auctex = super.auctex.override {
-        #       elpaBuild = args: super.elpaBuild
-        #         (args // {
-        #           version = "13.0.6";
-        #           src = pkgs.fetchurl {
-        #             url = "https://elpa.gnu.org/packages/auctex-13.0.6.tar";
-        #             sha256 = "00wp388rh2nnk8fam53kilykg90jylps31qxv9ijy1lsp1hqdjys";
-        #           };
-        #         });
-        #     };
-        #   };
+        # overrides = self: super: {
+          # org = super.org.override {
+            # elpaBuild = args: super.elpaBuild
+              # (args // {
+                # version = "9.4.2";
+                # src = pkgs.fetchurl {
+                  # url = "https://elpa.gnu.org/packages/org-9.4.2.tar.lz";
+                  # sha256 = "17rn6y1rxhlisxsr9c4z4x60wm21pyv47i5xhyrasanc28w991nc";
+                # };
+                # nativeBuildInputs = [ pkgs.lzip ];
+              # });
+          # };
+        # };
       };
+
       git = {
         enable = true;
         userEmail = "julian.grove@gmail.com";
