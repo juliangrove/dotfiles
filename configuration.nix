@@ -50,7 +50,8 @@
   # };
 
   # Set your time zone.
-  time.timeZone = "Europe/Stockholm";
+  # time.timeZone = "Europe/Stockholm";
+  time.timeZone = "America/New_York";
 
   # for things like spotify
   nixpkgs.config.allowUnfree = true;

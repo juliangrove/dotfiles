@@ -1,3 +1,5 @@
+;;; emacs init file
+
 (require 'package)
 
 (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/"))
@@ -18,25 +20,23 @@
 (tool-bar-mode -1)
 (defun my/disable-scroll-bars (frame)
   (modify-frame-parameters frame
-                           '((vertical-scroll-bars . nil)
-                             (horizontal-scroll-bars . nil))))
+			   '((vertical-scroll-bars . nil)
+			     (horizontal-scroll-bars . nil))))
 (add-hook 'after-make-frame-functions 'my/disable-scroll-bars)
 
 (cua-mode 1)
 
 ;; abbreviations
 (use-package agda-input
-  :config (setq default-input-method "Agda"))
-(use-package agda-input
+  :config (setq default-input-method "Agda")
   :load-path "~/.emacs.d/lisp"
   :defer 5
-  :config
   :custom
   (default-input-method "Agda")
   (agda-input-user-translations
    '(("Phi" "Φ")
      ("phi" "φ")))
-     ;; ("t" "▵" "▿" "▴"  "▾" "◂" "◃" "▸" "▹"  "◄" "◅" "►" "▻" "◢" "◿" "◣" "◺" "◤" "◸" "◥" "◹")))
+  ;; ("t" "▵" "▿" "▴"  "▾" "◂" "◃" "▸" "▹"  "◄" "◅" "►" "▻" "◢" "◿" "◣" "◺" "◤" "◸" "◥" "◹")))
   (default-input-method "Agda"))
 
 (setq split-width-threshold 1)
@@ -94,13 +94,13 @@
 (setq mu4e-get-mail-command "mbsync -a")
 
 (setq
-  user-mail-address "julian.grove@gmail.com"
-  user-full-name "Julian Grove"
-  mu4e-compose-signature
-  (concat "Julian Grove\n"
-	  "julian.grove@gmail.com\n"
-	  "juliangrove.github.io\n"
-	  "sent via mu4e"))
+ user-mail-address "julian.grove@gmail.com"
+ user-full-name "Julian Grove"
+ mu4e-compose-signature
+ (concat "Julian Grove\n"
+	 "julian.grove@gmail.com\n"
+	 "juliangrove.github.io\n"
+	 "sent via mu4e"))
 
 (require 'smtpmail)
 
@@ -142,19 +142,19 @@
 (setq TeX-view-program-list '(("Zathura" "zathura %u")))
 
 (add-hook 'LaTeX-mode-hook '(lambda ()
-                  (add-to-list 'TeX-expand-list
-                       '("%u" pdf-make-url))))
+			      (add-to-list 'TeX-expand-list
+					   '("%u" pdf-make-url))))
 (defun pdf-make-url () (concat
-               "file://\""
-               (expand-file-name (funcall file (TeX-output-extension) t)
-                         (file-name-directory (TeX-master-file)))
-               "\"#src:"
-               (TeX-current-line)
-	       "\""
-               (expand-file-name (TeX-master-directory))
-               "./"
-               (TeX-current-file-name-master-relative)
-	       "\""))
+			"file://\""
+			(expand-file-name (funcall file (TeX-output-extension) t)
+					  (file-name-directory (TeX-master-file)))
+			"\"#src:"
+			(TeX-current-line)
+			"\""
+			(expand-file-name (TeX-master-directory))
+			"./"
+			(TeX-current-file-name-master-relative)
+			"\""))
 (setq TeX-view-program-selection '((output-pdf "Zathura")))
 
 ;; flycheck
@@ -162,9 +162,9 @@
   :init (global-flycheck-mode))
 
 ;; (setq flycheck-command-wrapper-function
-        ;; (lambda (command) (apply 'nix-shell-command (nix-current-sandbox) command))
-      ;; flycheck-executable-find
-        ;; (lambda (cmd) (nix-executable-find (nix-current-sandbox) cmd)))
+;; (lambda (command) (apply 'nix-shell-command (nix-current-sandbox) command))
+;; flycheck-executable-find
+;; (lambda (cmd) (nix-executable-find (nix-current-sandbox) cmd)))
 
 ;; haskell
 (require 'haskell-mode)
@@ -186,22 +186,37 @@
 (setq dante-repl-command-line '("nix-shell" "--run" "cabal repl"))
 
 ;; ocaml
-(autoload 'merlin-mode "merlin" "Merlin mode" t)
-(add-hook 'tuareg-mode-hook 'merlin-mode)
-(add-hook 'caml-mode-hook 'merlin-mode)
-(add-hook 'merlin-mode-hook #'company-mode)
-
+(require 'ocp-indent)
+(use-package tuareg
+  :config
+  ;; (add-hook 'tuareg-mode-hook #'electric-pair-local-mode)
+  ;; (add-hook 'tuareg-mode-hook 'tuareg-imenu-set-imenu)
+  (add-hook 'tuareg-mode-hook
+	    (lambda () (add-hook 'before-save-hook 'ocp-indent-buffer nil t)
+	      (merlin-mode)))
+  (setq auto-mode-alist
+	(append '(("\\.ml[ily]?$" . tuareg-mode)
+                  ("\\.topml$" . tuareg-mode))
+		auto-mode-alist)))
+(use-package merlin
+  :config
+  (add-hook 'tuareg-mode-hook 'merlin-mode)
+  (add-hook 'merlin-mode-hook #'company-mode)
+  (add-hook 'caml-mode-hook 'merlin-mode)
+  (setq merlin-error-after-save nil))
 (use-package utop
   :config
   (autoload 'utop-minor-mode "utop" "Minor mode for utop" t)
-  (add-hook 'tuareg-mode-hook 'utop-minor-mode))
+  (add-hook 'tuareg-mode-hook 'utop-minor-mode)
+  (define-key utop-mode-map (kbd "S-<up>") 'utop-history-goto-prev)
+  (define-key utop-mode-map (kbd "S-<down>") 'utop-history-goto-next))
 
 ;; coq
 (add-hook 'coq-mode-hook 'coq-commenter-mode)
 
 ;; prolog
 (setq auto-mode-alist (append '(("\\.pl\\'" . prolog-mode))
-     auto-mode-alist))
+			      auto-mode-alist))
 (setq prolog-system 'swi)
 (autoload 'run-prolog "pl" "Run an inferior prolog process" t)
 (autoload 'prolog-mode "prolog" "SWI-Prolog mode" t)
@@ -225,23 +240,23 @@
 
 (let* ((headline `(:inherit default :weight bold)))
   (custom-theme-set-faces 'user
-                          `(org-level-8 ((t (,@headline))))
-                          `(org-level-7 ((t (,@headline))))
-                          `(org-level-6 ((t (,@headline))))
-                          `(org-level-5 ((t (,@headline))))
-                          `(org-level-4 ((t (,@headline))))
-                          `(org-level-3 ((t (,@headline))))
-                          `(org-level-2 ((t (,@headline))))
-                          `(org-level-1 ((t (,@headline))))
-                          `(org-document-title ((t (,@headline :underline nil))))))
+			  `(org-level-8 ((t (,@headline))))
+			  `(org-level-7 ((t (,@headline))))
+			  `(org-level-6 ((t (,@headline))))
+			  `(org-level-5 ((t (,@headline))))
+			  `(org-level-4 ((t (,@headline))))
+			  `(org-level-3 ((t (,@headline))))
+			  `(org-level-2 ((t (,@headline))))
+			  `(org-level-1 ((t (,@headline))))
+			  `(org-document-title ((t (,@headline :underline nil))))))
 
 ;; emphasis markers
 (setq org-hide-emphasis-markers t)
 
 ;; bullets
 (font-lock-add-keywords 'org-mode
-                        '(("^ +\\([-*]\\) "
-                           (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
+			'(("^ +\\([-*]\\) "
+			   (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
 
 ;; org latex
 (require 'ox-latex)
@@ -309,7 +324,7 @@
 	       ("\\subsection{%s}" . "\\subsection*{%s}")
 	       ("\\subsubsection{%s}" . "\\subsubsection*{%s}")))
 (add-to-list 'org-latex-classes
-             '("slides"
+	     '("slides"
                "\\documentclass[presentation]{beamer}
 \\usepackage[T1]{fontenc}
 \\setbeamerfont{frametitle}{size=\\large}
@@ -471,14 +486,14 @@
 (defun my-org-gcal-fetch (&optional arg)
   (interactive "P")
   (let ((browse-url-browser-function #'browse-url-firefox))
-        (org-gcal-fetch)))
+    (org-gcal-fetch)))
 
 (add-hook 'org-agenda-mode-hook (lambda () (org-gcal-sync)))
 (add-hook 'org-capture-after-finalize-hook (lambda () (org-gcal-sync)))
 
 (setq org-capture-templates
-'(("a" "Appointment" entry (file  "~/.emacs.d/gcal.org")
-"* %?\n\n%^T\n\n:PROPERTIES:\n\n:END:\n\n")))
+      '(("a" "Appointment" entry (file  "~/.emacs.d/gcal.org")
+	 "* %?\n\n%^T\n\n:PROPERTIES:\n\n:END:\n\n")))
 
 ;; org-agenda
 (setq org-agenda-files (list "~/.emacs.d/gcal.org"))
@@ -505,7 +520,7 @@
 (use-package dired-subtree
   :config
   (bind-keys :map dired-mode-map
-             ("SPC" . dired-icons-subtree-toggle)))
+	     ("SPC" . dired-icons-subtree-toggle)))
 
 (defun dired-icons-subtree-toggle ()
   (interactive)
@@ -513,9 +528,9 @@
   (revert-buffer))
 
 (add-hook 'dired-mode-hook
-      (lambda ()
-        (dired-hide-details-mode)
-        (dired-hide-dotfiles-mode)))
+	  (lambda ()
+            (dired-hide-details-mode)
+            (dired-hide-dotfiles-mode)))
 (add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
 
 ;; nixos
@@ -557,15 +572,15 @@
     (defun agda2--xref-backend () "agda2 xref backend." (when (eq major-mode 'agda2-mode) 'agda2))
     (cl-defmethod xref-backend-identifier-at-point ((_backend (eql agda2)))
       (point))
-    
+
     (cl-defmethod xref-backend-identifier-completion-table ((_backend (eql agda2)))
       nil)
-    
+
     (cl-defmethod xref-backend-definitions ((_backend (eql agda2)) source-pos)
       (let* ((target (get-text-property source-pos 'annotation-goto))
              (fname (car target))
              (buf (get-file-buffer fname))
              (pnt (cdr target)))
         (list (xref-make "definiton" (xref-make-buffer-location buf pnt)))))
-    
+
     (add-hook 'xref-backend-functions 'agda2--xref-backend)))

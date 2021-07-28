@@ -1,4 +1,5 @@
 { config, pkgs, ... }:
+
 let
   emacs-overlay = fetchTarball {
     url = https://github.com/nix-community/emacs-overlay/archive/master.tar.gz;
@@ -113,6 +114,7 @@ in
       agda-stuff # agda + packages
       cabal-install # haskell
       coq
+      # dune_2 # ocaml
       eff
       ghc # haskell
       idris
@@ -120,8 +122,9 @@ in
       ocaml
       ocamlPackages.findlib
       ocamlPackages.ocamlbuild
+      ocamlPackages.ocp-indent
       ocamlPackages.merlin
-      # octave
+      ocamlPackages.utop
       python-stuff # python + packages
       racket
       R-stuff # R + packages
@@ -156,7 +159,7 @@ in
         historyIgnore = [ "ls*" "cd*" "exit" "pwd" ];
         bashrcExtra = ''
           PS1=$'\[\033[32m\e[2m\]\u03bb\[\033[00m\] '
-          neofetch --ascii_distro nixos_old
+                                           neofetch --ascii_distro nixos_old
         '';
       };
 
@@ -165,17 +168,17 @@ in
         package = pkgs.emacs;
         extraPackages = import ./emacs.nix { inherit pkgs; };
         # overrides = self: super: {
-          # org = super.org.override {
-            # elpaBuild = args: super.elpaBuild
-              # (args // {
-                # version = "9.4.2";
-                # src = pkgs.fetchurl {
-                  # url = "https://elpa.gnu.org/packages/org-9.4.2.tar.lz";
-                  # sha256 = "17rn6y1rxhlisxsr9c4z4x60wm21pyv47i5xhyrasanc28w991nc";
-                # };
-                # nativeBuildInputs = [ pkgs.lzip ];
-              # });
-          # };
+        # org = super.org.override {
+        # elpaBuild = args: super.elpaBuild
+        # (args // {
+        # version = "9.4.2";
+        # src = pkgs.fetchurl {
+        # url = "https://elpa.gnu.org/packages/org-9.4.2.tar.lz";
+        # sha256 = "17rn6y1rxhlisxsr9c4z4x60wm21pyv47i5xhyrasanc28w991nc";
+        # };
+        # nativeBuildInputs = [ pkgs.lzip ];
+        # });
+        # };
         # };
       };
 

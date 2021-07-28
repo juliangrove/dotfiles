@@ -4,7 +4,7 @@
     with epkgs; [
       # ac-octave
       agda-input
-      agda2-mode
+      agda2-mode # agda
       airline-themes
       all-the-icons
       all-the-icons-dired
@@ -14,9 +14,9 @@
       calfw-gcal
       calfw-ical
       calfw-org
-      caml
-      coq-commenter
-      dante
+      caml # ocaml
+      coq-commenter # coq
+      dante # haskell
       dired-hide-dotfiles
       dired-sidebar
       dired-subtree
@@ -29,15 +29,16 @@
       fill-column-indicator
       flycheck
       gruvbox-theme
-      haskell-mode
-      idris-mode
+      haskell-mode # haskell
+      idris-mode # idris
       magit
-      markdown-mode
+      markdown-mode # markdown
       merlin # ocaml
       nix-haskell-mode
-      nix-mode
-      nixpkgs-fmt
-      nix-sandbox
+      nix-mode # nix
+      nixpkgs-fmt # nix
+      nix-sandbox # nix
+      ocp-indent
       openwith
       org
       org-agenda-property
@@ -53,7 +54,7 @@
       tuareg # ocaml
       use-package
       utop # ocaml
-      yaml-mode
+      yaml-mode # yaml
       xclip
     ]
   )
