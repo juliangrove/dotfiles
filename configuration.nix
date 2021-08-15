@@ -42,12 +42,12 @@
     firewall.enable = true;
   };
 
-  nix = {
-    package = pkgs.nixUnstable;
-    extraOptions = ''
-      experimental-features = nix-command flakes
-    '';
-  };
+  # nix = {
+  # package = pkgs.nixUnstable;
+  # extraOptions = ''
+  # experimental-features = nix-command flakes
+  # '';
+  # };
 
   # Select internationalisation properties.
   # i18n = {
