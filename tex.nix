@@ -8,6 +8,7 @@
             adjustbox
             appendix
             beamer
+            beamertheme-metropolis
             biber
             biblatex
             bussproofs
@@ -43,6 +44,7 @@
             pgfopts
             relsize
             scheme-basic
+            scheme-tetex
             sectsty
             sfmath
             stackengine

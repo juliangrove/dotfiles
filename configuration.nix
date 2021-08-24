@@ -77,7 +77,7 @@
       nitrogen # wallpaper
       lxqt.pavucontrol-qt # pulseaudio control
       xbindkeys # keybindings
-      unstable.haskellPackages.xmobar # status bar
+      haskellPackages.xmobar # status bar
     ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -214,7 +214,7 @@
     fonts = with pkgs; [
       corefonts
       emacs-all-the-icons-fonts
-      font-awesome_4
+      font-awesome
       ipafont
       kochi-substitute
       lohit-fonts.kannada
