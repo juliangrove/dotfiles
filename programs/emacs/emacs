@@ -126,6 +126,11 @@
 
 (add-to-list 'mm-inhibit-file-name-handlers 'openwith-file-handler)
 
+(with-eval-after-load "emojify"
+  (delete 'mu4e-headers-mode emojify-inhibit-major-modes))
+
+(add-hook 'mu4e-view-mode-hook #'emojify-mode)
+
 ;; latex
 (setq-default TeX-PDF-mode t)
 (setq-default TeX-master t)
@@ -262,68 +267,6 @@
 (require 'ox-latex)
 (require 'ox-beamer)
 (add-to-list 'org-latex-classes
-	     '("manuscript"
-	       "\\documentclass[12pt,twoside]{article}
-\\usepackage[margin=1.5in]{geometry}
-\\usepackage{etoolbox}
-\\ifundef{\\abstract}{}{\\patchcmd{\\abstract}%
-  {\\quotation}{\\quotation\\noindent\\ignorespaces\\textbf{Abstract}\\hspace{1mm}}{}{}}
-\\renewcommand{\\abstractname}{\\vspace{-1.4\\baselineskip}}
-\\usepackage{lscape}
-\\usepackage{titling}
-\\usepackage{graphicx}
-\\usepackage{amssymb}
-\\usepackage{mathtools}
-\\usepackage{amsthm}
-\\theoremstyle{definition}
-\\newtheorem{thm}{Theorem}
-\\usepackage[inline]{enumitem}
-\\usepackage{xcolor}
-\\pagestyle{plain}
-\\usepackage{libertine}
-\\usepackage[varqu]{zi4}
-\\usepackage[libertine]{newtxmath}
-%%\\usepackage[small]{eulervm}
-%%\\usepackage[{libertinust1math}
-\\usepackage[T1]{fontenc}
-%%\\usepackage[notextcomp,nosf]{kpfonts}
-\\usepackage{tipa}
-\\usepackage{tikz}
-\\usetikzlibrary{fit}
-\\usetikzlibrary{positioning}
-\\usepackage{natbib}
-\\usepackage{stmaryrd}
-\\usepackage{fancyhdr}
-\\pagestyle{fancy}
-\\usepackage{sectsty}
-\\usepackage{expex}
-\\usepackage{stackrel}
-\\usepackage{stackengine}
-\\usepackage{relsize}
-\\usepackage{fixltx2e}
-\\raggedbottom
-\\allsectionsfont{\\normalsize\\bfseries\\sffamily}
-\\usepackage[colorlinks=true,urlcolor=blue!60!black!80,citecolor=blue!60!black!80,linkcolor=black,bookmarks,bookmarksopen,bookmarksdepth=2]{hyperref}
-\\renewcommand\\UrlFont{\\normalsize}
-\\usepackage[normalem]{ulem}
-\\usepackage{appendix}
-\\fancyfoot{}
-\\fancyhead[LO]{\\footnotesize\\sf\\thetitle}
-\\fancyhead[RE]{\\footnotesize\\sf\\theauthor}
-\\fancyhead[LE,RO]{\\footnotesize\\sf\\thepage}
-\\renewcommand{\\headrulewidth}{0pt}
-\\pretitle{\\Large\\bfseries\\sffamily\\noindent}\\posttitle{\\par\\vskip 1em}
-\\newcommand{\\affil}{\\vspace{-1em}}
-\\preauthor{\\normalsize\\sf\\noindent\\lineskip 0.5em}\\postauthor{\\\\\\affil\\par\\vskip 1em}
-\\predate{\\normalsize\\sf\\noindent}\\postdate{\\par\\vskip 1em}
-\\bibliographystyle{li}
-[NO-DEFAULT-PACKAGES]
-[PACKAGES]
-[EXTRA]"
-	       ("\\section{%s}" . "\\section*{%s}")
-	       ("\\subsection{%s}" . "\\subsection*{%s}")
-	       ("\\subsubsection{%s}" . "\\subsubsection*{%s}")))
-(add-to-list 'org-latex-classes
 	     '("slides"
                "\\documentclass[presentation]{beamer}
 \\usepackage[T1]{fontenc}
@@ -365,50 +308,6 @@
                ("\\section{%s}" . "\\section*{%s}")
                ("\\subsection{%s}" . "\\subsection*{%s}")
                ("\\subsubsection{%s}" . "\\subsubsection*{%s}")))
-(add-to-list 'org-latex-classes
-	     '("abstract"
-	       "\\documentclass[12pt,letterpaper]{article}
-\\usepackage[margin=1in]{geometry}
-\\usepackage{etoolbox}
-\\usepackage{lscape}
-\\usepackage{titling}
-\\usepackage{titlesec}
-\\usepackage{graphicx}
-\\usepackage{amssymb}
-\\usepackage{mathtools}
-\\usepackage{amsthm}
-\\theoremstyle{definition}
-\\newtheorem{thm}{Theorem}
-\\usepackage[inline]{enumitem}
-\\usepackage{xcolor}
-\\pagestyle{plain}
-\\usepackage[T1]{fontenc}
-\\usepackage{MinionPro}
-\\usepackage{tipa}
-\\usepackage{tikz}
-\\usetikzlibrary{fit}
-\\usetikzlibrary{positioning}
-\\usepackage{natbib}
-\\usepackage{stmaryrd}
-\\usepackage{expex}
-\\usepackage{stackrel}
-\\usepackage{stackengine}
-\\usepackage{relsize}
-\\usepackage{fixltx2e}
-\\raggedbottom
-\\usepackage[colorlinks=true,urlcolor=blue!60!black!80,citecolor=blue!60!black!80,linkcolor=black,bookmarks,bookmarksopen,bookmarksdepth=2]{hyperref}
-\\renewcommand\\UrlFont{\\normalsize}
-\\renewcommand{\\maketitle}{\\normalsize\\begin{center}\\textbf{\\thetitle}\\end{center}\\vspace{-5mm}}
-\\titleformat{\\section}[runin]{\\normalfont\\bfseries}{}{0pt}{}\\titlespacing{\\section}{0pt}{*0.5}{\\wordsep}
-\\usepackage[normalem]{ulem}
-\\bibliographystyle{li}
-\\usepackage{bibentry}
-[NO-DEFAULT-PACKAGES]
-[PACKAGES]
-[EXTRA]"
-	       ("\\section{%s}" . "\\section*{%s}")
-	       ("\\subsection{%s}" . "\\subsection*{%s}")
-	       ("\\subsubsection{%s}" . "\\subsubsection*{%s}")))
 (add-to-list 'org-latex-classes
 	     '("review"
 	       "\\documentclass[12pt,twoside]{article}
@@ -470,6 +369,8 @@
 (require 'org-ref)
 
 (require 'ox-bibtex)
+
+(setq compile-command "make clean && make -k")
 
 ;; org-gcal
 (setq org-agenda-files (list "~/.emacs.d/gcal.org"))

@@ -132,7 +132,7 @@ in
       swiProlog # prolog
 
       # latex
-      tex
+      # tex
 
       # libraries
       cyrus_sasl
@@ -159,7 +159,7 @@ in
         historyIgnore = [ "ls*" "cd*" "exit" "pwd" ];
         bashrcExtra = ''
           PS1=$'\[\033[32m\e[2m\]\u03bb\[\033[00m\] '
-                                           neofetch --ascii_distro nixos_old
+          neofetch --ascii_distro nixos_old
         '';
       };
 
@@ -181,6 +181,11 @@ in
         # };
         # };
       };
+
+      # firefox = {
+      # enable = true;
+      # package = pkgs.latest.firefox-nightly-bin;
+      # };
 
       git = {
         enable = true;
