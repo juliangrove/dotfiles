@@ -83,6 +83,9 @@
 
 ;; mu4e
 (require 'mu4e)
+(setq mu4e-mu-binary "~/.nix-profile/bin/mu")
+(use-package mu4e-marker-icons
+  :init (mu4e-marker-icons-mode 1))
 
 (setq mail-user-agent 'mu4e-user-agent)
 
@@ -166,10 +169,10 @@
 (use-package flycheck
   :init (global-flycheck-mode))
 
-;; (setq flycheck-command-wrapper-function
-;; (lambda (command) (apply 'nix-shell-command (nix-current-sandbox) command))
-;; flycheck-executable-find
-;; (lambda (cmd) (nix-executable-find (nix-current-sandbox) cmd)))
+(setq flycheck-command-wrapper-function
+(lambda (command) (apply 'nix-shell-command (nix-current-sandbox) command))
+flycheck-executable-find
+(lambda (cmd) (nix-executable-find (nix-current-sandbox) cmd)))
 
 ;; haskell
 (require 'haskell-mode)
@@ -368,6 +371,9 @@
 
 (require 'org-ref)
 
+;; (with-eval-after-load 'org
+  ;; (add-hook 'org-mode-hook 'org-ref-prettify-mode))
+
 (require 'ox-bibtex)
 
 (setq compile-command "make clean && make -k")
@@ -379,7 +385,7 @@
 (defun get-gcal-config-value (key)
   (cdr (assoc key (json-read-file "~/.emacs.d/gcal-secret.json"))))
 
-(require 'org-gcal)
+;; (require 'org-gcal)
 (setq org-gcal-client-id (get-gcal-config-value 'client_id)
       org-gcal-client-secret (get-gcal-config-value 'client_secret)
       org-gcal-file-alist '(("juliangrove@gmail.com" . "~/.emacs.d/gcal.org")))

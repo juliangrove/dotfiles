@@ -15,6 +15,7 @@
       calfw-ical
       calfw-org
       caml # ocaml
+      citeproc # used with org-ref
       coq-commenter # coq
       dante # haskell
       dired-hide-dotfiles
@@ -34,6 +35,7 @@
       magit
       markdown-mode # markdown
       merlin # ocaml
+      mu4e-marker-icons
       nix-haskell-mode
       nix-mode # nix
       nixpkgs-fmt # nix
@@ -47,6 +49,7 @@
       org-noter
       org-plus-contrib
       org-ref
+      # org-ref-prettify
       pdf-tools
       proof-general # coq
       racket-mode
