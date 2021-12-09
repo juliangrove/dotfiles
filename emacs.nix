@@ -15,7 +15,7 @@
       calfw-ical
       calfw-org
       caml # ocaml
-      citeproc # used with org-ref
+      # citeproc # used with org-ref
       coq-commenter # coq
       dante # haskell
       dired-hide-dotfiles
@@ -47,12 +47,13 @@
       org-bullets
       org-gcal
       org-noter
-      org-plus-contrib
+      # org-plus-contrib
       org-ref
       # org-ref-prettify
       pdf-tools
       proof-general # coq
       racket-mode
+      # semantic-theming
       tabbar
       tuareg # ocaml
       use-package

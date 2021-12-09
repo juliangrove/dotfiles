@@ -44,10 +44,13 @@
 (put 'dired-find-alternate-file 'disabled nil)
 (add-hook 'dired-mode-hook (lambda () (local-set-key (kbd "<mouse-2>") #'dired-find-alternate-file)))
 
+;; (use-package est)
+;; (est-gruvbox-dark)
+
 (load-theme 'gruvbox t)
 
 (require 'airline-themes)
-;; (load-theme 'airline-gruvbox-dark t)
+;; ;; (load-theme 'airline-gruvbox-dark t)
 (load-theme 'airline-base16_gruvbox_dark_hard t)
 (setq airline-cursor-column t)
 
@@ -267,6 +270,7 @@ flycheck-executable-find
 			   (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
 
 ;; org latex
+(require 'org-inlinetask)
 (require 'ox-latex)
 (require 'ox-beamer)
 (add-to-list 'org-latex-classes
@@ -374,7 +378,7 @@ flycheck-executable-find
 ;; (with-eval-after-load 'org
   ;; (add-hook 'org-mode-hook 'org-ref-prettify-mode))
 
-(require 'ox-bibtex)
+;; (require 'ox-bibtex)
 
 (setq compile-command "make clean && make -k")
 

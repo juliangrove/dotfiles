@@ -168,6 +168,17 @@ in
         package = pkgs.emacs;
         extraPackages = import ./emacs.nix { inherit pkgs; };
         # overrides = self: super: {
+        # semantic-theming = self.trivialBuild {
+        # pname = "emacs-semantic-theming";
+        # version = "0.0.1";
+        # src = pkgs.fetchFromGitHub {
+        # owner = "vladmaraev";
+        # repo = "emacs-semantics-theming";
+        # rev = "a7c2740b8edd50d16631496836ab915932cb411a";
+        # sha256 = "13d974vfj84vav1dngy5kygj0rbcrlc9dir2cm8rvmppf3yvcfy4";
+        # };
+        # buildPhase = "";
+        # };
         # org = super.org.override {
         # elpaBuild = args: super.elpaBuild
         # (args // {
