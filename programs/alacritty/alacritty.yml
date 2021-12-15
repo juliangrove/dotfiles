@@ -19,7 +19,7 @@ font:
   bold_italic:
     family: 'DejaVu Sans Mono'
     style: Bold Italic
-  size: 12
+  size: 8.5
 
 # Colors
 colors:

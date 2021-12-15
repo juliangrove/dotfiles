@@ -108,7 +108,7 @@ Config {
 	-- 				, "-L", "25"
 	-- 				, "-m", ""
 	-- 				, "-l", "" ] 1
-	,  Run Com ".xmobar/volume.sh" [] "vol" 2
+	,  Run Com "bash" ["-c", ".xmobar/volume.sh"] "vol" 2
 	-- ,  Run DiskU [ ("/", "<fn=2>/: <used>/<size></fn>")
 	--             , ("sdb1", "<usedbar>") ]
 	-- 	    [ "-L", "20", "-H", "50"

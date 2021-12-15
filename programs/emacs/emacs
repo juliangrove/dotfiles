@@ -54,6 +54,8 @@
 (load-theme 'airline-base16_gruvbox_dark_hard t)
 (setq airline-cursor-column t)
 
+(setq custom-file "~/.emacs.d/emacs-custom.el")
+
 (setq column-number-mode t)
 
 ;; evil
@@ -495,3 +497,37 @@ flycheck-executable-find
         (list (xref-make "definiton" (xref-make-buffer-location buf pnt)))))
 
     (add-hook 'xref-backend-functions 'agda2--xref-backend)))
+
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(haskell-process-auto-import-loaded-modules t)
+ '(haskell-process-log t)
+ '(haskell-process-suggest-remove-import-lines t)
+ '(haskell-process-type 'cabal-repl))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(agda2-highlight-bound-variable-face ((t (:foreground "#ebdbb2"))))
+ '(agda2-highlight-datatype-face ((t (:foreground "#458588"))))
+ '(agda2-highlight-function-face ((t (:foreground "#458588"))))
+ '(agda2-highlight-inductive-constructor-face ((t (:foreground "#98971a"))))
+ '(agda2-highlight-keyword-face ((t (:foreground "#d79921"))))
+ '(agda2-highlight-module-face ((t (:foreground "#b16286"))))
+ '(agda2-highlight-primitive-face ((t (:foreground "#83a598"))))
+ '(agda2-highlight-symbol-face ((t (:foreground "#a89984"))))
+ '(font-lock-comment-face ((t (:foreground "#928374"))))
+ '(org-document-title ((t (:inherit default :weight bold :underline nil))))
+ '(org-level-1 ((t (:inherit default :weight bold))))
+ '(org-level-2 ((t (:inherit default :weight bold))))
+ '(org-level-3 ((t (:inherit default :weight bold))))
+ '(org-level-4 ((t (:inherit default :weight bold))))
+ '(org-level-5 ((t (:inherit default :weight bold))))
+ '(org-level-6 ((t (:inherit default :weight bold))))
+ '(org-level-7 ((t (:inherit default :weight bold))))
+ '(org-level-8 ((t (:inherit default :weight bold))))
+ '(proof-locked-face ((t (:extend t :background "#076678")))))
