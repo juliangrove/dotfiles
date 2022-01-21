@@ -97,7 +97,7 @@ in
       neofetch
       nixpkgs-fmt
       nix-prefetch-git
-      openvpn
+      openconnect
       pandoc
       pciutils
       pdftk
@@ -140,8 +140,11 @@ in
       # gui apps
       briss
       # clementineUnfree
+      # discord
+      dmenu
       latest.firefox-nightly-bin
       google-chrome
+      # mathematica
       pinentry_qt5 # support for gpg passphrase entry
       skype
       spotify
@@ -167,30 +170,32 @@ in
         enable = true;
         package = pkgs.emacs;
         extraPackages = import ./emacs.nix { inherit pkgs; };
-        # overrides = self: super: {
-        # semantic-theming = self.trivialBuild {
-        # pname = "emacs-semantic-theming";
-        # version = "0.0.1";
-        # src = pkgs.fetchFromGitHub {
-        # owner = "vladmaraev";
-        # repo = "emacs-semantics-theming";
-        # rev = "a7c2740b8edd50d16631496836ab915932cb411a";
-        # sha256 = "13d974vfj84vav1dngy5kygj0rbcrlc9dir2cm8rvmppf3yvcfy4";
-        # };
-        # buildPhase = "";
-        # };
-        # org = super.org.override {
-        # elpaBuild = args: super.elpaBuild
-        # (args // {
-        # version = "9.4.2";
-        # src = pkgs.fetchurl {
-        # url = "https://elpa.gnu.org/packages/org-9.4.2.tar.lz";
-        # sha256 = "17rn6y1rxhlisxsr9c4z4x60wm21pyv47i5xhyrasanc28w991nc";
-        # };
-        # nativeBuildInputs = [ pkgs.lzip ];
-        # });
-        # };
-        # };
+        overrides = self: super: {
+          mu4e-marker-icons = self.trivialBuild {
+            pname = "mu4e-marker-icons";
+            version = "20210124.514";
+            src = pkgs.fetchurl {
+              url = https://melpa.org/packages/mu4e-marker-icons-20210124.514.el;
+              sha256 = "1rscac46rxhn7ci8nzpbqlif0s5hqnsgnzgwjfkhqf5b5q0lp4w1";
+            };
+            buildPhase = "";
+            installPhase = ''
+              mkdir -p $out/share/emacs/site-lisp
+              cp mu4e-marker-icons-20210124.514.el $out/share/emacs/site-lisp/mu4e-marker-icons.el
+            '';
+          };
+          # org = super.org.override {
+          # elpaBuild = args: super.elpaBuild
+          # (args // {
+          # version = "9.4.2";
+          # src = pkgs.fetchurl {
+          # url = "https://elpa.gnu.org/packages/org-9.4.2.tar.lz";
+          # sha256 = "17rn6y1rxhlisxsr9c4z4x60wm21pyv47i5xhyrasanc28w991nc";
+          # };
+          # nativeBuildInputs = [ pkgs.lzip ];
+          # });
+          # };
+        };
       };
 
       # firefox = {

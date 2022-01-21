@@ -89,8 +89,8 @@
 ;; mu4e
 (require 'mu4e)
 (setq mu4e-mu-binary "~/.nix-profile/bin/mu")
-(use-package mu4e-marker-icons
-  :init (mu4e-marker-icons-mode 1))
+(require 'mu4e-marker-icons)
+(mu4e-marker-icons-mode 1)
 
 (setq mail-user-agent 'mu4e-user-agent)
 
@@ -98,6 +98,7 @@
 (setq mu4e-sent-folder "/gmail/sent")
 (setq mu4e-trash-folder "/gmail/trash")
 
+(add-hook 'mu4e-compose-mode-hook #'(lambda () (auto-save-mode -1)))
 (setq mu4e-sent-messages-behavior 'delete)
 (setq mu4e-get-mail-command "mbsync -a")
 
