@@ -141,11 +141,12 @@ in
       briss
       # clementineUnfree
       # discord
-      dmenu
+      # dmenu
       latest.firefox-nightly-bin
       google-chrome
       # mathematica
       pinentry_qt5 # support for gpg passphrase entry
+      rofi
       skype
       spotify
       zoom-us

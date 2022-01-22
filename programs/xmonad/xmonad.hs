@@ -60,9 +60,9 @@ mystartup = do
   spawn $ "gpg2 -q --for-your-eyes-only --no-tty -d ~/.gmailpass.gpg"
     ++ " && gpg2 -q --for-your-eyes-only --no-tty -d ~/.gupass.gpg"
 mykeys c = mkKeymap c $
-  [ ("M-S-d", spawn $ "dmenu_run -b -fn 'Courier-12' -nb '#282828'"
-              ++ " -nf '#ebdbb2' -sb '#98971a' -sf '#1d2021'")
-  , ("M-S-e", spawn "emacsclient -c --eval \'(dired \"~/Documents\")\'")
+  [ -- ("M-S-d", spawn $ "dmenu_run -b -fn 'Courier-12' -nb '#282828'"
+    -- ++ " -nf '#ebdbb2' -sb '#98971a' -sf '#1d2021'")
+    ("M-S-e", spawn "emacsclient -c --eval \'(dired \"~/Documents\")\'")
   , ("M-S-f", spawn "firefox")
   , ("M-S-g", spawn "google-chrome-stable")
   , ("M-S-l", spawn $ "i3lock-fancy-rapid 40 10 -n"
@@ -77,6 +77,7 @@ mykeys c = mkKeymap c $
                    ++ " --ringwrong-color=fb493480")
   , ("M-S-i", spawn "escrotum -s")
   , ("M-S-u", spawn "escrotum")
+  , ("M-S-r", spawn "rofi -theme gruvbox-dark -show run")
   , ("M-S-s", spawn "spotify")
   , ("M-S-z", spawn "zoom-us") ]
 
