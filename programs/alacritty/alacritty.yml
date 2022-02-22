@@ -5,6 +5,8 @@ window:
     x: 10
     y: 10
   decorations: none
+  opacity: 0.85
+
 
 font:
   normal:
@@ -90,7 +92,5 @@ colors:
   #
   indexed_colors: []
 
-# Opacity
-background_opacity: 0.85
 
 # ...

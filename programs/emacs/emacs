@@ -198,6 +198,9 @@ flycheck-executable-find
   (add-hook 'haskell-mode-hook 'dante-mode))
 (setq dante-debug '(inputs outputs responses))
 (setq dante-repl-command-line '("nix-shell" "--run" "cabal repl"))
+(use-package attrap
+  :ensure t
+  :bind (("C-x /" . attrap-attrap))) ;; use any binding of your choice
 
 ;; ocaml
 (require 'ocp-indent)
@@ -532,3 +535,13 @@ flycheck-executable-find
  '(org-level-7 ((t (:inherit default :weight bold))))
  '(org-level-8 ((t (:inherit default :weight bold))))
  '(proof-locked-face ((t (:extend t :background "#076678")))))
+
+;; babel
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((emacs-lisp . t)
+   (latex . t)
+   (shell . t)
+   (haskell . t)
+   (python . t)
+   (maxima . t)))

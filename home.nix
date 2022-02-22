@@ -86,6 +86,7 @@ in
       escrotum
       feh
       gcc
+      gnumake
       gnupg
       htop
       i3lock-fancy-rapid
@@ -112,11 +113,11 @@ in
 
       # languages
       agda-stuff # agda + packages
-      cabal-install # haskell
+      # cabal-install # haskell
       coq
       # dune_2 # ocaml
       eff
-      ghc # haskell
+      # ghc # haskell
       idris
       idris2
       ocaml
@@ -128,7 +129,7 @@ in
       python-stuff # python + packages
       racket
       R-stuff # R + packages
-      stack # haskell
+      # stack # haskell
       swiProlog # prolog
 
       # latex
@@ -171,32 +172,32 @@ in
         enable = true;
         package = pkgs.emacs;
         extraPackages = import ./emacs.nix { inherit pkgs; };
-        overrides = self: super: {
-          mu4e-marker-icons = self.trivialBuild {
-            pname = "mu4e-marker-icons";
-            version = "20210124.514";
-            src = pkgs.fetchurl {
-              url = https://melpa.org/packages/mu4e-marker-icons-20210124.514.el;
-              sha256 = "1rscac46rxhn7ci8nzpbqlif0s5hqnsgnzgwjfkhqf5b5q0lp4w1";
-            };
-            buildPhase = "";
-            installPhase = ''
-              mkdir -p $out/share/emacs/site-lisp
-              cp mu4e-marker-icons-20210124.514.el $out/share/emacs/site-lisp/mu4e-marker-icons.el
-            '';
-          };
-          # org = super.org.override {
-          # elpaBuild = args: super.elpaBuild
-          # (args // {
-          # version = "9.4.2";
-          # src = pkgs.fetchurl {
-          # url = "https://elpa.gnu.org/packages/org-9.4.2.tar.lz";
-          # sha256 = "17rn6y1rxhlisxsr9c4z4x60wm21pyv47i5xhyrasanc28w991nc";
-          # };
-          # nativeBuildInputs = [ pkgs.lzip ];
-          # });
-          # };
-        };
+        # overrides = self: super: {
+        # mu4e-marker-icons = self.trivialBuild {
+        # pname = "mu4e-marker-icons";
+        # version = "20210124.514";
+        # src = pkgs.fetchurl {
+        # url = https://melpa.org/packages/mu4e-marker-icons-20210124.514.el;
+        # sha256 = "1rscac46rxhn7ci8nzpbqlif0s5hqnsgnzgwjfkhqf5b5q0lp4w1";
+        # };
+        # buildPhase = "";
+        # installPhase = ''
+        # mkdir -p $out/share/emacs/site-lisp
+        # cp mu4e-marker-icons-20210124.514.el $out/share/emacs/site-lisp/mu4e-marker-icons.el
+        # '';
+        # };
+        # org = super.org.override {
+        # elpaBuild = args: super.elpaBuild
+        # (args // {
+        # version = "9.4.2";
+        # src = pkgs.fetchurl {
+        # url = "https://elpa.gnu.org/packages/org-9.4.2.tar.lz";
+        # sha256 = "17rn6y1rxhlisxsr9c4z4x60wm21pyv47i5xhyrasanc28w991nc";
+        # };
+        # nativeBuildInputs = [ pkgs.lzip ];
+        # });
+        # };
+        # };
       };
 
       # firefox = {

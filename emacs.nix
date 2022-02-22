@@ -8,6 +8,7 @@
       airline-themes
       all-the-icons
       all-the-icons-dired
+      attrap # haskell
       auctex # latex
       auto-package-update
       calfw
@@ -15,7 +16,7 @@
       calfw-ical
       calfw-org
       caml # ocaml
-      # citeproc # used with org-ref
+      citeproc # used with org-ref
       coq-commenter # coq
       dante # haskell
       dired-hide-dotfiles
@@ -46,8 +47,6 @@
       org-agenda-property
       org-bullets
       org-gcal
-      org-noter
-      # org-plus-contrib
       org-ref
       # org-ref-prettify
       pdf-tools

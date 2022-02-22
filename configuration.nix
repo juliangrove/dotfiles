@@ -159,17 +159,17 @@
       xautolock = {
         enable = true;
         locker = ''${pkgs.writeShellScript "lock-screen-i3lock-fancy-rapid" ''
-            ~/.nix-profile/bin/i3lock-fancy-rapid 40 10 -n \
-            --inside-color=1d202180 \
-            --ring-color=b8bb2680 \
-            --keyhl-color=fabd2f80 \
-            --bshl-color=cc241dff \
-            --line-color=282828ff \
-            --insidever-color=83a5984d \
-            --ringver-color=45858880 \
-            --insidewrong-color=cc241d80 \
-            --ringwrong-color=fb493480
-          ''}'';
+          ~/.nix-profile/bin/i3lock-fancy-rapid 40 10 -n \
+          --inside-color=1d202180 \
+          --ring-color=b8bb2680 \
+          --keyhl-color=fabd2f80 \
+          --bshl-color=cc241dff \
+          --line-color=282828ff \
+          --insidever-color=83a5984d \
+          --ringver-color=45858880 \
+          --insidewrong-color=cc241d80 \
+          --ringwrong-color=fb493480
+        ''}'';
         time = 3;
         extraOptions = [ "-corners" "00-0" ];
       };
@@ -243,4 +243,5 @@
   # servers. You should change this only after NixOS release notes say you
   # should.
   system.stateVersion = " 21.11 "; # Did you read the comment?
+
 }
