@@ -1,6 +1,7 @@
 -- | my xmonad.hs
 
 import XMonad
+import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.DynamicLog
 import XMonad.Layout.Spacing
 import qualified Data.Map as M
@@ -14,7 +15,8 @@ main = do -- dbus <- D.connectSession
           -- -\- Request access to the DBus name
           -- D.requestName dbus (D.busName_ "org.xmonad.Log")
           --   [D.nameAllowReplacement, D.nameReplaceExisting, D.nameDoNotQueue]-- 
-          xmonad =<< statusBar mybar mypp togglestrutskey myconfig
+          x <- statusBar mybar mypp togglestrutskey myconfig
+          xmonad (ewmh x)
 
 -- Command to launch the bar.
 mybar = "xmobar"
@@ -57,8 +59,10 @@ mylayout = tiled ||| Mirror tiled ||| Full
     -- Percent of screen to increment by when resizing panes
     delta   = 3/100
 mystartup = do
-  spawn $ "gpg2 -q --for-your-eyes-only --no-tty -d ~/.gmailpass.gpg"
-    ++ " && gpg2 -q --for-your-eyes-only --no-tty -d ~/.gupass.gpg"
+  spawn $ "gpg2 -q --for-your-eyes-only --no-tty -d ~/.gmailpass.gpg" ++
+    " && gpg2 -q --for-your-eyes-only --no-tty -d ~/.gupass.gpg" ++
+    " && arbtt-capture"
+    
 mykeys c = mkKeymap c $
   [ -- ("M-S-d", spawn $ "dmenu_run -b -fn 'Courier-12' -nb '#282828'"
     -- ++ " -nf '#ebdbb2' -sb '#98971a' -sf '#1d2021'")

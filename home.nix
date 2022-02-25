@@ -14,6 +14,9 @@ in
     ".agda/defaults" = {
       source = programs/agda/defaults;
     };
+    ".arbtt/categorize.cfg" = {
+      source = programs/arbtt/categorize.cfg;
+    };
     ".config/alacritty/alacritty.yml" = {
       source = programs/alacritty/alacritty.yml;
     };
@@ -74,6 +77,7 @@ in
     in
     with pkgs; [
       # cli tools
+      haskellPackages.arbtt
       aspell
       aspellDicts.en
       aspellDicts.en-computers
