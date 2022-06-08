@@ -13,6 +13,7 @@
                (cons "melpa" (concat proto "://melpa.org/packages/")) t))
 (package-initialize)
 
+;; misc.
 (require 'xclip)
 (xclip-mode 1)
 
@@ -25,6 +26,32 @@
 (add-hook 'after-make-frame-functions 'my/disable-scroll-bars)
 
 (cua-mode 1)
+
+;; dired
+(require 'all-the-icons)
+(use-package dired-sidebar
+  :bind (("M-d" . dired-sidebar-toggle-with-current-directory)))
+
+(use-package dired-subtree
+  :config
+  (bind-keys :map dired-mode-map
+	     ("SPC" . dired-icons-subtree-toggle)))
+
+(defun dired-icons-subtree-toggle ()
+  (interactive)
+  (dired-subtree-toggle)
+  (revert-buffer))
+
+(add-hook 'dired-mode-hook
+	  (lambda ()
+            (dired-hide-details-mode)
+            (dired-hide-dotfiles-mode)))
+(add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
+
+(define-key dired-mode-map "." #'dired-hide-dotfiles-mode)
+
+;; backup files
+(setq backup-directory-alist `(("." . ,(expand-file-name "tmp/backups/" user-emacs-directory))))
 
 ;; abbreviations
 (use-package agda-input
@@ -190,17 +217,43 @@ flycheck-executable-find
  '(haskell-process-auto-import-loaded-modules t)
  '(haskell-process-log t))
 (add-hook 'haskell-mode-hook 'interactive-haskell-mode)
+
+(defun insert-pragma ()
+  (interactive)
+  (insert "{-# LANGUAGE  #-}\n")
+  (backward-char 5))
+(defun add-haskell-pragma-binding ()
+   (local-set-key (kbd "C-x p") #'insert-pragma))
+(add-hook 'haskell-mode-hook #'add-haskell-pragma-binding)
+
+(defun insert-brackets ()
+  (interactive)
+  (insert "{-#  #-}")
+  (backward-char 4))
+(defun add-haskell-brackets-binding ()
+   (local-set-key (kbd "C-x r") #'insert-brackets))
+(add-hook 'haskell-mode-hook #'add-haskell-brackets-binding)
+
+(defun insert-repl ()
+  (interactive)
+  (insert "-- >>> \n")
+  (backward-char 1))
+(defun add-haskell-repl-binding ()
+   (local-set-key (kbd "C-x i") #'insert-repl))
+
 (use-package dante
   :after haskell-mode
   :commands 'dante-mode
   :init
-  (add-hook 'haskell-mode-hook 'flymake-mode)
-  (add-hook 'haskell-mode-hook 'dante-mode))
+  (add-hook 'haskell-mode-hook 'flycheck-mode)
+  (add-hook 'haskell-mode-hook 'dante-mode)
+  (add-hook 'haskell-mode-hook #'add-haskell-repl-binding))
 (setq dante-debug '(inputs outputs responses))
 (setq dante-repl-command-line '("nix-shell" "--run" "cabal repl"))
 (use-package attrap
   :ensure t
   :bind (("C-x /" . attrap-attrap))) ;; use any binding of your choice
+
 
 ;; ocaml
 (require 'ocp-indent)
@@ -252,8 +305,10 @@ flycheck-executable-find
 (global-set-key (kbd "C-c c") 'org-capture)
 
 ;; headers
-(require 'org-bullets)
-(add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
+(require 'org-superstar)
+(add-hook 'org-mode-hook (lambda () (org-superstar-mode 1)))
+(setq org-superstar-leading-bullet ?\s)
+(setq org-superstar-headline-bullets-list '("◉" "○" "●" "○" "●" "○" "●" "○"))
 
 (let* ((headline `(:inherit default :weight bold)))
   (custom-theme-set-faces 'user
@@ -271,9 +326,9 @@ flycheck-executable-find
 (setq org-hide-emphasis-markers t)
 
 ;; bullets
-(font-lock-add-keywords 'org-mode
-			'(("^ +\\([-*]\\) "
-			   (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
+;; (font-lock-add-keywords 'org-mode
+			;; '(("^ +\\([-*]\\) "
+			   ;; (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
 
 ;; org latex
 (require 'org-inlinetask)
@@ -427,29 +482,6 @@ flycheck-executable-find
 (set-frame-font "DejaVu Sans Mono-12")
 (setq default-frame-alist '((font . "DejaVu Sans Mono-12")))
 
-;; dired
-(require 'all-the-icons)
-(use-package dired-sidebar
-  :bind (("M-d" . dired-sidebar-toggle-sidebar)))
-
-(define-key dired-mode-map "." #'dired-hide-dotfiles-mode)
-
-(use-package dired-subtree
-  :config
-  (bind-keys :map dired-mode-map
-	     ("SPC" . dired-icons-subtree-toggle)))
-
-(defun dired-icons-subtree-toggle ()
-  (interactive)
-  (dired-subtree-toggle)
-  (revert-buffer))
-
-(add-hook 'dired-mode-hook
-	  (lambda ()
-            (dired-hide-details-mode)
-            (dired-hide-dotfiles-mode)))
-(add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
-
 ;; nixos
 (require 'nix-mode)
 (add-to-list 'auto-mode-alist '("\\.nix\\'" . nix-mode))
@@ -460,8 +492,8 @@ flycheck-executable-find
 (require 'direnv)
 
 ;; pdf viewer
-(pdf-loader-install)
-(add-hook 'TeX-after-compilation-finished-functions #'TeX-revert-document-buffer)
+;; (pdf-loader-install)
+;; (add-hook 'TeX-after-compilation-finished-functions #'TeX-revert-document-buffer)
 
 ;; markdown
 (use-package markdown-mode
@@ -522,7 +554,9 @@ flycheck-executable-find
  '(agda2-highlight-inductive-constructor-face ((t (:foreground "#98971a"))))
  '(agda2-highlight-keyword-face ((t (:foreground "#d79921"))))
  '(agda2-highlight-module-face ((t (:foreground "#b16286"))))
+ '(agda2-highlight-postulate-face ((t (:foreground "#076678"))))
  '(agda2-highlight-primitive-face ((t (:foreground "#83a598"))))
+ '(agda2-highlight-record-face ((t (:foreground "#076678"))))
  '(agda2-highlight-symbol-face ((t (:foreground "#a89984"))))
  '(font-lock-comment-face ((t (:foreground "#928374"))))
  '(org-document-title ((t (:inherit default :weight bold :underline nil))))
@@ -545,3 +579,26 @@ flycheck-executable-find
    (haskell . t)
    (python . t)
    (maxima . t)))
+
+;; (set-face-attribute 'org-meta-line nil :height 0.9 :slant 'normal)
+(set-face-attribute 'org-block-begin-line nil :foreground "#665c54" :height 0.9 :slant 'normal)
+(set-face-attribute 'org-block-end-line nil :foreground "#665c54" :height 0.9 :slant 'normal)
+
+;; dumb-jump
+(use-package dumb-jump
+  :ensure t
+  :bind (("M-g o" . dumb-jump-go-other-window)
+         ("M-g j" . dumb-jump-go)
+         ("M-g b" . dumb-jump-back)
+         ("M-g q" . dumb-jump-quick-look)
+         ("M-g x" . dumb-jump-go-prefer-external)
+         ("M-g z" . dumb-jump-go-prefer-external-other-window)))
+
+;; gnuplot-mode
+(require 'gnuplot-mode)
+(setq gnuplot-program "~/.nix-profile/bin/gnuplot")
+(setq auto-mode-alist 
+(append '(("\\.\\(gp\\|gnuplot\\)$" . gnuplot-mode)) auto-mode-alist))
+
+;; ledger-mode
+(require 'ledger-mode)

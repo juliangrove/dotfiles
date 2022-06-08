@@ -7,6 +7,7 @@ let
   mozilla-overlay = fetchTarball {
     url = https://github.com/mozilla/nixpkgs-mozilla/archive/master.tar.gz;
   };
+  nixos = import <nixos> { };
 in
 {
   # dotfiles
@@ -57,7 +58,6 @@ in
         agdaPackages.cubical
       ]));
       i3lock-fancy-rapid = pkgs.callPackage ./programs/i3lock-fancy-rapid { };
-      nixos = import <nixos> { };
       python-packages = py-pkgs: with py-pkgs; [
         matplotlib
         numpy
@@ -92,14 +92,16 @@ in
       gcc
       gnumake
       gnupg
+      gnuplot
       htop
       i3lock-fancy-rapid
       isync
       killall
+      ledger
       lm_sensors
       lshw
       mu
-      neofetch
+      nixos.neofetch
       nixpkgs-fmt
       nix-prefetch-git
       openconnect
@@ -148,11 +150,13 @@ in
       # discord
       # dmenu
       latest.firefox-nightly-bin
+      # firefox
+      gimp
       google-chrome
       # mathematica
       pinentry_qt5 # support for gpg passphrase entry
       rofi
-      skype
+      # skypeforlinux
       spotify
       zoom-us
       zotero
@@ -160,15 +164,19 @@ in
 
   programs =
     {
-      alacritty.enable = true; # terminal emulator
+      alacritty = {
+        # terminal emultaor
+        enable = true;
+        # package = nixos.alacritty;
+      };
 
       bash = {
         enable = true;
         historyControl = [ "ignoredups" ];
-        historyIgnore = [ "ls*" "cd*" "exit" "pwd" ];
+        historyIgnore = [ "ls*" "exit" "pwd" "reboot" "shutdown" ];
         bashrcExtra = ''
           PS1=$'\[\033[32m\e[2m\]\u03bb\[\033[00m\] '
-          neofetch --ascii_distro nixos_old
+          neofetch --ascii_distro NixOS_old
         '';
       };
 

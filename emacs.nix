@@ -23,6 +23,7 @@
       dired-sidebar
       dired-subtree
       direnv
+      dumb-jump
       elpy # python
       emojify
       ess # R
@@ -30,9 +31,12 @@
       evil-collection
       fill-column-indicator
       flycheck
+      # gnuplot
+      gnuplot-mode
       gruvbox-theme
       haskell-mode # haskell
       idris-mode # idris
+      ledger-mode
       magit
       markdown-mode # markdown
       merlin # ocaml
@@ -45,14 +49,15 @@
       openwith
       org
       org-agenda-property
-      org-bullets
       org-gcal
       org-ref
       # org-ref-prettify
-      pdf-tools
+      org-superstar
+      # pdf-tools
       proof-general # coq
       racket-mode
       # semantic-theming
+      swiper
       tabbar
       tuareg # ocaml
       use-package
