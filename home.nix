@@ -158,8 +158,10 @@ in
       rofi
       # skypeforlinux
       spotify
+      xournal
       zoom-us
       zotero
+      # zulip
     ];
 
   programs =

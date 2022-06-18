@@ -193,19 +193,20 @@
   hardware = {
     bluetooth = {
       enable = true;
-      powerOnBoot = false;
       package = pkgs.bluezFull;
+      powerOnBoot = false;
+      settings.General.ControllerMode = "bredr";
     };
 
     pulseaudio = {
       enable = true;
-      package = pkgs.pulseaudioFull;
-      support32Bit = true;
-      systemWide = false;
       extraConfig = ''
         load-module module-alsa-sink   device=hw:0,0 channels=4
         load-module module-alsa-source device=hw:0,6 channels=4
       '';
+      package = pkgs.pulseaudioFull;
+      support32Bit = true;
+      systemWide = false;
     };
   };
 
@@ -219,9 +220,9 @@
       kochi-substitute
       lohit-fonts.kannada
       powerline-fonts
+      source-han-sans-korean
       source-han-sans-simplified-chinese
       source-han-sans-traditional-chinese
-      source-han-sans-korean
     ];
   };
 
