@@ -213,6 +213,8 @@
   # fonts
   fonts = {
     fonts = with pkgs; [
+      aegyptus
+      akkadian
       corefonts
       emacs-all-the-icons-fonts
       font-awesome

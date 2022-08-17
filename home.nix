@@ -100,7 +100,7 @@ in
       ledger
       lm_sensors
       lshw
-      mu
+      nixos.mu
       nixos.neofetch
       nixpkgs-fmt
       nix-prefetch-git
@@ -185,7 +185,7 @@ in
       emacs = {
         enable = true;
         package = pkgs.emacs;
-        extraPackages = import ./emacs.nix { inherit pkgs; };
+        extraPackages = import ./emacs.nix { inherit nixos pkgs; };
         # overrides = self: super: {
         # mu4e-marker-icons = self.trivialBuild {
         # pname = "mu4e-marker-icons";

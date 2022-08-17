@@ -202,10 +202,10 @@
 (use-package flycheck
   :init (global-flycheck-mode))
 
-(setq flycheck-command-wrapper-function
-(lambda (command) (apply 'nix-shell-command (nix-current-sandbox) command))
-flycheck-executable-find
-(lambda (cmd) (nix-executable-find (nix-current-sandbox) cmd)))
+;; (setq flycheck-command-wrapper-function
+;; (lambda (command) (apply 'nix-shell-command (nix-current-sandbox) command))
+;; flycheck-executable-find
+;; (lambda (cmd) (nix-executable-find (nix-current-sandbox) cmd)))
 
 ;; haskell
 (require 'haskell-mode)
@@ -334,106 +334,7 @@ flycheck-executable-find
 (require 'org-inlinetask)
 (require 'ox-latex)
 (require 'ox-beamer)
-(add-to-list 'org-latex-classes
-	     '("slides"
-               "\\documentclass[presentation]{beamer}
-\\usepackage[T1]{fontenc}
-\\setbeamerfont{frametitle}{size=\\large}
-\\setbeamertemplate{footline}{
-\\begin{flushright}
-\\insertframenumber/\\inserttotalframenumber\\hspace{2mm}\\mbox{}
-\\end{flushright}}
-\\usepackage{libertine}
-\\usepackage[varqu]{zi4}
-\\usepackage[libertine]{newtxmath}
-%%\\usepackage[small]{eulervm}
-%%\\usepackage[{libertinust1math}
-\\usepackage[T1]{fontenc}
-\\renewcommand*\\familydefault{\\sfdefault}
-\\usepackage{tipa}
-\\usepackage{adjustbox}
-\\usepackage{multirow}
-\\usepackage{multicol}
-\\usepackage{tikz}
-\\usetikzlibrary{positioning}
-\\usepackage{tikz-qtree}
-\\usepackage{expex}
-\\usepackage{natbib}
-\\usepackage{stmaryrd}
-\\usepackage{stackrel}
-\\usepackage{stackengine}
-\\usepackage{relsize}
-\\usepackage{amsmath}
-\\usepackage{mathtools}
-\\usepackage{fixltx2e}
-\\usepackage{graphicx}
-\\usepackage{xcolor}
-\\usepackage[normalem]{ulem}
-\\bibliographystyle{li}
-[NO-DEFAULT-PACKAGES]
-[PACKAGES]
-[EXTRA]"
-               ("\\section{%s}" . "\\section*{%s}")
-               ("\\subsection{%s}" . "\\subsection*{%s}")
-               ("\\subsubsection{%s}" . "\\subsubsection*{%s}")))
-(add-to-list 'org-latex-classes
-	     '("review"
-	       "\\documentclass[12pt,twoside]{article}
-\\usepackage[margin=1.2in]{geometry}
-\\usepackage{etoolbox}
-\\ifundef{\\abstract}{}{\\patchcmd{\\abstract}%
-  {\\quotation}{\\quotation\\noindent\\ignorespaces\\textbf{Abstract}\\hspace{1mm}}{}{}}
-\\renewcommand{\\abstractname}{\\vspace{-1.4\\baselineskip}}
-\\usepackage{lscape}
-\\usepackage{titling}
-\\usepackage{graphicx}
-\\usepackage{amssymb}
-\\usepackage{mathtools}
-\\usepackage{amsthm}
-\\theoremstyle{definition}
-\\newtheorem{thm}{Theorem}
-\\usepackage[inline]{enumitem}
-\\usepackage{xcolor}
-\\pagestyle{plain}
-\\usepackage{libertine}
-\\usepackage[varqu]{zi4}
-\\usepackage[libertine]{newtxmath}
-%%\\usepackage[small]{eulervm}
-%%\\usepackage[{libertinust1math}
-\\usepackage[T1]{fontenc}
-%%\\usepackage[notextcomp,nosf]{kpfonts}
-\\usepackage{tipa}
-\\usepackage{tikz}
-\\usetikzlibrary{fit}
-\\usetikzlibrary{positioning}
-\\usepackage{natbib}
-\\usepackage{stmaryrd}
-\\usepackage{sectsty}
-\\usepackage{expex}
-\\usepackage{stackrel}
-\\usepackage{stackengine}
-\\usepackage{relsize}
-\\usepackage{fixltx2e}
-\\raggedbottom
-\\allsectionsfont{\\normalsize}
-\\usepackage[colorlinks=true,urlcolor=blue!60!black!80,citecolor=blue!60!black!80,linkcolor=black,bookmarks,bookmarksopen,bookmarksdepth=2]{hyperref}
-\\renewcommand\\UrlFont{\\normalsize}
-\\usepackage[normalem]{ulem}
-\\usepackage{appendix}
-\\bibliographystyle{li}
-[NO-DEFAULT-PACKAGES]
-[PACKAGES]
-[EXTRA]"
-	       ("\\section{%s}" . "\\section*{%s}")
-	       ("\\subsection{%s}" . "\\subsection*{%s}")
-	       ("\\subsubsection{%s}" . "\\subsubsection*{%s}")))
-(setq org-latex-pdf-process
-      '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
-	"bibtex %b"
-	"pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
-	"pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
 (setq org-latex-listings 'minted)
-
 (require 'org-ref)
 
 ;; (with-eval-after-load 'org

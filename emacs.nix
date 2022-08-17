@@ -1,4 +1,4 @@
-{ pkgs }:
+{ nixos, pkgs }:
 (
   epkgs: (
     with epkgs; [
@@ -33,6 +33,7 @@
       flycheck
       # gnuplot
       gnuplot-mode
+      # nixos.emacsPackages.gruvbox-theme
       gruvbox-theme
       haskell-mode # haskell
       idris-mode # idris
