@@ -63,7 +63,7 @@ in
         numpy
         pandas
         pygments
-        scikitlearn
+        scikit-learn
         # tensorflowWithoutCuda
       ];
       python-stuff = pkgs.python38.withPackages python-packages;
@@ -132,7 +132,7 @@ in
       ocamlPackages.ocp-indent
       ocamlPackages.merlin
       ocamlPackages.utop
-      python-stuff # python + packages
+      # python-stuff # python + packages
       racket
       R-stuff # R + packages
       # stack # haskell
@@ -154,9 +154,10 @@ in
       gimp
       google-chrome
       # mathematica
-      pinentry_qt5 # support for gpg passphrase entry
+      pinentry-qt # support for gpg passphrase entry
       rofi
       # skypeforlinux
+      signal-desktop
       spotify
       xournal
       zoom-us

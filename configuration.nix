@@ -14,7 +14,17 @@
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
     };
-    kernelPackages = pkgs.linuxPackages_latest;
+    kernelPackages = pkgs.linuxPackagesFor (pkgs.linux_6_0.override {
+      argsOverride = rec {
+        src = pkgs.fetchurl {
+          url = "mirror://kernel/linux/kernel/v6.x/linux-${version}.tar.xz";
+          sha256 = "17awx4c5fz7f656ig5bydccci052jsai0lczrn2bdk5cihw2cg51";
+        };
+        version = "6.0.2";
+        modDirVersion = "6.0.2";
+      };
+    });
+    # kernelPackages = pkgs.linuxPackages_latest;
   };
 
   networking = {
@@ -57,8 +67,8 @@
   # };
 
   # Set your time zone.
-  # time.timeZone = "America/New_York";
-  time.timeZone = "Europe/Stockholm";
+  time.timeZone = "America/New_York";
+  # time.timeZone = "Europe/Stockholm";
   # time.timeZone = "Europe/London";
 
   # for things like spotify

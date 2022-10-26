@@ -95,3 +95,44 @@ Group gu
 Channel gu-inbox
 Channel gu-sent
 Channel gu-trash
+
+# IMAPAccount ur
+# Host outlook.office365.com
+# User jgrove2@ur.rochester.edu
+# PassCmd "~/.nix-profile/bin/gpg2 -q --for-your-eyes-only --no-tty -d ~/.urpass.gpg"
+# SSLType IMAPS
+# CertificateFile /etc/ssl/certs/ca-certificates.crt
+
+# IMAPStore ur-remote
+# Account ur
+
+# MaildirStore ur-local
+# Path ~/.mail/ur/
+# Inbox ~/.mail/ur/inbox
+
+# Channel ur-inbox
+# Far :ur-remote:
+# Near :ur-local:
+# Patterns "INBOX"
+# Create Near
+# Remove Near
+# SyncState *
+
+# Channel ur-sent
+# Far :ur-remote:"Sent Items"
+# Near :ur-local:sent
+# Create Near
+# Remove Near
+# SyncState *
+
+# Channel ur-trash
+# Far :ur-remote:"Deleted Items"
+# Near :ur-local:trash
+# Create Near
+# Remove Near
+# SyncState *
+
+# Group ur
+# Channel ur-inbox
+# Channel ur-sent
+# Channel ur-trash

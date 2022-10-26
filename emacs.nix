@@ -33,8 +33,8 @@
       flycheck
       # gnuplot
       gnuplot-mode
-      # nixos.emacsPackages.gruvbox-theme
-      gruvbox-theme
+      nixos.emacsPackages.gruvbox-theme
+      # gruvbox-theme
       haskell-mode # haskell
       idris-mode # idris
       ledger-mode

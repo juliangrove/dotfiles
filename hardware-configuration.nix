@@ -63,13 +63,10 @@
       lib.mkDefault config.hardware.enableRedistributableFirmware;
   };
 
-  services.throttled.enable = lib.mkDefault
-    true;
+  services.throttled.enable = lib.mkDefault true;
 
-  nix.maxJobs = lib.mkDefault
-    8;
-  powerManagement.cpuFreqGovernor = lib.mkDefault
-    "powersave";
+  nix.maxJobs = lib.mkDefault 8;
+  powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
   # High-DPI console
   console.font = lib.mkDefault
     "${pkgs.terminus_font}/share/consolefonts/ter-u28n.psf.gz";
