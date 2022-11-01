@@ -11,34 +11,48 @@ let
 in
 {
   # dotfiles
-  home.file = {
-    ".agda/defaults" = {
-      source = programs/agda/defaults;
+  home = {
+    file = {
+      ".agda/defaults" = {
+        source = programs/agda/defaults;
+      };
+      ".arbtt/categorize.cfg" = {
+        source = programs/arbtt/categorize.cfg;
+      };
+      ".config/alacritty/alacritty.yml" = {
+        source = programs/alacritty/alacritty.yml;
+      };
+      ".config/neofetch/config.conf" = {
+        source = programs/neofetch/config.conf;
+      };
+      ".emacs" = {
+        source = programs/emacs/emacs;
+      };
+      ".mbsyncrc" = {
+        source = programs/isync/mbsyncrc;
+      };
+      ".xbindkeysrc" = {
+        source = programs/xbindkeys/xbindkeysrc;
+      };
+      ".xmobar/volume.sh" = {
+        source = programs/xmobar/volume.sh;
+      };
+      ".xmobar/xmobarrc" = {
+        source = programs/xmobar/xmobarrc;
+      };
     };
-    ".arbtt/categorize.cfg" = {
-      source = programs/arbtt/categorize.cfg;
+
+    homeDirectory = "/home/juliangrove";
+
+    # cursors
+    pointerCursor = {
+      package = pkgs.vanilla-dmz;
+      name = "Vanilla-DMZ";
     };
-    ".config/alacritty/alacritty.yml" = {
-      source = programs/alacritty/alacritty.yml;
-    };
-    ".config/neofetch/config.conf" = {
-      source = programs/neofetch/config.conf;
-    };
-    ".emacs" = {
-      source = programs/emacs/emacs;
-    };
-    ".mbsyncrc" = {
-      source = programs/isync/mbsyncrc;
-    };
-    ".xbindkeysrc" = {
-      source = programs/xbindkeys/xbindkeysrc;
-    };
-    ".xmobar/volume.sh" = {
-      source = programs/xmobar/volume.sh;
-    };
-    ".xmobar/xmobarrc" = {
-      source = programs/xmobar/xmobarrc;
-    };
+
+    stateVersion = "22.05";
+
+    username = "juliangrove";
   };
 
   nixpkgs = {
@@ -231,11 +245,11 @@ in
       zathura.enable = true; # zathura
     };
 
-  # cursors
-  xsession.pointerCursor = {
-    package = pkgs.vanilla-dmz;
-    name = "Vanilla-DMZ";
-  };
+  # cursors - moved to home
+  # xsession.pointerCursor = {
+  # package = pkgs.vanilla-dmz;
+  # name = "Vanilla-DMZ";
+  # };
 
   # systemd user services
   services = {
