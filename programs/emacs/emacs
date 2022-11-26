@@ -87,9 +87,8 @@
 
 ;; evil
 ;; (setq evil-want-keybinding nil)
-(require 'evil)
 (evil-mode 1)
-;; (evil-collection-init)
+;; (evil-collection-init 'xref)
 
 (global-linum-mode t)
 (add-hook 'pdf-view-mode-hook (lambda() (linum-mode -1)))
@@ -485,15 +484,15 @@
 (set-face-attribute 'org-block-begin-line nil :foreground "#665c54" :height 0.9 :slant 'normal)
 (set-face-attribute 'org-block-end-line nil :foreground "#665c54" :height 0.9 :slant 'normal)
 
-;; dumb-jump
-(use-package dumb-jump
-  :ensure t
-  :bind (("M-g o" . dumb-jump-go-other-window)
-         ("M-g j" . dumb-jump-go)
-         ("M-g b" . dumb-jump-back)
-         ("M-g q" . dumb-jump-quick-look)
-         ("M-g x" . dumb-jump-go-prefer-external)
-         ("M-g z" . dumb-jump-go-prefer-external-other-window)))
+;; dumb-jump (deprecated; use xref instead)
+;; (use-package dumb-jump
+;;   :ensure t
+;;   :bind (("M-g o" . dumb-jump-go-other-window)
+;;          ("M-g j" . dumb-jump-go)
+;;          ("M-g b" . dumb-jump-back)
+;;          ("M-g q" . dumb-jump-quick-look)
+;;          ("M-g x" . dumb-jump-go-prefer-external)
+;;          ("M-g z" . dumb-jump-go-prefer-external-other-window)))
 
 ;; gnuplot-mode
 (require 'gnuplot-mode)

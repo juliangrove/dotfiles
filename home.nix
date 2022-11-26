@@ -83,6 +83,7 @@ in
       python-stuff = pkgs.python38.withPackages python-packages;
       R-stuff = pkgs.rWrapper.override {
         packages = with pkgs.rPackages; [
+          dplyr
           ggplot2
           lme4
         ];

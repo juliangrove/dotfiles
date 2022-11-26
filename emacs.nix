@@ -23,7 +23,7 @@
       dired-sidebar
       dired-subtree
       direnv
-      dumb-jump
+      # dumb-jump # deprecated by xref
       elpy # python
       emojify
       ess # R

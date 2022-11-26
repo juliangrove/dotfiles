@@ -55,46 +55,46 @@ Channel gmail-sent
 Channel gmail-trash
 Channel gmail-all
 
-IMAPAccount gu
-Host outlook.office365.com
-User julian.grove@gu.se
-PassCmd "~/.nix-profile/bin/gpg2 -q --for-your-eyes-only --no-tty -d ~/.gupass.gpg"
-SSLType IMAPS
-CertificateFile /etc/ssl/certs/ca-certificates.crt
+# IMAPAccount gu
+# Host outlook.office365.com
+# User julian.grove@gu.se
+# PassCmd "~/.nix-profile/bin/gpg2 -q --for-your-eyes-only --no-tty -d ~/.gupass.gpg"
+# SSLType IMAPS
+# CertificateFile /etc/ssl/certs/ca-certificates.crt
 
-IMAPStore gu-remote
-Account gu
+# IMAPStore gu-remote
+# Account gu
 
-MaildirStore gu-local
-Path ~/.mail/gu/
-Inbox ~/.mail/gu/inbox
+# MaildirStore gu-local
+# Path ~/.mail/gu/
+# Inbox ~/.mail/gu/inbox
 
-Channel gu-inbox
-Far :gu-remote:
-Near :gu-local:
-Patterns "INBOX"
-Create Near
-Remove Near
-SyncState *
+# Channel gu-inbox
+# Far :gu-remote:
+# Near :gu-local:
+# Patterns "INBOX"
+# Create Near
+# Remove Near
+# SyncState *
 
-Channel gu-sent
-Far :gu-remote:"Sent Items"
-Near :gu-local:sent
-Create Near
-Remove Near
-SyncState *
+# Channel gu-sent
+# Far :gu-remote:"Sent Items"
+# Near :gu-local:sent
+# Create Near
+# Remove Near
+# SyncState *
 
-Channel gu-trash
-Far :gu-remote:"Deleted Items"
-Near :gu-local:trash
-Create Near
-Remove Near
-SyncState *
+# Channel gu-trash
+# Far :gu-remote:"Deleted Items"
+# Near :gu-local:trash
+# Create Near
+# Remove Near
+# SyncState *
 
-Group gu
-Channel gu-inbox
-Channel gu-sent
-Channel gu-trash
+# Group gu
+# Channel gu-inbox
+# Channel gu-sent
+# Channel gu-trash
 
 # IMAPAccount ur
 # Host outlook.office365.com
