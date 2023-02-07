@@ -351,9 +351,9 @@
   (cdr (assoc key (json-read-file "~/.emacs.d/gcal-secret.json"))))
 
 ;; (require 'org-gcal)
-(setq org-gcal-client-id (get-gcal-config-value 'client_id)
-      org-gcal-client-secret (get-gcal-config-value 'client_secret)
-      org-gcal-file-alist '(("juliangrove@gmail.com" . "~/.emacs.d/gcal.org")))
+;; (setq org-gcal-client-id (get-gcal-config-value 'client_id)
+      ;; org-gcal-client-secret (get-gcal-config-value 'client_secret)
+      ;; org-gcal-file-alist '(("juliangrove@gmail.com" . "~/.emacs.d/gcal.org")))
 
 (defun my-org-gcal-fetch (&optional arg)
   (interactive "P")
@@ -363,12 +363,12 @@
 (add-hook 'org-agenda-mode-hook (lambda () (org-gcal-sync)))
 (add-hook 'org-capture-after-finalize-hook (lambda () (org-gcal-sync)))
 
-(setq org-capture-templates
-      '(("a" "Appointment" entry (file  "~/.emacs.d/gcal.org")
-	 "* %?\n\n%^T\n\n:PROPERTIES:\n\n:END:\n\n")))
+;; (setq org-capture-templates
+      ;; '(("a" "Appointment" entry (file  "~/.emacs.d/gcal.org")
+	 ;; "* %?\n\n%^T\n\n:PROPERTIES:\n\n:END:\n\n")))
 
 ;; org-agenda
-(setq org-agenda-files (list "~/.emacs.d/gcal.org"))
+;; (setq org-agenda-files (list "~/.emacs.d/gcal.org"))
 
 ;; calfw
 (require 'calfw)
@@ -379,8 +379,8 @@
   (interactive)
   (cfw:open-org-calendar))
 
-(set-frame-font "DejaVu Sans Mono-12")
-(setq default-frame-alist '((font . "DejaVu Sans Mono-12")))
+(set-frame-font "DejaVu Sans Mono-8.5")
+(setq default-frame-alist '((font . "DejaVu Sans Mono-8.5")))
 
 ;; nixos
 (require 'nix-mode)

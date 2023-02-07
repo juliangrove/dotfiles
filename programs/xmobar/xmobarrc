@@ -1,13 +1,13 @@
 Config {
 
    -- appearance
-     font =             "xft:SFNS Display:size=11,FontAwesome"
-   , additionalFonts = [ "xft:Calibri:size=11:antialiasing=true"
-                       , "xft:Courier:size=12:antialiasing=true" ]
+     font =             "xft:FontAwesome-27"
+   , additionalFonts = [ "xft:Calibri-27"
+                       , "xft:Courier-30" ]
    , bgColor =          "black"
    , alpha =            0
    , fgColor =          "white"
-   , position =         TopW C 97
+   , position =         Static { xpos = 57, ypos = 0, width = 3726, height = 45 }
    , border =           NoBorder
    , borderColor =      "#646464"
 

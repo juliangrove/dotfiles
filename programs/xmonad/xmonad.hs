@@ -59,7 +59,8 @@ mylayout = tiled ||| Mirror tiled ||| Full
     -- Percent of screen to increment by when resizing panes
     delta   = 3/100
 mystartup = do
-  spawn $ "gpg2 -q --for-your-eyes-only --no-tty -d ~/.gmailpass.gpg" ++
+  spawn $ "xsetroot -cursor_name X_cursor -rv" ++
+    " && gpg2 -q --for-your-eyes-only --no-tty -d ~/.gmailpass.gpg" ++
     " && arbtt-capture"
     
 mykeys c = mkKeymap c $
@@ -80,7 +81,7 @@ mykeys c = mkKeymap c $
                    ++ " --ringwrong-color=fb493480")
   , ("M-S-i", spawn "escrotum -s")
   , ("M-S-u", spawn "escrotum")
-  , ("M-S-r", spawn "rofi -theme gruvbox-dark -font 'Courier New 16' -show run")
+  , ("M-S-r", spawn "rofi -theme gruvbox-dark -font 'Courier New 30' -show run")
   , ("M-S-s", spawn "spotify")
   , ("M-S-z", spawn "zoom-us") ]
 

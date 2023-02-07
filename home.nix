@@ -172,7 +172,7 @@ in
       gimp
       google-chrome
       # mathematica
-      pinentry-qt # support for gpg passphrase entry
+      # pinentry-qt # support for gpg passphrase entry -- moved to configuration.nix
       rofi
       # skypeforlinux
       signal-desktop
