@@ -95,7 +95,7 @@
       unstable.home-manager # personal config
       nitrogen # wallpaper
       lxqt.pavucontrol-qt # pulseaudio control
-      pinentry-qt
+      pinentry-qt # gpg passphrase entry
       xbindkeys # keybindings
       haskellPackages.xmobar # status bar
     ];
