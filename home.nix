@@ -72,26 +72,23 @@ in
         agdaPackages.cubical
       ]));
       i3lock-fancy-rapid = pkgs.callPackage ./programs/i3lock-fancy-rapid { };
-      #   python-packages = py-pkgs: with py-pkgs; [
-      #     boto3
-      #     matplotlib
-      #     numpy
-      #     pandas
-      #     pygments
-      #     scikit-learn
-      #     # tensorflowWithoutCuda
-      #   ];
-      #   python-stuff = pkgs.python38.withPackages python-packages;
-      #   R-stuff = pkgs.rWrapper.override {
-      #     packages = with pkgs.rPackages; [
-      #       dplyr
-      #       EnvStats
-      #       ggplot2
-      #       lme4
-      #       Rfast
-      #     ];
-      #   };
-      #   tex = (pkgs.callPackage ./tex.nix { }).tex;
+      python-packages = py-pkgs: with py-pkgs; [
+        matplotlib
+        numpy
+        pandas
+        pygments
+        scikit-learn
+        # tensorflowWithoutCuda
+      ];
+      python-stuff = pkgs.python38.withPackages python-packages;
+      R-stuff = pkgs.rWrapper.override {
+        packages = with pkgs.rPackages; [
+          dplyr
+          ggplot2
+          lme4
+        ];
+      };
+      tex = (pkgs.callPackage ./tex.nix { }).tex;
     in
     with pkgs; [
       # cli tools
@@ -142,7 +139,7 @@ in
       # dune_2 # ocaml
       eff
       # ghc # haskell
-      # idris
+      idris
       idris2
       ocaml
       ocamlPackages.findlib
@@ -152,7 +149,7 @@ in
       ocamlPackages.utop
       # python-stuff # python + packages
       racket
-      # R-stuff # R + packages
+      R-stuff # R + packages
       # stack # haskell
       swiProlog # prolog
 

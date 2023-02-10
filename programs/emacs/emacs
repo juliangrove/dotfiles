@@ -172,8 +172,8 @@
 (setq latex-run-command "pdflatex")
 (setq TeX-command-extra-options "-shell-escape")
 (setq shift-select-mode t)
-(setq TeX-parse-self nil)			; Don't enable parse on load.
-(setq TeX-auto-save nil)			; Don't enable parse on save.
+(setq TeX-parse-self t)			; Enable parse on load.
+(setq TeX-auto-save t)			; Enable parse on save.
 (setq latex-run-command "pdflatex")
 (setq TeX-command-extra-options "-shell-escape")
 (setq TeX-view-program-selection '((output-pdf "PDF Viewer")))
