@@ -36,7 +36,7 @@
     # replicates the default behaviour.
     useDHCP = false;
     interfaces = {
-      # enp0s31f6.useDHCP = true;
+      enp0s31f6.useDHCP = true;
       wlp0s20f3.useDHCP = true;
     };
 
@@ -74,16 +74,8 @@
   # for things like spotify
   nixpkgs.config.allowUnfree = true;
 
-  programs = {
-    gnupg.agent = {
-      enable = true;
-      pinentryFlavor = "qt";
-      enableSSHSupport = true;
-    };
-
-    # backlight
-    light.enable = true;
-  };
+  # backlight
+  programs.light.enable = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -95,7 +87,6 @@
       unstable.home-manager # personal config
       nitrogen # wallpaper
       lxqt.pavucontrol-qt # pulseaudio control
-      pinentry-qt # gpg passphrase entry
       xbindkeys # keybindings
       haskellPackages.xmobar # status bar
     ];
@@ -123,8 +114,6 @@
       enableWifi = true;
     };
 
-    pcscd.enable = true;
-
     # Enable  CUPS to print documents.
     printing = {
       enable = true;
@@ -138,7 +127,7 @@
       # x11
       enable = true;
       xkbOptions = "eurosign:e";
-      dpi = 323;
+      dpi = 145;
 
       # touchpad support
       libinput = {
@@ -221,10 +210,10 @@
 
     pulseaudio = {
       enable = true;
-      # extraConfig = ''
-      # load-module module-alsa-sink   device=hw:0,0 channels=4
-      # load-module module-alsa-source device=hw:0,6 channels=4
-      # '';
+      extraConfig = ''
+        load-module module-alsa-sink   device=hw:0,0 channels=4
+        load-module module-alsa-source device=hw:0,6 channels=4
+      '';
       package = pkgs.pulseaudioFull;
       support32Bit = true;
       systemWide = false;
@@ -267,6 +256,6 @@
   # compatible, in order to avoid breaking some software such as database
   # servers. You should change this only after NixOS release notes say you
   # should.
-  system.stateVersion = " 22.11 "; # Did you read the comment?
+  system.stateVersion = " 22.05 "; # Did you read the comment?
 
 }

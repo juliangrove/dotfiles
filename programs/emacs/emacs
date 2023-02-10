@@ -172,8 +172,8 @@
 (setq latex-run-command "pdflatex")
 (setq TeX-command-extra-options "-shell-escape")
 (setq shift-select-mode t)
-(setq TeX-parse-self t)			; Enable parse on load.
-(setq TeX-auto-save t)			; Enable parse on save.
+(setq TeX-parse-self nil)			; Don't enable parse on load.
+(setq TeX-auto-save nil)			; Don't enable parse on save.
 (setq latex-run-command "pdflatex")
 (setq TeX-command-extra-options "-shell-escape")
 (setq TeX-view-program-selection '((output-pdf "PDF Viewer")))
@@ -296,52 +296,6 @@
 ;; R
 (require 'ess-r-mode)
 
-;; ;;; stan-mode.el
-;; (use-package stan-mode
-;;   :mode ("\\.stan\\'" . stan-mode)
-;;   :hook (stan-mode . stan-mode-setup)
-;;   ;;
-;;   :config
-;;   ;; The officially recommended offset is 2.
-;;   (setq stan-indentation-offset 2))
-
-;; ;;; company-stan.el
-;; (use-package company-stan
-;;   :hook (stan-mode . company-stan-setup)
-;;   ;;
-;;   :config
-;;   ;; Whether to use fuzzy matching in `company-stan'
-;;   (setq company-stan-fuzzy nil))
-
-;; ;;; eldoc-stan.el
-;; (use-package eldoc-stan
-;;   :hook (stan-mode . eldoc-stan-setup)
-;;   ;;
-;;   :config
-;;   ;; No configuration options as of now.
-;;   )
-
-;; ;;; flycheck-stan.el
-;; (use-package flycheck-stan
-;;   ;; Add a hook to setup `flycheck-stan' upon `stan-mode' entry
-;;   :hook ((stan-mode . flycheck-stan-stanc2-setup)
-;;          (stan-mode . flycheck-stan-stanc3-setup))
-;;   :config
-;;   ;; A string containing the name or the path of the stanc2 executable
-;;   ;; If nil, defaults to `stanc2'
-;;   (setq flycheck-stanc-executable nil)
-;;   ;; A string containing the name or the path of the stanc2 executable
-;;   ;; If nil, defaults to `stanc3'
-;;   (setq flycheck-stanc3-executable nil))
-
-;; ;;; stan-snippets.el
-;; (use-package stan-snippets
-;;   :hook (stan-mode . stan-snippets-initialize)
-;;   ;;
-;;   :config
-;;   ;; No configuration options as of now.
-;;   )
-
 ;; org
 (setq org-startup-truncated nil)
 
@@ -397,9 +351,9 @@
   (cdr (assoc key (json-read-file "~/.emacs.d/gcal-secret.json"))))
 
 ;; (require 'org-gcal)
-;; (setq org-gcal-client-id (get-gcal-config-value 'client_id)
-      ;; org-gcal-client-secret (get-gcal-config-value 'client_secret)
-      ;; org-gcal-file-alist '(("juliangrove@gmail.com" . "~/.emacs.d/gcal.org")))
+(setq org-gcal-client-id (get-gcal-config-value 'client_id)
+      org-gcal-client-secret (get-gcal-config-value 'client_secret)
+      org-gcal-file-alist '(("juliangrove@gmail.com" . "~/.emacs.d/gcal.org")))
 
 (defun my-org-gcal-fetch (&optional arg)
   (interactive "P")
@@ -409,12 +363,12 @@
 (add-hook 'org-agenda-mode-hook (lambda () (org-gcal-sync)))
 (add-hook 'org-capture-after-finalize-hook (lambda () (org-gcal-sync)))
 
-;; (setq org-capture-templates
-      ;; '(("a" "Appointment" entry (file  "~/.emacs.d/gcal.org")
-	 ;; "* %?\n\n%^T\n\n:PROPERTIES:\n\n:END:\n\n")))
+(setq org-capture-templates
+      '(("a" "Appointment" entry (file  "~/.emacs.d/gcal.org")
+	 "* %?\n\n%^T\n\n:PROPERTIES:\n\n:END:\n\n")))
 
 ;; org-agenda
-;; (setq org-agenda-files (list "~/.emacs.d/gcal.org"))
+(setq org-agenda-files (list "~/.emacs.d/gcal.org"))
 
 ;; calfw
 (require 'calfw)
@@ -425,8 +379,8 @@
   (interactive)
   (cfw:open-org-calendar))
 
-(set-frame-font "DejaVu Sans Mono-8.5")
-(setq default-frame-alist '((font . "DejaVu Sans Mono-8.5")))
+(set-frame-font "DejaVu Sans Mono-12")
+(setq default-frame-alist '((font . "DejaVu Sans Mono-12")))
 
 ;; nixos
 (require 'nix-mode)
@@ -530,7 +484,7 @@
 (set-face-attribute 'org-block-begin-line nil :foreground "#665c54" :height 0.9 :slant 'normal)
 (set-face-attribute 'org-block-end-line nil :foreground "#665c54" :height 0.9 :slant 'normal)
 
-;; dumb-jump ;; deprecated; use xref instead
+;; dumb-jump (deprecated; use xref instead)
 ;; (use-package dumb-jump
 ;;   :ensure t
 ;;   :bind (("M-g o" . dumb-jump-go-other-window)
