@@ -8,6 +8,7 @@ let
     url = https://github.com/mozilla/nixpkgs-mozilla/archive/master.tar.gz;
   };
   nixos = import <nixos> { };
+  old = import <old> { };
 in
 {
   # dotfiles
@@ -48,9 +49,10 @@ in
     pointerCursor = {
       package = pkgs.vanilla-dmz;
       name = "Vanilla-DMZ";
+      size = 50;
     };
 
-    stateVersion = "22.05";
+    stateVersion = "22.11";
 
     username = "juliangrove";
   };
@@ -118,15 +120,16 @@ in
       ledger
       lm_sensors
       lshw
-      nixos.mu
       nixos.neofetch
       nixpkgs-fmt
       nix-prefetch-git
       openconnect
+      p7zip
       pandoc
       pciutils
       pdftk
       prettyping
+      tmux
       unzip
       wget
       xorg.xdpyinfo
@@ -141,7 +144,7 @@ in
       coq
       # dune_2 # ocaml
       eff
-      # ghc # haskell
+      # nixos.ghc # haskell
       # idris
       idris2
       ocaml
@@ -153,7 +156,7 @@ in
       # python-stuff # python + packages
       racket
       # R-stuff # R + packages
-      # stack # haskell
+      stack # haskell
       swiProlog # prolog
 
       # latex
@@ -171,6 +174,7 @@ in
       # firefox
       gimp
       google-chrome
+      inkscape
       # mathematica
       # pinentry-qt # support for gpg passphrase entry -- moved to configuration.nix
       rofi
@@ -188,7 +192,7 @@ in
       alacritty = {
         # terminal emultaor
         enable = true;
-        # package = nixos.alacritty;
+        package = nixos.alacritty;
       };
 
       bash = {
@@ -244,7 +248,33 @@ in
         userName = "juliangrove";
       };
 
+      mu = {
+        enable = true;
+        package = pkgs.stdenv.mkDerivation {
+          pname = "mu";
+          version = "1.8.14";
+
+          src = pkgs.fetchzip {
+            url = https://github.com/djcb/mu/archive/refs/tags/v1.8.14.zip;
+            sha256 = "sha256-m6if0Br9WRPR8POwOM0Iwido3UR/V0BlkuaLcWsf/c0";
+          };
+
+          installPhase = ''
+            mkdir - p $out
+            mv mu $out
+          '';
+
+          meta.mainProgram = "mu";
+        };
+      };
+
       ssh.enable = true;
+
+      # vscode = {
+      # enable = true;
+      # extensions = with pkgs.vscode-extensions;
+      # [ jdinhlife.gruvbox justusadam.language-haskell ];
+      # };
 
       zathura.enable = true; # zathura
     };
