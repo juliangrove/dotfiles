@@ -92,7 +92,8 @@
       unstable = import <nixos-unstable> { };
     in
     with pkgs; [
-      unstable.home-manager # personal config
+      hack-font
+      home-manager # personal config
       nitrogen # wallpaper
       lxqt.pavucontrol-qt # pulseaudio control
       pinentry-qt # gpg passphrase entry
@@ -214,7 +215,7 @@
   hardware = {
     bluetooth = {
       enable = true;
-      package = pkgs.bluezFull;
+      package = pkgs.bluez;
       powerOnBoot = false;
       settings.General.ControllerMode = "bredr";
     };
@@ -233,15 +234,23 @@
 
   # fonts
   fonts = {
-    fonts = with pkgs; [
+    packages = with pkgs; [
       aegyptus
       akkadian
       corefonts
       emacs-all-the-icons-fonts
+      etBook
       font-awesome
+      iosevka
+      iosevka-comfy.comfy
       ipafont
+      jetbrains-mono
       kochi-substitute
+      liberation_ttf
+      libertinus
       lohit-fonts.kannada
+      mplus-outline-fonts.githubRelease
+      nerdfonts
       powerline-fonts
       source-han-sans-korean
       source-han-sans-simplified-chinese
@@ -267,6 +276,6 @@
   # compatible, in order to avoid breaking some software such as database
   # servers. You should change this only after NixOS release notes say you
   # should.
-  system.stateVersion = " 22.11 "; # Did you read the comment?
+  system.stateVersion = " 23.11 "; # Did you read the comment?
 
 }

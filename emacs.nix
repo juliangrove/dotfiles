@@ -17,7 +17,7 @@
       calfw-org
       caml # ocaml
       citeproc # used with org-ref
-      # company-stan
+      company-stan
       coq-commenter # coq
       dante # haskell
       dired-hide-dotfiles
@@ -25,7 +25,7 @@
       dired-subtree
       direnv
       # dumb-jump # deprecated by xref
-      # eldoc-stan
+      eldoc-stan
       elpy # python
       emojify
       ess # R
@@ -33,7 +33,7 @@
       evil-collection
       fill-column-indicator
       flycheck
-      # flycheck-stan
+      flycheck-stan
       # gnuplot
       gnuplot-mode
       nixos.emacsPackages.gruvbox-theme
@@ -41,10 +41,13 @@
       haskell-mode # haskell
       idris-mode # idris
       ledger-mode
+      ligature
       magit
       markdown-mode # markdown
       merlin # ocaml
+      mu4e
       mu4e-marker-icons
+      # nerd-icons
       nix-haskell-mode
       nix-mode # nix
       nixpkgs-fmt # nix
@@ -61,8 +64,8 @@
       proof-general # coq
       racket-mode
       # semantic-theming
-      # stan-mode
-      # stan-snippets
+      stan-mode
+      stan-snippets
       swiper
       tabbar
       tuareg # ocaml
