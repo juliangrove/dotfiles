@@ -9,6 +9,22 @@ let
   };
   nixos = import <nixos> { };
   old = import <old> { };
+  muPkg = pkgs.stdenv.mkDerivation {
+    pname = "mu";
+    version = "1.8.14";
+
+    src = pkgs.fetchzip {
+      url = https://github.com/djcb/mu/archive/refs/tags/v1.8.14.zip;
+      sha256 = "sha256-m6if0Br9WRPR8POwOM0Iwido3UR/V0BlkuaLcWsf/c0";
+    };
+
+    installPhase = ''
+      mkdir - p $out
+      mv mu $out
+    '';
+
+    meta.mainProgram = "mu";
+  };
 in
 {
   # dotfiles
@@ -250,22 +266,7 @@ in
 
       mu = {
         enable = true;
-        package = pkgs.stdenv.mkDerivation {
-          pname = "mu";
-          version = "1.8.14";
-
-          src = pkgs.fetchzip {
-            url = https://github.com/djcb/mu/archive/refs/tags/v1.8.14.zip;
-            sha256 = "sha256-m6if0Br9WRPR8POwOM0Iwido3UR/V0BlkuaLcWsf/c0";
-          };
-
-          installPhase = ''
-            mkdir - p $out
-            mv mu $out
-          '';
-
-          meta.mainProgram = "mu";
-        };
+        package = muPkg;
       };
 
       ssh.enable = true;
@@ -292,7 +293,7 @@ in
     mbsync = {
       enable = true;
       frequency = "*:0/1";
-      postExec = "${pkgs.mu}/bin/mu index";
+      postExec = "/nix/var/nix/profiles/default/bin/mu index";
     };
 
     redshift = {

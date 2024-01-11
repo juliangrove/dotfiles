@@ -90,12 +90,17 @@
 (evil-mode 1)
 ;; (evil-collection-init 'xref)
 
-(global-linum-mode t)
-(add-hook 'pdf-view-mode-hook (lambda() (linum-mode -1)))
 
 ;; line wrap at 80 chars
 (add-hook 'text-mode-hook #'auto-fill-mode)
 (setq-default fill-column 80)
+
+;; line-number mode
+(set-face-attribute 'line-number nil :background "#282828")
+(set-face-attribute 'line-number-current-line nil :background "#282828")
+(set-face-attribute 'line-number nil :foreground "#504945")
+(set-face-attribute 'line-number-current-line nil :foreground "#d5c4a1")
+(global-set-key (kbd "C-c n") 'display-line-numbers-mode)
 
 (require 'fill-column-indicator)
 (global-set-key (kbd "C-c r") 'fci-mode)
@@ -114,7 +119,9 @@
 
 ;; mu4e
 (require 'mu4e)
-(setq mu4e-mu-binary "~/.nix-profile/bin/mu")
+;; (setq mu4e-mu-binary "~/.nix-profile/bin/mu")
+(setq mu4e-mu-binary "/nix/var/nix/profiles/default/bin/mu")
+;; (require 'nerd-icons)
 (require 'mu4e-marker-icons)
 (mu4e-marker-icons-mode 1)
 
@@ -156,6 +163,7 @@
 (defun no-auto-fill ()
   "Turn off auto-fill-mode."
   (auto-fill-mode -1))
+
 
 (add-hook 'mu4e-compose-mode-hook #'no-auto-fill)
 
@@ -296,51 +304,51 @@
 ;; R
 (require 'ess-r-mode)
 
-;; ;;; stan-mode.el
-;; (use-package stan-mode
-;;   :mode ("\\.stan\\'" . stan-mode)
-;;   :hook (stan-mode . stan-mode-setup)
-;;   ;;
-;;   :config
-;;   ;; The officially recommended offset is 2.
-;;   (setq stan-indentation-offset 2))
+;;; stan-mode.el
+(use-package stan-mode
+  :mode ("\\.stan\\'" . stan-mode)
+  :hook (stan-mode . stan-mode-setup)
+  
+  :config
+  ;; The officially recommended offset is 2.
+  (setq stan-indentation-offset 2))
 
-;; ;;; company-stan.el
-;; (use-package company-stan
-;;   :hook (stan-mode . company-stan-setup)
-;;   ;;
-;;   :config
-;;   ;; Whether to use fuzzy matching in `company-stan'
-;;   (setq company-stan-fuzzy nil))
+;;; company-stan.el
+(use-package company-stan
+  :hook (stan-mode . company-stan-setup)
+  ;;
+  :config
+  ;; Whether to use fuzzy matching in `company-stan'
+  (setq company-stan-fuzzy nil))
 
-;; ;;; eldoc-stan.el
-;; (use-package eldoc-stan
-;;   :hook (stan-mode . eldoc-stan-setup)
-;;   ;;
-;;   :config
-;;   ;; No configuration options as of now.
-;;   )
+;;; eldoc-stan.el
+(use-package eldoc-stan
+  :hook (stan-mode . eldoc-stan-setup)
+  ;;
+  :config
+  ;; No configuration options as of now.
+  )
 
-;; ;;; flycheck-stan.el
-;; (use-package flycheck-stan
-;;   ;; Add a hook to setup `flycheck-stan' upon `stan-mode' entry
-;;   :hook ((stan-mode . flycheck-stan-stanc2-setup)
-;;          (stan-mode . flycheck-stan-stanc3-setup))
-;;   :config
-;;   ;; A string containing the name or the path of the stanc2 executable
-;;   ;; If nil, defaults to `stanc2'
-;;   (setq flycheck-stanc-executable nil)
-;;   ;; A string containing the name or the path of the stanc2 executable
-;;   ;; If nil, defaults to `stanc3'
-;;   (setq flycheck-stanc3-executable nil))
+;;; flycheck-stan.el
+(use-package flycheck-stan
+  ;; Add a hook to setup `flycheck-stan' upon `stan-mode' entry
+  :hook ((stan-mode . flycheck-stan-stanc2-setup)
+         (stan-mode . flycheck-stan-stanc3-setup))
+  :config
+  ;; A string containing the name or the path of the stanc2 executable
+  ;; If nil, defaults to `stanc2'
+  (setq flycheck-stanc-executable nil)
+  ;; A string containing the name or the path of the stanc2 executable
+  ;; If nil, defaults to `stanc3'
+  (setq flycheck-stanc3-executable nil))
 
-;; ;;; stan-snippets.el
-;; (use-package stan-snippets
-;;   :hook (stan-mode . stan-snippets-initialize)
-;;   ;;
-;;   :config
-;;   ;; No configuration options as of now.
-;;   )
+;;; stan-snippets.el
+(use-package stan-snippets
+  :hook (stan-mode . stan-snippets-initialize)
+  ;;
+  :config
+  ;; No configuration options as of now.
+  )
 
 ;; org
 (setq org-startup-truncated nil)
@@ -427,6 +435,9 @@
 
 (set-frame-font "DejaVu Sans Mono-8.5")
 (setq default-frame-alist '((font . "DejaVu Sans Mono-8.5")))
+
+;; (set-frame-font "JetBrains Mono-9")
+;; (setq default-frame-alist '((font . "JetBrains Mono-9")))
 
 ;; nixos
 (require 'nix-mode)
