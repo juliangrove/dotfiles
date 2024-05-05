@@ -194,7 +194,7 @@
           --ringwrong-color=fb493480
         ''}'';
         time = 3;
-        extraOptions = [ "-corners" "00-0" ];
+        extraOptions = [ "-corners" "----" ];
       };
     };
 
@@ -237,6 +237,7 @@
     packages = with pkgs; [
       aegyptus
       akkadian
+      alegreya
       corefonts
       emacs-all-the-icons-fonts
       etBook
@@ -248,6 +249,7 @@
       kochi-substitute
       liberation_ttf
       libertinus
+      lmmath
       lohit-fonts.kannada
       mplus-outline-fonts.githubRelease
       nerdfonts

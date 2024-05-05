@@ -92,7 +92,7 @@
 
 
 ;; line wrap at 80 chars
-(add-hook 'text-mode-hook #'auto-fill-mode)
+;; (add-hook 'text-mode-hook #'auto-fill-mode)
 (setq-default fill-column 80)
 
 ;; line-number mode
@@ -111,6 +111,15 @@
 ;; text-mode hooks
 (dolist (hook '(text-mode-hook))
   (add-hook hook (lambda () (flyspell-mode 1))))
+
+(defun insert-math ()
+  (interactive)
+  (insert "\\(\\)")
+  (backward-char 2))
+
+(defun add-text-mode-insert-math-binding ()
+   (local-set-key (kbd "C-x m") #'insert-math))
+(add-hook 'text-mode-hook #'add-text-mode-insert-math-binding)
 
 ;; opening pdfs
 (require 'openwith)

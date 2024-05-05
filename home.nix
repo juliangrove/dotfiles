@@ -183,6 +183,7 @@ in
 
       # gui apps
       briss
+      cider
       # clementineUnfree
       # discord
       # dmenu
@@ -293,6 +294,7 @@ in
     mbsync = {
       enable = true;
       frequency = "*:0/1";
+      # postExec = "${pkgs.mu}/bin/mu index";
       postExec = "/nix/var/nix/profiles/default/bin/mu index";
     };
 
