@@ -1,13 +1,13 @@
 Config {
 
    -- appearance
-     font =             "xft:FontAwesome-27"
-   , additionalFonts = [ "xft:Calibri-27"
-                       , "xft:Courier-30" ]
+     font =             "xft:FontAwesome-22"
+   , additionalFonts = [ "xft:Calibri-22"
+                       , "xft:Courier-24" ]
    , bgColor =          "black"
    , alpha =            0
    , fgColor =          "white"
-   , position =         Static { xpos = 57, ypos = 0, width = 3726, height = 45 }
+   , position =         Static { xpos = 57, ypos = 0, width = 2766, height = 45 }
    , border =           NoBorder
    , borderColor =      "#646464"
 

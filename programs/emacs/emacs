@@ -442,8 +442,8 @@
   (interactive)
   (cfw:open-org-calendar))
 
-(set-frame-font "DejaVu Sans Mono-8.5")
-(setq default-frame-alist '((font . "DejaVu Sans Mono-8.5")))
+(set-frame-font "DejaVu Sans Mono-12")
+(setq default-frame-alist '((font . "DejaVu Sans Mono-12")))
 
 ;; (set-frame-font "JetBrains Mono-9")
 ;; (setq default-frame-alist '((font . "JetBrains Mono-9")))
