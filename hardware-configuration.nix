@@ -13,7 +13,7 @@
   boot.initrd.kernelModules = [ "dm-snapshot" ];
   boot.initrd.luks.devices = {
     crypted = {
-      device = "/dev/disk/by-uuid/916437e7-4477-46b4-96d8-066a121a3fdd";
+      device = "/dev/disk/by-uuid/b92c1f6f-aca5-4a66-bab1-1f504ff23800";
       preLVM = true;
     };
   };
@@ -23,18 +23,19 @@
 
   fileSystems."/" =
     {
-      device = "/dev/disk/by-uuid/8c0341b0-7c9a-4dda-8f27-e2c86908f8dc";
+      device = "/dev/disk/by-uuid/842c0be0-c07a-43a1-876f-bb06a6437250";
       fsType = "ext4";
     };
 
   fileSystems."/boot" =
     {
-      device = "/dev/disk/by-uuid/9459-0502";
+      device = "/dev/disk/by-uuid/2331-8F40";
       fsType = "vfat";
+      options = [ "fmask=0022" "dmask=0022" ];
     };
 
   swapDevices =
-    [{ device = "/dev/disk/by-uuid/1fc86fd7-6cca-4843-b346-3ee725fccdde"; }];
+    [{ device = "/dev/disk/by-uuid/35c88336-4a02-4e2b-9f6f-1144b7b0e4a8"; }];
 
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
