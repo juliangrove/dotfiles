@@ -139,7 +139,7 @@
       # x11
       enable = true;
       xkbOptions = "eurosign:e";
-      dpi = 323;
+      dpi = 240;
 
       # touchpad support
       libinput = {
