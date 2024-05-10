@@ -267,7 +267,7 @@ in
 
       mu = {
         enable = true;
-        package = muPkg;
+        # package = muPkg;
       };
 
       ssh.enable = true;
