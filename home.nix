@@ -294,8 +294,8 @@ in
     mbsync = {
       enable = true;
       frequency = "*:0/1";
-      # postExec = "${pkgs.mu}/bin/mu index";
-      postExec = "/nix/var/nix/profiles/default/bin/mu index";
+      postExec = "${pkgs.mu}/bin/mu index";
+      # postExec = "/nix/var/nix/profiles/default/bin/mu index";
     };
 
     redshift = {

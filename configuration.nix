@@ -92,11 +92,13 @@
       unstable = import <nixos-unstable> { };
     in
     with pkgs; [
+      alsa-firmware
       hack-font
       home-manager # personal config
       nitrogen # wallpaper
       lxqt.pavucontrol-qt # pulseaudio control
       pinentry-qt # gpg passphrase entry
+      sof-firmware
       xbindkeys # keybindings
       haskellPackages.xmobar # status bar
     ];
@@ -139,7 +141,7 @@
       # x11
       enable = true;
       xkbOptions = "eurosign:e";
-      dpi = 323;
+      dpi = 243;
 
       # touchpad support
       libinput = {

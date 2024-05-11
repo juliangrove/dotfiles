@@ -128,8 +128,8 @@
 
 ;; mu4e
 (require 'mu4e)
-;; (setq mu4e-mu-binary "~/.nix-profile/bin/mu")
-(setq mu4e-mu-binary "/nix/var/nix/profiles/default/bin/mu")
+(setq mu4e-mu-binary "~/.nix-profile/bin/mu")
+;; (setq mu4e-mu-binary "/nix/var/nix/profiles/default/bin/mu")
 ;; (require 'nerd-icons)
 (require 'mu4e-marker-icons)
 (mu4e-marker-icons-mode 1)
@@ -442,8 +442,8 @@
   (interactive)
   (cfw:open-org-calendar))
 
-(set-frame-font "DejaVu Sans Mono-12")
-(setq default-frame-alist '((font . "DejaVu Sans Mono-12")))
+(set-frame-font "DejaVu Sans Mono-9.5")
+(setq default-frame-alist '((font . "DejaVu Sans Mono-9.5")))
 
 ;; (set-frame-font "JetBrains Mono-9")
 ;; (setq default-frame-alist '((font . "JetBrains Mono-9")))
