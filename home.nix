@@ -187,7 +187,7 @@ in
       # clementineUnfree
       # discord
       # dmenu
-      latest.firefox-nightly-bin
+      # latest.firefox-nightly-bin
       # firefox
       gimp
       google-chrome
@@ -254,10 +254,10 @@ in
         # };
       };
 
-      # firefox = {
-      # enable = true;
-      # package = pkgs.latest.firefox-nightly-bin;
-      # };
+      firefox = {
+        enable = true;
+        # package = pkgs.latest.firefox-nightly-bin;
+      };
 
       git = {
         enable = true;

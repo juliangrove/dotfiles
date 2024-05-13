@@ -72,7 +72,10 @@
   # time.timeZone = "Europe/London";
 
   # for things like spotify
-  nixpkgs.config.allowUnfree = true;
+  nixpkgs.config = {
+    allowUnfree = true;
+    input-fonts.acceptLicense = true;
+  };
 
   programs = {
     gnupg.agent = {
@@ -246,6 +249,7 @@
       font-awesome
       iosevka
       iosevka-comfy.comfy
+      input-fonts
       ipafont
       jetbrains-mono
       kochi-substitute
