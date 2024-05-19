@@ -187,6 +187,7 @@ in
       # clementineUnfree
       # discord
       # dmenu
+      evince
       # latest.firefox-nightly-bin
       # firefox
       gimp
@@ -256,7 +257,7 @@ in
 
       firefox = {
         enable = true;
-        # package = pkgs.latest.firefox-nightly-bin;
+        package = pkgs.latest.firefox-nightly-bin;
       };
 
       git = {
