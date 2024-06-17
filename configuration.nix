@@ -90,21 +90,25 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages =
-    let
-      unstable = import <nixos-unstable> { };
-    in
-    with pkgs; [
-      alsa-firmware
-      hack-font
-      home-manager # personal config
-      nitrogen # wallpaper
-      lxqt.pavucontrol-qt # pulseaudio control
-      pinentry-qt # gpg passphrase entry
-      sof-firmware
-      xbindkeys # keybindings
-      haskellPackages.xmobar # status bar
-    ];
+  environment = {
+    etc = {
+      "modprobe.d/alsa.conf".text = "options snd-intel-dspcfg dsp_driver=1";
+    };
+
+    systemPackages =
+      let
+        unstable = import <nixos-unstable> { };
+      in
+      with pkgs; [
+        hack-font
+        home-manager # personal config
+        nitrogen # wallpaper
+        lxqt.pavucontrol-qt # pulseaudio control
+        pinentry-qt # gpg passphrase entry
+        xbindkeys # keybindings
+        haskellPackages.xmobar # status bar
+      ];
+  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -224,6 +228,10 @@
       powerOnBoot = false;
       settings.General.ControllerMode = "bredr";
     };
+
+    firmware = with pkgs; [
+      sof-firmware
+    ];
 
     pulseaudio = {
       enable = true;

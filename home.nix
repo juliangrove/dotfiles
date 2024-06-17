@@ -145,6 +145,7 @@ in
       pciutils
       pdftk
       prettyping
+      qrencode
       tmux
       unzip
       wget
@@ -279,7 +280,9 @@ in
       # [ jdinhlife.gruvbox justusadam.language-haskell ];
       # };
 
-      zathura.enable = true; # zathura
+      zathura = {
+        enable = true; # zathura
+      };
     };
 
   # cursors - moved to home
@@ -292,6 +295,12 @@ in
   services = {
     emacs.enable = true;
 
+    gammastep = {
+      enable = true;
+      latitude = 43.156578;
+      longitude = -77.608849;
+    };
+
     mbsync = {
       enable = true;
       frequency = "*:0/1";
@@ -299,9 +308,9 @@ in
       # postExec = "/nix/var/nix/profiles/default/bin/mu index";
     };
 
-    redshift = {
-      enable = true;
-      provider = "geoclue2";
-    };
+    # redshift = {
+    # enable = true;
+    # provider = "geoclue2";
+    # };
   };
 }
