@@ -169,10 +169,11 @@
 (setq mu4e-view-show-images t
       mu4e-view-image-max-width 800)
 
+(setq mu4e-compose-dont-reply-to-self t)
+
 (defun no-auto-fill ()
   "Turn off auto-fill-mode."
   (auto-fill-mode -1))
-
 
 (add-hook 'mu4e-compose-mode-hook #'no-auto-fill)
 
@@ -442,8 +443,8 @@
   (interactive)
   (cfw:open-org-calendar))
 
-(set-frame-font "DejaVu Sans Mono-12")
-(setq default-frame-alist '((font . "DejaVu Sans Mono-12")))
+(set-frame-font "DejaVu Sans Mono-9.5")
+(setq default-frame-alist '((font . "DejaVu Sans Mono-9.5")))
 
 ;; (set-frame-font "JetBrains Mono-9")
 ;; (setq default-frame-alist '((font . "JetBrains Mono-9")))
@@ -568,3 +569,6 @@
 
 ;; ledger-mode
 (require 'ledger-mode)
+
+;; compilation
+

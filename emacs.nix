@@ -47,6 +47,7 @@
       merlin # ocaml
       mu4e
       mu4e-marker-icons
+      compile-multi
       # nerd-icons
       nix-haskell-mode
       nix-mode # nix

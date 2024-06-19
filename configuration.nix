@@ -72,7 +72,10 @@
   # time.timeZone = "Europe/London";
 
   # for things like spotify
-  nixpkgs.config.allowUnfree = true;
+  nixpkgs.config = {
+    allowUnfree = true;
+    input-fonts.acceptLicense = true;
+  };
 
   programs = {
     gnupg.agent = {
@@ -139,7 +142,7 @@
       # x11
       enable = true;
       xkbOptions = "eurosign:e";
-      dpi = 240;
+      dpi = 323;
 
       # touchpad support
       libinput = {
@@ -242,6 +245,7 @@
       emacs-all-the-icons-fonts
       etBook
       font-awesome
+      input-fonts
       iosevka
       iosevka-comfy.comfy
       ipafont
@@ -253,6 +257,7 @@
       lohit-fonts.kannada
       mplus-outline-fonts.githubRelease
       nerdfonts
+      noto-fonts-cjk-sans
       powerline-fonts
       source-han-sans-korean
       source-han-sans-simplified-chinese

@@ -187,7 +187,7 @@ in
       # clementineUnfree
       # discord
       # dmenu
-      latest.firefox-nightly-bin
+      # latest.firefox-nightly-bin
       # firefox
       gimp
       google-chrome
@@ -254,10 +254,10 @@ in
         # };
       };
 
-      # firefox = {
-      # enable = true;
-      # package = pkgs.latest.firefox-nightly-bin;
-      # };
+      firefox = {
+        enable = true;
+        package = pkgs.latest.firefox-nightly-bin;
+      };
 
       git = {
         enable = true;
@@ -291,6 +291,12 @@ in
   services = {
     emacs.enable = true;
 
+    # gammastep = {
+    # enable = true;
+    # latitude = 43.156578;
+    # longitude = -77.608849;
+    # };
+
     mbsync = {
       enable = true;
       frequency = "*:0/1";
@@ -300,7 +306,9 @@ in
 
     redshift = {
       enable = true;
-      provider = "geoclue2";
+      latitude = 43.156578;
+      longitude = -77.608849;
+      # provider = "geoclue2";
     };
   };
 }
