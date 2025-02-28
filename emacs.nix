@@ -3,7 +3,7 @@
   epkgs: (
     with epkgs; [
       # ac-octave
-      agda-input
+      # agda-input
       agda2-mode # agda
       airline-themes
       all-the-icons
@@ -36,8 +36,8 @@
       flycheck-stan
       # gnuplot
       gnuplot-mode
-      nixos.emacsPackages.gruvbox-theme
-      # gruvbox-theme
+      # nixos.emacsPackages.gruvbox-theme
+      gruvbox-theme
       haskell-mode # haskell
       idris-mode # idris
       ledger-mode
@@ -45,7 +45,8 @@
       magit
       markdown-mode # markdown
       merlin # ocaml
-      mu4e
+      # mu4e
+      mu4e-column-faces
       mu4e-marker-icons
       # nerd-icons
       nix-haskell-mode

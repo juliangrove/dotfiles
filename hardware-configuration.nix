@@ -18,8 +18,12 @@
     };
   };
 
-  boot.kernelModules = [ "kvm-intel" ];
-  boot.extraModulePackages = [ ];
+  boot = {
+    extraModulePackages = [ ];
+    blacklistedKernelModules = [ "nouveau" "snd_hda_intel" ]; # Example modules to blacklist
+    kernelModules = [ "kvm-intel" ];
+    kernelParams = [ "acpi=force" "reboot=pci" "pcie_port_pm=off" "thunderbolt=no" ];
+  };
 
   fileSystems."/" =
     {

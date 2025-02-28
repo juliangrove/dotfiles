@@ -66,20 +66,20 @@
 #  Control + b:2 + Release
 
 # Increase volume
-"pactl set-sink-volume @DEFAULT_SINK@ +1000"
+"wpctl set-volume @DEFAULT_SINK@ 1%+"
    XF86AudioRaiseVolume
 
 # Decrease volume
-"pactl set-sink-volume @DEFAULT_SINK@ -1000"
+"wpctl set-volume @DEFAULT_SINK@ 1%-"
    XF86AudioLowerVolume
 
 # Mute volume
-"pactl set-sink-mute @DEFAULT_SINK@ toggle"
+"wpctl set-mute @DEFAULT_SINK@ toggle"
    XF86AudioMute
 
 # Mute mic
-"pactl set-source-mute 1 toggle"
-   XF86AudioMicMute
+# "pactl set-source-mute 1 toggle"
+   # XF86AudioMicMute
 
 # Increase brightness
 "light -A 6.25"

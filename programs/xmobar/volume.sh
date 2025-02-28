@@ -1,8 +1,8 @@
-volume=$(pactl list sinks | grep '^[[:space:]]Volume:' | head -n $(( $SINK + 4 )) | tail -n 1 | sed -e 's,.* \([0-9][0-9]*\)%.*,\1,')
+volume=$(wpctl status | grep "vol" | sed -E 's/.*\[vol: ([0-9.]+).*/\1/' | awk '{print int($1*100)}' | sed -n '4p')
 
-mute=$(pactl list sinks | grep '^[[:space:]]Mute:' |     head -n $(( $SINK + 4 )) | tail -n 1 | sed -e 's,.* \([0-9][0-9]*\)%.*,\1,')
+mute=$(wpctl status | grep "vol" | sed -E 's/.*\[vol: [0-9.]+ ([A-Z]+).*/\1/' | grep "MUTED")
 
-if [[ "$mute" == "	Mute: yes" ]]
+if [[ "$mute" == "MUTED" ]]
 then printf "<fc=#a89984></fc>"
 else if (( $volume >= 75 ))
      then printf "<fc=#b8bb26></fc>"

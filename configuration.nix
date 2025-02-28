@@ -80,8 +80,8 @@
   programs = {
     gnupg.agent = {
       enable = true;
-      pinentryFlavor = "qt";
       enableSSHSupport = true;
+      pinentryPackage = pkgs.pinentry-qt;
     };
 
     # backlight
@@ -91,10 +91,6 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment = {
-    etc = {
-      "modprobe.d/alsa.conf".text = "options snd-intel-dspcfg dsp_driver=1";
-    };
-
     systemPackages =
       let
         unstable = import <nixos-unstable> { };
@@ -104,8 +100,9 @@
         home-manager # personal config
         nitrogen # wallpaper
         lxqt.pavucontrol-qt # pulseaudio control
-        pinentry-qt # gpg passphrase entry
         xbindkeys # keybindings
+        xdotool
+        xorg.xhost
         haskellPackages.xmobar # status bar
       ];
   };
@@ -125,7 +122,28 @@
     # avahi for DNS discovery
     avahi = {
       enable = true;
-      nssmdns = true; # local hostname resolution for apps
+      nssmdns4 = true; # local hostname resolution for apps
+    };
+
+    # auto-login
+    displayManager = {
+      autoLogin = {
+        enable = true;
+        user = "juliangrove";
+      };
+
+      defaultSession = "none+xmonad";
+    };
+
+    flatpak.enable = true;
+
+    # touchpad support
+    libinput = {
+      enable = true;
+      touchpad = {
+        naturalScrolling = true;
+        tapping = false;
+      };
     };
 
     geoclue2 = {
@@ -147,17 +165,8 @@
     xserver = {
       # x11
       enable = true;
-      xkbOptions = "eurosign:e";
+      xkb.options = "eurosign:e";
       dpi = 243;
-
-      # touchpad support
-      libinput = {
-        enable = true;
-        touchpad = {
-          naturalScrolling = true;
-          tapping = false;
-        };
-      };
 
       # wm
       windowManager.xmonad = {
@@ -171,21 +180,11 @@
         config = programs/xmonad/xmonad.hs;
       };
 
-      # auto-login
-      displayManager = {
-        autoLogin = {
-          enable = true;
-          user = "juliangrove";
-        };
-
-        defaultSession = "none+xmonad";
-
-        sessionCommands = ''
-          nitrogen --restore
-          xbindkeys &
-          systemctl --user restart emacs # keep having to do this for some reason
-        '';
-      };
+      displayManager.sessionCommands = ''
+        nitrogen --restore
+        xbindkeys &
+        systemctl --user restart emacs # keep having to do this for some reason
+      '';
 
       # screen-locker
       xautolock = {
@@ -215,11 +214,10 @@
       shadowExclude = [ "name = 'xmobar'" ];
     };
 
+    pipewire.enable = true;
+
     blueman.enable = true;
   };
-
-  # Enable sound.
-  sound.enable = true;
 
   hardware = {
     bluetooth = {
@@ -234,7 +232,7 @@
     ];
 
     pulseaudio = {
-      enable = true;
+      enable = false;
       # extraConfig = ''
       # load-module module-alsa-sink   device=hw:0,0 channels=4
       # load-module module-alsa-source device=hw:0,6 channels=4
@@ -265,14 +263,25 @@
       libertinus
       lmmath
       lohit-fonts.kannada
+      material-icons
       mplus-outline-fonts.githubRelease
       nerdfonts
+      noto-fonts-cjk-sans
+      noto-fonts-emoji
       powerline-fonts
       source-han-sans-korean
       source-han-sans-simplified-chinese
       source-han-sans-traditional-chinese
     ];
   };
+
+  # Optionally, enable XDG portals for better integration
+  xdg.portal =
+    {
+      config.common.default = "*";
+      enable = true;
+      extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+    };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.juliangrove = {
@@ -292,6 +301,6 @@
   # compatible, in order to avoid breaking some software such as database
   # servers. You should change this only after NixOS release notes say you
   # should.
-  system.stateVersion = " 23.11 "; # Did you read the comment?
+  system.stateVersion = " 24.11 "; # Did you read the comment?
 
 }

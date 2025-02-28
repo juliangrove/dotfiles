@@ -1,4 +1,4 @@
-;;; emacs init file
+;; emacs init file
 
 (require 'package)
 
@@ -128,11 +128,28 @@
 
 ;; mu4e
 (require 'mu4e)
-(setq mu4e-mu-binary "~/.nix-profile/bin/mu")
+;; (setq mu4e-user-mail-address-list '("julian.grove@gmail.com" "juliangrove@gmail.com" "julian.grove@rochester.edu" "jgrove2@ur.rochester.edu"))
+;; (setq mu4e-user-mail-address-list (mu4e--mail-account-list))
+;; (setq mu4e-compose-dont-reply-to-names
+      ;; '("julian.grove@gmail.com" "juliangrove@gmail.com" "julian.grove@rochester.edu" "jgrove2@ur.rochester.edu"))
+(with-eval-after-load 'mu4e
+  (mu4e-column-faces-mode))
+;; (setq mu4e-mu-binary "~/.nix-profile/bin/mu")
 ;; (setq mu4e-mu-binary "/nix/var/nix/profiles/default/bin/mu")
 ;; (require 'nerd-icons)
-(require 'mu4e-marker-icons)
-(mu4e-marker-icons-mode 1)
+(use-package mu4e-marker-icons
+  :init (mu4e-marker-icons-mode 1))
+(setq mu4e-headers-unread-mark    '("u" . "📩 "))
+(setq mu4e-headers-draft-mark     '("D" . "🚧 "))
+(setq mu4e-headers-flagged-mark   '("F" . "🚩 "))
+(setq mu4e-headers-new-mark       '("N" . "✨ "))
+(setq mu4e-headers-passed-mark    '("P" . "↪ "))
+(setq mu4e-headers-replied-mark   '("R" . "↩ "))
+(setq mu4e-headers-seen-mark      '("S" . " "))
+(setq mu4e-headers-trashed-mark   '("T" . "🗑️"))
+(setq mu4e-headers-attach-mark    '("a" . "📎 "))
+(setq mu4e-headers-encrypted-mark '("x" . "🔑 "))
+(setq mu4e-headers-signed-mark    '("s" . "🖊 "))
 
 (setq mail-user-agent 'mu4e-user-agent)
 
@@ -169,8 +186,6 @@
 (setq mu4e-view-show-images t
       mu4e-view-image-max-width 800)
 
-(setq mu4e-compose-dont-reply-to-self t)
-
 (defun no-auto-fill ()
   "Turn off auto-fill-mode."
   (auto-fill-mode -1))
@@ -183,6 +198,9 @@
   (delete 'mu4e-headers-mode emojify-inhibit-major-modes))
 
 (add-hook 'mu4e-view-mode-hook #'emojify-mode)
+
+;; Set the font for Unicode symbols (e.g., icons)
+(set-fontset-font t 'unicode (font-spec :family "FontAwesome" :size 9.5))
 
 ;; latex
 (setq-default TeX-PDF-mode t)
@@ -355,7 +373,7 @@
 ;;; stan-snippets.el
 (use-package stan-snippets
   :hook (stan-mode . stan-snippets-initialize)
-  ;;
+  
   :config
   ;; No configuration options as of now.
   )
@@ -392,6 +410,9 @@
 ;; (font-lock-add-keywords 'org-mode
 			;; '(("^ +\\([-*]\\) "
 			   ;; (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
+
+;; org shortcuts
+(define-key org-mode-map (kbd "C-c q") (lambda () (interactive) (org-insert-structure-template "quote")))
 
 ;; org latex
 (require 'org-inlinetask)

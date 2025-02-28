@@ -11,15 +11,33 @@ let
   old = import <old> { };
   muPkg = pkgs.stdenv.mkDerivation {
     pname = "mu";
-    version = "1.8.14";
+    version = "1.12.8";
 
     src = pkgs.fetchzip {
-      url = https://github.com/djcb/mu/archive/refs/tags/v1.8.14.zip;
-      sha256 = "sha256-m6if0Br9WRPR8POwOM0Iwido3UR/V0BlkuaLcWsf/c0";
+      url = https://github.com/djcb/mu/archive/refs/tags/v1.12.8.zip;
+      sha256 = "sha256-lc6GWGvWy/RjjY64vu8n8OtBUZjN6L8OQ/Q01eM34h4=";
     };
 
+    nativeBuildInputs = with pkgs; [
+      cld2
+      coreutils
+      meson
+      ninja
+      glib
+      gmime3
+      guile
+      pkg-config
+      python3
+      readline
+      xapian
+    ];
+
+    preConfigure = ''
+      patchShebangs build-aux/date.py
+    '';
+
     installPhase = ''
-      mkdir - p $out
+      mkdir -p $out
       mv mu $out
     '';
 
@@ -83,6 +101,12 @@ in
     ];
   };
 
+  home.activation.addFlathubRemote = config.lib.dag.entryAfter [ "writeBoundary" ] ''
+    if ! ${pkgs.flatpak}/bin/flatpak remote-list | grep -q flathub; then
+    ${pkgs.flatpak}/bin/flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+    fi
+  '';
+
   home.packages =
     let
       agda-stuff = (pkgs.agda.withPackages (with pkgs; [
@@ -125,6 +149,7 @@ in
       dict
       escrotum
       feh
+      flatpak
       gcc
       gnumake
       gnupg
@@ -174,7 +199,7 @@ in
       racket
       # R-stuff # R + packages
       stack # haskell
-      swiProlog # prolog
+      swi-prolog # prolog
 
       # latex
       # tex
@@ -219,8 +244,19 @@ in
         historyControl = [ "ignoredups" ];
         historyIgnore = [ "ls*" "exit" "pwd" "reboot" "shutdown" ];
         bashrcExtra = ''
-          PS1=$'\[\033[32m\e[2m\]\u03bb\[\033[00m\] '
-          neofetch --ascii_distro NixOS_old
+          PS1 = $'\[
+            \033
+            [
+              32
+              m\e
+              [ 2 m\ ]\u03bb\[
+              \033
+              [ 00 m\ ] '
+              neofetch --ascii_distro
+              NixOS_old
+
+              eval
+              "$(direnv hook bash)"
         '';
       };
 
@@ -295,22 +331,19 @@ in
   services = {
     emacs.enable = true;
 
-    gammastep = {
-      enable = true;
-      latitude = 43.156578;
-      longitude = -77.608849;
-    };
+    lorri.enable = true;
 
     mbsync = {
       enable = true;
       frequency = "*:0/1";
       postExec = "${pkgs.mu}/bin/mu index";
-      # postExec = "/nix/var/nix/profiles/default/bin/mu index";
     };
 
-    # redshift = {
-    # enable = true;
-    # provider = "geoclue2";
-    # };
+    redshift = {
+      enable = true;
+      latitude = 43.156578;
+      longitude = -77.608849;
+      # provider = "geoclue2";
+    };
   };
 }
