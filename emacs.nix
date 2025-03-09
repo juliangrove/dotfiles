@@ -16,6 +16,7 @@
       calfw-ical
       calfw-org
       caml # ocaml
+      # cargo
       citeproc # used with org-ref
       company-stan
       coq-commenter # coq
@@ -25,6 +26,7 @@
       dired-subtree
       direnv
       # dumb-jump # deprecated by xref
+      eglot
       eldoc-stan
       elpy # python
       emojify
@@ -42,6 +44,8 @@
       idris-mode # idris
       ledger-mode
       ligature
+      lsp-mode
+      # lsp-ui
       magit
       markdown-mode # markdown
       merlin # ocaml
@@ -64,6 +68,8 @@
       # pdf-tools
       proof-general # coq
       racket-mode
+      # rustic # rust
+      rust-mode # rust
       # semantic-theming
       stan-mode
       stan-snippets

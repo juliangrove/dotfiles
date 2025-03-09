@@ -135,7 +135,7 @@
       defaultSession = "none+xmonad";
     };
 
-    flatpak.enable = true;
+    # flatpak.enable = true;
 
     # touchpad support
     libinput = {
@@ -214,7 +214,19 @@
       shadowExclude = [ "name = 'xmobar'" ];
     };
 
-    pipewire.enable = true;
+    pipewire = {
+      alsa.enable = true;
+      enable = true;
+      extraConfig = {
+        pipewire."99-silent-bell.conf" = {
+          "context.properties" = {
+            "module.x11.bell" = false;
+          };
+        };
+      };
+      pulse.enable = true;
+      wireplumber.enable = true;
+    };
 
     blueman.enable = true;
   };
@@ -231,16 +243,16 @@
       sof-firmware
     ];
 
-    pulseaudio = {
-      enable = false;
-      # extraConfig = ''
-      # load-module module-alsa-sink   device=hw:0,0 channels=4
-      # load-module module-alsa-source device=hw:0,6 channels=4
-      # '';
-      package = pkgs.pulseaudioFull;
-      support32Bit = true;
-      systemWide = false;
-    };
+    #   pulseaudio = {
+    #     enable = false;
+    #     # extraConfig = ''
+    #     # load-module module-alsa-sink   device=hw:0,0 channels=4
+    #     # load-module module-alsa-source device=hw:0,6 channels=4
+    #     # '';
+    #     package = pkgs.pulseaudioFull;
+    #     support32Bit = true;
+    #     systemWide = false;
+    #   };
   };
 
   # fonts
@@ -288,7 +300,7 @@
     description = "Julian Grove";
     isNormalUser = true;
     createHome = true;
-    extraGroups = [ "wheel" "audio" "pulse" "networkmanager" "video" "cups" ]; # stuff I can do
+    extraGroups = [ "wheel" "audio" "networkmanager" "video" "cups" ]; # stuff I can do
   };
 
   # some extra hardware management

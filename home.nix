@@ -101,11 +101,11 @@ in
     ];
   };
 
-  home.activation.addFlathubRemote = config.lib.dag.entryAfter [ "writeBoundary" ] ''
-    if ! ${pkgs.flatpak}/bin/flatpak remote-list | grep -q flathub; then
-    ${pkgs.flatpak}/bin/flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-    fi
-  '';
+  # home.activation.addFlathubRemote = config.lib.dag.entryAfter [ "writeBoundary" ] ''
+  #   if ! ${pkgs.flatpak}/bin/flatpak remote-list | grep -q flathub; then
+  #   ${pkgs.flatpak}/bin/flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+  #   fi
+  # '';
 
   home.packages =
     let
@@ -149,7 +149,7 @@ in
       dict
       escrotum
       feh
-      flatpak
+      # flatpak
       gcc
       gnumake
       gnupg
@@ -244,19 +244,8 @@ in
         historyControl = [ "ignoredups" ];
         historyIgnore = [ "ls*" "exit" "pwd" "reboot" "shutdown" ];
         bashrcExtra = ''
-          PS1 = $'\[
-            \033
-            [
-              32
-              m\e
-              [ 2 m\ ]\u03bb\[
-              \033
-              [ 00 m\ ] '
-              neofetch --ascii_distro
-              NixOS_old
-
-              eval
-              "$(direnv hook bash)"
+          PS1=$'\[\033[32m\e[2m\]\u03bb\[\033[00m\] '
+          neofetch --ascii_distro NixOS_old
         '';
       };
 
