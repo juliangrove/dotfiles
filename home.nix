@@ -181,25 +181,25 @@ in
       vim
 
       # languages
-      agda-stuff # agda + packages
+      # agda-stuff # agda + packages
       # cabal-install # haskell
-      coq
+      # coq
       # dune_2 # ocaml
-      eff
+      # eff
       # nixos.ghc # haskell
       # idris
-      idris2
-      ocaml
-      ocamlPackages.findlib
-      ocamlPackages.ocamlbuild
-      ocamlPackages.ocp-indent
-      ocamlPackages.merlin
-      ocamlPackages.utop
+      # idris2
+      # ocaml
+      # ocamlPackages.findlib
+      # ocamlPackages.ocamlbuild
+      # ocamlPackages.ocp-indent
+      # ocamlPackages.merlin
+      # ocamlPackages.utop
       # python-stuff # python + packages
-      racket
+      # racket
       # R-stuff # R + packages
-      stack # haskell
-      swi-prolog # prolog
+      # stack # haskell
+      # swi-prolog # prolog
 
       # latex
       # tex
