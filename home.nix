@@ -92,7 +92,12 @@ in
   };
 
   nixpkgs = {
-    config.allowUnfree = true; # for things like spotify
+    config = {
+      allowUnfree = true; # for things like spotify
+      permittedInsecurePackages = [
+        "xpdf-4.05"
+      ];
+    };
     # overlays
     overlays = [
       # (import ./overlays/python-pygments.nix)
@@ -170,11 +175,14 @@ in
       pciutils
       pdftk
       prettyping
+      quarto
       qrencode
+      texlive.combined.scheme-full # pdfjam
       tmux
       unzip
       wget
       xorg.xdpyinfo
+      xpdf
       zip
 
       # editors
@@ -283,7 +291,18 @@ in
 
       firefox = {
         enable = true;
-        package = pkgs.latest.firefox-nightly-bin;
+        # package = pkgs.latest.firefox-nightly-bin;
+        profiles.default = {
+          settings = {
+            # Disable signature verification for add-ons and themes
+            "xpinstall.signatures.required" = false;
+            "extensions.langpacks.signatures.required" = false;
+
+            # Allow installing themes from third-party sources
+            "extensions.install.requireBuiltInCerts" = false;
+            "extensions.install.requireSecureOrigin" = false;
+          };
+        };
       };
 
       git = {

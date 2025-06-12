@@ -14,6 +14,10 @@
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
     };
+    kernel.sysctl = {
+      "vm.dirty_writeback_centisecs" = 1500;
+      "kernel.nmi_watchdog" = 0;
+    };
     # kernelPackages = pkgs.linuxPackagesFor (pkgs.linux_6_0.override {
     #   argsOverride = rec {
     #     src = pkgs.fetchurl {
@@ -67,7 +71,7 @@
   # };
 
   # Set your time zone.
-  time.timeZone = "America/New_York";
+  time.timeZone = "America/Denver";
   # time.timeZone = "Europe/Stockholm";
   # time.timeZone = "Europe/London";
 
@@ -125,6 +129,8 @@
       nssmdns4 = true; # local hostname resolution for apps
     };
 
+    blueman.enable = true;
+
     # auto-login
     displayManager = {
       autoLogin = {
@@ -136,6 +142,15 @@
     };
 
     # flatpak.enable = true;
+
+    logind = {
+      extraConfig = ''
+        IdleAction=suspend
+        IdleActionSec=5min
+        HandleSuspendKey=suspend
+        HandleHibernateKey=hibernate
+      '';
+    };
 
     # touchpad support
     libinput = {
@@ -228,8 +243,36 @@
       wireplumber.enable = true;
     };
 
-    blueman.enable = true;
+    tlp = {
+      enable = true;
+      settings = {
+        # CPU energy policy
+        CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
+        CPU_ENERGY_PERF_POLICY_ON_AC = "balance_power";
+
+        # Intel platform profile (if supported by your firmware)
+        PLATFORM_PROFILE_ON_BAT = "low-power";
+        PLATFORM_PROFILE_ON_AC = "balanced";
+
+        START_CHARGE_THRESH_BAT0 = 40; # Don’t charge until below 40%
+        STOP_CHARGE_THRESH_BAT0 = 80; # Stop charging at 80%
+
+        # USB autosuspend
+        USB_AUTOSUSPEND = "Y";
+
+        # Wi-Fi power saving
+        WIFI_PWR_ON_BAT = "on";
+
+        # Disable Wake-on-LAN
+        WOL_DISABLE = "Y";
+      };
+    };
   };
+
+  # Hibernate after being suspended for 15 minutes
+  systemd.sleep.extraConfig = ''
+    HibernateDelaySec=15min
+  '';
 
   hardware = {
     bluetooth = {
@@ -277,9 +320,10 @@
       lohit-fonts.kannada
       material-icons
       mplus-outline-fonts.githubRelease
-      nerdfonts
+      # nerdfonts
       noto-fonts-cjk-sans
       noto-fonts-emoji
+      open-sans
       powerline-fonts
       source-han-sans-korean
       source-han-sans-simplified-chinese
@@ -313,6 +357,6 @@
   # compatible, in order to avoid breaking some software such as database
   # servers. You should change this only after NixOS release notes say you
   # should.
-  system.stateVersion = " 24.11 "; # Did you read the comment?
+  system.stateVersion = "25.05"; # Did you read the comment?
 
 }

@@ -58,6 +58,7 @@
       nixpkgs-fmt # nix
       nix-sandbox # nix
       ocp-indent
+      ocamlformat
       openwith
       org
       org-agenda-property
@@ -67,6 +68,7 @@
       org-superstar
       # pdf-tools
       proof-general # coq
+      quarto-mode # quarto
       racket-mode
       # rustic # rust
       rust-mode # rust

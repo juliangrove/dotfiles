@@ -291,6 +291,10 @@
 
 
 ;; ocaml
+(use-package ocamlformat
+  :custom (ocamlformat-enable 'enable-outside-detected-project)
+  :hook (before-save . ocamlformat-before-save)
+  )
 (require 'ocp-indent)
 (use-package tuareg
   :config
@@ -299,6 +303,9 @@
   (add-hook 'tuareg-mode-hook
 	    (lambda () (add-hook 'before-save-hook 'ocp-indent-buffer nil t)
 	      (merlin-mode)))
+  (add-hook 'tuareg-mode-hook (lambda ()
+				(define-key tuareg-mode-map (kbd "C-M-<tab>") #'ocamlformat)
+				(add-hook 'before-save-hook #'ocamlformat-before-save)))
   (setq auto-mode-alist
 	(append '(("\\.ml[ily]?$" . tuareg-mode)
                   ("\\.topml$" . tuareg-mode))
@@ -628,3 +635,7 @@
   (lsp-ui-doc-enable nil))
 
 (setq lsp-rust-analyzer-server-command '("nix-shell" "--run" "rust-analyzer"))
+
+;; quarto
+;; load the library
+(require 'quarto-mode)
