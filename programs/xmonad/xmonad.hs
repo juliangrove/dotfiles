@@ -60,8 +60,8 @@ mylayout = tiled ||| Mirror tiled ||| Full
     delta   = 3/100
 mystartup = do
   spawn $ "xsetroot -cursor_name X_cursor -rv" ++
-    " && gpg2 -q --for-your-eyes-only --no-tty -d ~/.gmailpass.gpg" ++
-    " && arbtt-capture"
+    " & gpg2 -q --for-your-eyes-only --no-tty -d ~/.gmailpass.gpg" ++
+    " & arbtt-capture"
     
 mykeys c = mkKeymap c $
   [ -- ("M-S-d", spawn $ "dmenu_run -b -fn 'Courier-12' -nb '#282828'"
@@ -69,16 +69,16 @@ mykeys c = mkKeymap c $
     ("M-S-e", spawn "emacsclient -c --eval \'(dired \"~/Documents\")\'")
   , ("M-S-f", spawn "firefox")
   , ("M-S-g", spawn "google-chrome-stable")
-  , ("M-S-l", spawn $ "i3lock-fancy-rapid 40 10 -n"
-                   ++ " --inside-color=1d202180"
-                   ++ " --ring-color=b8bb2680"
-                   ++ " --keyhl-color=fabd2f80"
-                   ++ " --bshl-color=cc241dff" 
-                   ++ " --line-color=282828ff"
-                   ++ " --insidever-color=83a5984d"
-                   ++ " --ringver-color=45858880"
-                   ++ " --insidewrong-color=cc241d80"
-                   ++ " --ringwrong-color=fb493480")
+  -- , ("M-S-l", spawn $ "i3lock-fancy-rapid 40 10 -n"
+                   -- ++ " --inside-color=1d202180"
+                   -- ++ " --ring-color=b8bb2680"
+                   -- ++ " --keyhl-color=fabd2f80"
+                   -- ++ " --bshl-color=cc241dff" 
+                   -- ++ " --line-color=282828ff"
+                   -- ++ " --insidever-color=83a5984d"
+                   -- ++ " --ringver-color=45858880"
+                   -- ++ " --insidewrong-color=cc241d80"
+                   -- ++ " --ringwrong-color=fb493480")
   , ("M-S-i", spawn "escrotum -s")
   , ("M-S-u", spawn "escrotum")
   , ("M-S-r", spawn "rofi -theme gruvbox-dark -font 'Courier New 30' -show run")

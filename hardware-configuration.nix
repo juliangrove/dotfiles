@@ -22,7 +22,7 @@
     extraModulePackages = [ ];
     blacklistedKernelModules = [ "nouveau" "snd_hda_intel" ]; # Example modules to blacklist
     kernelModules = [ "kvm-intel" ];
-    kernelParams = [ "acpi=force" "reboot=pci" "pcie_port_pm=off" "thunderbolt=no" ];
+    kernelParams = [ "reboot=pci" "intel_pstate=active" "resume=UUID=35c88336-4a02-4e2b-9f6f-1144b7b0e4a8" ];
   };
 
   fileSystems."/" =

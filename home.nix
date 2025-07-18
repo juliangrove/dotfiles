@@ -175,7 +175,7 @@ in
       pciutils
       pdftk
       prettyping
-      quarto
+      nixos.quarto
       qrencode
       texlive.combined.scheme-full # pdfjam
       tmux
@@ -233,7 +233,7 @@ in
       # skypeforlinux
       signal-desktop
       spotify
-      xournal
+      xournalpp
       zoom-us
       zotero
       # zulip
@@ -349,8 +349,8 @@ in
 
     redshift = {
       enable = true;
-      latitude = 43.156578;
-      longitude = -77.608849;
+      latitude = 35.6894;
+      longitude = 105.9382;
       # provider = "geoclue2";
     };
   };

@@ -18,6 +18,11 @@
       "vm.dirty_writeback_centisecs" = 1500;
       "kernel.nmi_watchdog" = 0;
     };
+    kernelParams = [
+      "resume=UUID=35c88336-4a02-4e2b-9f6f-1144b7b0e4a8"
+      "mem_sleep_default=deep" # Force deep sleep (suspend-to-ram)
+    ];
+    resumeDevice = "/dev/disk/by-uuid/35c88336-4a02-4e2b-9f6f-1144b7b0e4a8";
     # kernelPackages = pkgs.linuxPackagesFor (pkgs.linux_6_0.override {
     #   argsOverride = rec {
     #     src = pkgs.fetchurl {
@@ -107,6 +112,8 @@
         xbindkeys # keybindings
         xdotool
         xorg.xhost
+        xorg.xset
+        xssproxy
         haskellPackages.xmobar # status bar
       ];
   };
@@ -143,15 +150,6 @@
 
     # flatpak.enable = true;
 
-    logind = {
-      extraConfig = ''
-        IdleAction=suspend
-        IdleActionSec=5min
-        HandleSuspendKey=suspend
-        HandleHibernateKey=hibernate
-      '';
-    };
-
     # touchpad support
     libinput = {
       enable = true;
@@ -180,7 +178,7 @@
     xserver = {
       # x11
       enable = true;
-      xkb.options = "eurosign:e";
+      # xkb.options = "eurosign:e";
       dpi = 243;
 
       # wm
@@ -201,22 +199,26 @@
         systemctl --user restart emacs # keep having to do this for some reason
       '';
 
-      # screen-locker
+      # use screen-locker to suspend
       xautolock = {
         enable = true;
-        locker = ''${pkgs.writeShellScript "lock-screen-i3lock-fancy-rapid" ''
-          ~/.nix-profile/bin/i3lock-fancy-rapid 40 10 -n \
-          --inside-color=1d202180 \
-          --ring-color=b8bb2680 \
-          --keyhl-color=fabd2f80 \
-          --bshl-color=cc241dff \
-          --line-color=282828ff \
-          --insidever-color=83a5984d \
-          --ringver-color=45858880 \
-          --insidewrong-color=cc241d80 \
-          --ringwrong-color=fb493480
+        locker = ''${pkgs.writeShellScript "suspendScript" ''
+          #!${pkgs.bash}/bin/bash
+          systemctl suspend-then-hibernate
         ''}'';
-        time = 3;
+        # locker = ''${pkgs.writeShellScript "lock-screen-i3lock-fancy-rapid" ''
+        # ~/.nix-profile/bin/i3lock-fancy-rapid 40 10 -n \
+        # --inside-color=1d202180 \
+        # --ring-color=b8bb2680 \
+        # --keyhl-color=fabd2f80 \
+        # --bshl-color=cc241dff \
+        # --line-color=282828ff \
+        # --insidever-color=83a5984d \
+        # --ringver-color=45858880 \
+        # --insidewrong-color=cc241d80 \
+        # --ringwrong-color=fb493480
+        # ''}'';
+        time = 10;
         extraOptions = [ "-corners" "----" ];
       };
     };
@@ -253,25 +255,33 @@
         # Intel platform profile (if supported by your firmware)
         PLATFORM_PROFILE_ON_BAT = "low-power";
         PLATFORM_PROFILE_ON_AC = "balanced";
-
-        START_CHARGE_THRESH_BAT0 = 40; # Don’t charge until below 40%
+        START_CHARGE_THRESH_BAT0 = 40; # Don't charge until below 40%
         STOP_CHARGE_THRESH_BAT0 = 80; # Stop charging at 80%
 
+        # Enable PCIe Runtime Power Management - THIS IS THE KEY ADDITION
+        RUNTIME_PM_ON_AC = "auto";
+        RUNTIME_PM_ON_BAT = "auto";
+
         # USB autosuspend
-        USB_AUTOSUSPEND = "Y";
+        USB_AUTOSUSPEND = "1"; # Changed from "Y" to "1" (more reliable)
 
         # Wi-Fi power saving
         WIFI_PWR_ON_BAT = "on";
 
         # Disable Wake-on-LAN
         WOL_DISABLE = "Y";
+
+        # Optional: Remove xhci_hcd from denylist to allow USB controller power management
+        RUNTIME_PM_DRIVER_DENYLIST = "mei_me nouveau radeon";
       };
     };
   };
 
-  # Hibernate after being suspended for 15 minutes
+  systemd.services.systemd-suspend-then-hibernate.wantedBy = [ "suspend.target" ];
+
+  # Hibernate after being suspended for 60 minutes.
   systemd.sleep.extraConfig = ''
-    HibernateDelaySec=15min
+    HibernateDelaySec=60min
   '';
 
   hardware = {
