@@ -90,6 +90,10 @@
 (evil-mode 1)
 ;; (evil-collection-init 'xref)
 
+(eval-after-load 'evil
+  '(progn
+     (evil-define-key 'normal LaTeX-mode-map (kbd "TAB") 'LaTeX-indent-line)
+     (evil-define-key 'insert LaTeX-mode-map (kbd "TAB") 'LaTeX-indent-line)))
 
 ;; line wrap at 80 chars
 ;; (add-hook 'text-mode-hook #'auto-fill-mode)
