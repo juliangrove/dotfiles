@@ -95,7 +95,7 @@ in
     config = {
       allowUnfree = true; # for things like spotify
       permittedInsecurePackages = [
-        "xpdf-4.05"
+        "xpdf-4.06"
       ];
     };
     # overlays
@@ -166,7 +166,7 @@ in
       ledger
       lm_sensors
       lshw
-      nixos.neofetch
+      fastfetch
       nixpkgs-fmt
       nix-prefetch-git
       openconnect
@@ -253,7 +253,7 @@ in
         historyIgnore = [ "ls*" "exit" "pwd" "reboot" "shutdown" ];
         bashrcExtra = ''
           PS1=$'\[\033[32m\e[2m\]\u03bb\[\033[00m\] '
-          neofetch --ascii_distro NixOS_old
+          fastfetch --logo NixOS_old
         '';
       };
 
@@ -307,8 +307,12 @@ in
 
       git = {
         enable = true;
-        userEmail = "julian.grove@gmail.com";
-        userName = "juliangrove";
+        settings = {
+          user = {
+            email = "julian.grove@gmail.com";
+            name = "juliangrove";
+          };
+        };
       };
 
       mu = {
@@ -316,7 +320,7 @@ in
         # package = muPkg;
       };
 
-      ssh.enable = true;
+      # ssh.enable = true;
 
       # vscode = {
       # enable = true;

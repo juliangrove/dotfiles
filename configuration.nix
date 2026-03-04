@@ -334,12 +334,10 @@
       mplus-outline-fonts.githubRelease
       # nerdfonts
       noto-fonts-cjk-sans
-      noto-fonts-emoji
+      noto-fonts-color-emoji
       open-sans
       powerline-fonts
-      source-han-sans-korean
-      source-han-sans-simplified-chinese
-      source-han-sans-traditional-chinese
+      source-han-sans
     ];
   };
 
@@ -369,6 +367,6 @@
   # compatible, in order to avoid breaking some software such as database
   # servers. You should change this only after NixOS release notes say you
   # should.
-  system.stateVersion = "25.05"; # Did you read the comment?
+  system.stateVersion = "25.11"; # Did you read the comment?
 
 }
