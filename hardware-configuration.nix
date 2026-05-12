@@ -11,35 +11,36 @@
 
   boot.initrd.availableKernelModules = [ "xhci_pci" "thunderbolt" "nvme" "usb_storage" "sd_mod" ];
   boot.initrd.kernelModules = [ "dm-snapshot" ];
-  boot.initrd.luks.devices = {
-    crypted = {
-      device = "/dev/disk/by-uuid/b92c1f6f-aca5-4a66-bab1-1f504ff23800";
-      preLVM = true;
-    };
+  boot.initrd.luks.devices."cryptroot" = {
+    device = "/dev/disk/by-uuid/33c42a68-4334-4529-8670-82286cc0cb79";
+    preLVM = true;
+    allowDiscards = true;
   };
+
+  boot.initrd.services.lvm.enable = true;
 
   boot = {
     extraModulePackages = [ ];
     blacklistedKernelModules = [ "nouveau" "snd_hda_intel" ]; # Example modules to blacklist
     kernelModules = [ "kvm-intel" ];
-    kernelParams = [ "reboot=pci" "intel_pstate=active" "resume=UUID=35c88336-4a02-4e2b-9f6f-1144b7b0e4a8" ];
+    kernelParams = [ "reboot=pci" "intel_pstate=active" "resume=UUID=33dad16f-250c-4993-b84b-05f69e978bb2" ];
   };
 
   fileSystems."/" =
     {
-      device = "/dev/disk/by-uuid/842c0be0-c07a-43a1-876f-bb06a6437250";
+      device = "/dev/disk/by-uuid/9a3e5059-0e6f-439b-ae7d-95286cfd95da";
       fsType = "ext4";
     };
 
   fileSystems."/boot" =
     {
-      device = "/dev/disk/by-uuid/2331-8F40";
+      device = "/dev/disk/by-uuid/3263-A9F1";
       fsType = "vfat";
       options = [ "fmask=0022" "dmask=0022" ];
     };
 
   swapDevices =
-    [{ device = "/dev/disk/by-uuid/35c88336-4a02-4e2b-9f6f-1144b7b0e4a8"; }];
+    [{ device = "/dev/disk/by-uuid/33dad16f-250c-4993-b84b-05f69e978bb2"; }];
 
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;

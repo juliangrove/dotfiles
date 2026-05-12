@@ -19,10 +19,11 @@
       "kernel.nmi_watchdog" = 0;
     };
     kernelParams = [
-      "resume=UUID=35c88336-4a02-4e2b-9f6f-1144b7b0e4a8"
+      "resume=UUID=33dad16f-250c-4993-b84b-05f69e978bb2"
       "mem_sleep_default=deep" # Force deep sleep (suspend-to-ram)
     ];
-    resumeDevice = "/dev/disk/by-uuid/35c88336-4a02-4e2b-9f6f-1144b7b0e4a8";
+    resumeDevice = "/dev/disk/by-uuid/33dad16f-250c-4993-b84b-05f69e978bb2";
+    
     # kernelPackages = pkgs.linuxPackagesFor (pkgs.linux_6_0.override {
     #   argsOverride = rec {
     #     src = pkgs.fetchurl {
@@ -117,6 +118,9 @@
         xorg.xset
         xssproxy
         haskellPackages.xmobar # status bar
+
+        xterm
+        alacritty
       ];
   };
 
@@ -128,7 +132,7 @@
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
+  services.openssh.enable = true;
 
   # systemd services
   services = {

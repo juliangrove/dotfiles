@@ -253,7 +253,9 @@ in
         historyIgnore = [ "ls*" "exit" "pwd" "reboot" "shutdown" ];
         bashrcExtra = ''
           PS1=$'\[\033[32m\e[2m\]\u03bb\[\033[00m\] '
-          fastfetch --logo NixOS_old
+          if [[ $- == *i* ]]; then
+            fastfetch --logo NixOS_old
+          fi
         '';
       };
 
