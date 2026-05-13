@@ -54,8 +54,8 @@ in
       ".arbtt/categorize.cfg" = {
         source = programs/arbtt/categorize.cfg;
       };
-      ".config/alacritty/alacritty.yml" = {
-        source = programs/alacritty/alacritty.yml;
+      ".config/alacritty/alacritty.toml" = {
+        source = programs/alacritty/alacritty.toml;
       };
       ".config/neofetch/config.conf" = {
         source = programs/neofetch/config.conf;
