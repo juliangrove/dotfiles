@@ -315,6 +315,7 @@ in
             email = "julian.grove@gmail.com";
             name = "juliangrove";
           };
+          url."git@github.com:".insteadOf = "https://github.com/";
         };
       };
 
