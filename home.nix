@@ -86,7 +86,7 @@ in
       size = 50;
     };
 
-    stateVersion = "22.11";
+    stateVersion = "25.11";
 
     username = "juliangrove";
   };
@@ -176,6 +176,7 @@ in
       pdftk
       prettyping
       nixos.quarto
+      mu
       qrencode
       texlive.combined.scheme-full # pdfjam
       tmux
@@ -315,11 +316,6 @@ in
             name = "juliangrove";
           };
         };
-      };
-
-      mu = {
-        enable = true;
-        # package = muPkg;
       };
 
       # ssh.enable = true;

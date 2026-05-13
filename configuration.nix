@@ -23,7 +23,7 @@
       "mem_sleep_default=deep" # Force deep sleep (suspend-to-ram)
     ];
     resumeDevice = "/dev/disk/by-uuid/33dad16f-250c-4993-b84b-05f69e978bb2";
-    
+
     # kernelPackages = pkgs.linuxPackagesFor (pkgs.linux_6_0.override {
     #   argsOverride = rec {
     #     src = pkgs.fetchurl {
@@ -77,8 +77,8 @@
   # };
 
   # Set your time zone.
-  time.timeZone = "America/New_York";
-  # time.timeZone = "America/Denver";
+  # time.timeZone = "America/New_York";
+  time.timeZone = "America/Denver";
   # time.timeZone = "Europe/Zurich";
   # time.timeZone = "Europe/Stockholm";
   # time.timeZone = "Europe/London";
